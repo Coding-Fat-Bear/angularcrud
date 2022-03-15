@@ -1,0 +1,54 @@
+
+<p >Timesheet</p>
+
+ 
+
+    <!-- <label>Login Time </label><input (keyup)="onKey($event)" name="Key" placeholder="login time" style="margin-left: 10px;" >
+  <p  >{{values}}</p> -->
+  <div style="width: 50%; float: left">
+    
+<input [(ngModel)]="timesheet.loginid"><input [(ngModel)]="timesheet.tsdate"><br><br><br>
+
+   <label style="font-size: medium;">CheckIn Time </label>
+        <input style="margin-left: 24px; width: 150px;" placeholder="Default" disabled="TRUE">
+        <input  type="time" timeformat="24h" [(ngModel)] ="timesheet.checkin" (input)="onKey($event)" 
+                 placeholder="CheckIn Time"style="margin-left: 10px; width: 150px;" ><br><br>
+
+        <label style="font-size: medium">CheckOut Time </label>
+        <input style="margin-left: 10px; width: 150px;" placeholder="Default" disabled="TRUE">
+        <input  type="time" [(ngModel)] ="timesheet.checkout" (input)="onKey($event)" 
+                 placeholder="CheckOut Time"style="margin-left: 10px; width: 150px;" >
+                 
+    </div>
+    <div  style="margin-left: 50%;">
+        <mat-card class="inline-calendar-card" >
+        <mat-calendar (selectedChange)="convert($event)" [(selected)]="selected"></mat-calendar>  
+      </mat-card>
+      <p >Selected date: {{selected}}</p>
+      <input type="date"  [(ngModel)] ="selected">
+      </div>
+      
+      
+<!-- <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Lgin ID</th>
+            <th>Date</th>
+            <th>CheckIn</th>
+            <th>CheckOut</th>
+            <th>Actions</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let timesheet of timesheets">
+            <td>{{timesheet.loginid}}</td>
+            <td>{{timesheet.tsdate}}</td>
+            <td>{{timesheet.checkin}}</td>
+            <td>{{timesheet.checkout}}</td>
+            <td>
+                <button (click) = "updateTimesheet(timesheet.timeid)" class="btn btn-info">Update</button>
+            </td>
+         </tr>
+    </tbody>
+</table> -->

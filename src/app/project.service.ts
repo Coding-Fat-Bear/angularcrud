@@ -12,19 +12,24 @@ export class ProjectService {
   private basePutUrl = "http://localhost:8080/put";
   private baseDeleteUrl = "http://localhost:8080/del";
   constructor(private httpClient: HttpClient) { }
+
   getProjectList(): Observable<Project[]>{
     return  this.httpClient.get<Project[]>(`${this.baseGetUrl}`);
   }
+
   postProject(project: Project) : Observable<Object>{
     return this.httpClient.post(`${this.basePostUrl}`,project);
   }
+
   getProjectById(id:number): Observable<Project>
   {
     return this.httpClient.get<Project>(`${this.baseGetUrl}/${id}`);
   }
+
   updateProject(id:number,project : Project) :Observable<Object>{
     return this.httpClient.put(`${this.basePutUrl}/${id}`,project)
   }
+
   deleteProject(id:number): Observable<any>
   {
     return this.httpClient.delete(`${this.baseDeleteUrl}/${id}`,{responseType:'text'});
