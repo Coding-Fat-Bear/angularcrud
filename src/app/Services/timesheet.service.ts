@@ -9,27 +9,29 @@ import { Observable } from 'rxjs';
 })
 export class TimesheetService {
   
-  private baseGetUrl = "http://localhost:8080/gettime";
-  private basePostUrl = "http://localhost:8080/savetime";
-  private basePutUrl = "http://localhost:8080/puttime";
+  private baseUrl = "http://localhost:8080";
 
   constructor(private httpClient: HttpClient) { }
 
   getTimesheetList(): Observable<Timesheet[]>{
-    return  this.httpClient.get<Timesheet[]>(`${this.baseGetUrl}`);
+    return  this.httpClient.get<Timesheet[]>(`${this.baseUrl}/gettime`);
   }
 
   postTimesheet(Timesheet: Timesheet) : Observable<Object>{
-    return this.httpClient.post(`${this.basePostUrl}`,Timesheet);
+    return this.httpClient.post(`${this.baseUrl}/savetime`,Timesheet);
   }
 
   getTimesheetById(id:number): Observable<Timesheet>
   {
-    return this.httpClient.get<Timesheet>(`${this.baseGetUrl}/${id}`);
+    return this.httpClient.get<Timesheet>(`${this.baseUrl}/gettime/${id}`);
+  }
+  getTimesheetBylogIdAndtsDate(logId:number,tsDate:String): Observable<Timesheet>
+  {
+    return this.httpClient.get<Timesheet>(`${this.baseUrl}/gettimeBydateAndloginid/${logId}/${tsDate}`);
   }
 
   updateTimesheet(id:number,Timesheet : Timesheet) :Observable<Object>{
-    return this.httpClient.put(`${this.basePutUrl}/${id}`,Timesheet)
+    return this.httpClient.put(`${this.baseUrl}/puttime/${id}`,Timesheet)
   }
 
 }

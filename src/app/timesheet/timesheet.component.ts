@@ -40,19 +40,20 @@ export class TimesheetComponent implements OnInit {
     }
    convert(event: any){
     console.log("event : ", event);
-    // this.selected = this.dateCon(event);
-    console.log("slected :", this.selected);
+    console.log("selected :", this.selected);
    }
+
+   /////////on Start////////////
   ngOnInit(): void {
     
     this.getTimesheet();
   }
   onKey(event: any)
   {
-    console.log(this.timesheet.checkout);
-    
    
   }
+
+  //////////// Servies/////////////
   private getTimesheet(){
     this.timesheetService.getTimesheetList().subscribe(data =>{
       this.timesheets = data;
