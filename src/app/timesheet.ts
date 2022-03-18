@@ -1,10 +1,10 @@
-import { Time } from "@angular/common";
+// import { Time } from "@angular/common";
 
 export class Timesheet {
     timeid : number;
     loginid : number;
     tsdate : Date;
-    checkin : Time;
-    checkout : Time;
+    checkin : String;
+    checkout : String;
     totalhours : number;
 }

@@ -2,7 +2,9 @@
 <p >Timesheet</p>
 
  
-
+<mat-form-field>
+    <input matInput type="datetime-local" placeholder="start date">
+  </mat-form-field>
     <!-- <label>Login Time </label><input (keyup)="onKey($event)" name="Key" placeholder="login time" style="margin-left: 10px;" >
   <p  >{{values}}</p> -->
   <div style="width: 50%; float: left">
@@ -11,21 +13,23 @@
 
    <label style="font-size: medium;">CheckIn Time </label>
         <input style="margin-left: 24px; width: 150px;" placeholder="Default" disabled="TRUE">
-        <input  type="time" timeformat="24h" [(ngModel)] ="timesheet.checkin" (input)="onKey($event)" 
+        <input type="time"  [(ngModel)] ="checkinDis" (input)="onKey($event)" 
                  placeholder="CheckIn Time"style="margin-left: 10px; width: 150px;" ><br><br>
 
         <label style="font-size: medium">CheckOut Time </label>
         <input style="margin-left: 10px; width: 150px;" placeholder="Default" disabled="TRUE">
-        <input  type="time" [(ngModel)] ="timesheet.checkout" (input)="onKey($event)" 
+        <input type="time"   [(ngModel)] ="checkoutDis" (input)="onKey($event)" 
                  placeholder="CheckOut Time"style="margin-left: 10px; width: 150px;" >
                  
     </div>
     <div  style="margin-left: 50%;">
         <mat-card class="inline-calendar-card" >
-        <mat-calendar (selectedChange)="convert($event)" [(selected)]="selected"></mat-calendar>  
+        <mat-calendar  (selectedChange)="convert($event)" [(selected)]="selected"></mat-calendar>  
       </mat-card>
-      <p >Selected date: {{selected}}</p>
+      <p (change)="convert($event)">Selected date: {{selected | date: 'yyyy-MM-dd' }}</p>
+      <input type="text"  [(ngModel)] ="selected">
       <input type="date"  [(ngModel)] ="selected">
+      <button (click)="upDate()"     class="btn btn-info">update date</button>
       </div>
       
       
@@ -47,7 +51,7 @@
             <td>{{timesheet.checkin}}</td>
             <td>{{timesheet.checkout}}</td>
             <td>
-                <button (click) = "updateTimesheet(timesheet.timeid)" class="btn btn-info">Update</button>
+                <button (click) = "upTime(timesheet.checkin,timesheet.checkout)" class="btn btn-info">Update</button>
             </td>
          </tr>
     </tbody>

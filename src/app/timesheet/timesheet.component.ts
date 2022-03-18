@@ -1,4 +1,4 @@
-import { Time } from '@angular/common';
+import * as moment from 'moment';
 import { Timesheet } from './../timesheet';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -10,21 +10,38 @@ import { TimesheetService } from '../Services/timesheet.service';
   styleUrls: ['./timesheet.component.css']
 })
 export class TimesheetComponent implements OnInit {
-  selected : Date = new Date();
+  selected : Date;
+  selectedtest = new Date("2022-03-15");
+  selectedPre :String;
   timesheets : Timesheet[];
   values:any;
   timesheet = new Timesheet();
- 
+  checkinDis : string;
+  checkoutDis : string;
  
   constructor(private timesheetService: TimesheetService,
     private router : Router) { }
+
+
+
+    upDate(){
+      console.log(this.selectedtest);
+      
+      this.selected = this.selectedtest;
+    }
+    upTime(checkin:any,checkout :any)
+    {
+      console.log(checkin + checkout );
+      this.timesheet.checkin = checkin;
+      this.timesheet.checkout = checkout;
+      
+      this.checkinDis = checkin;
+      this.checkoutDis = checkout;
+    }
    convert(event: any){
-    console.log("Date changed", event);
-    let date = JSON.stringify(event)
-   date= date.slice(1,11) 
-  //  this.selected =date;
-    console.log("Date changed", date);
-    console.log("Date changed", this.selected);
+    console.log("event : ", event);
+    // this.selected = this.dateCon(event);
+    console.log("slected :", this.selected);
    }
   ngOnInit(): void {
     
@@ -42,7 +59,10 @@ export class TimesheetComponent implements OnInit {
     })
   }
 
-  updateTimesheet(id: number){
-    this.router.navigate(['update',id]);
+   dateCon(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
   }
 }
