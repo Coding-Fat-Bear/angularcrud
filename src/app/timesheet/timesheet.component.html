@@ -12,31 +12,32 @@
 <input [(ngModel)]="timesheet.loginid"><input [(ngModel)]="timesheet.tsdate "><br><br><br>
 
    <label style="font-size: medium;">CheckIn Time </label>
-        <input style="margin-left: 24px; width: 150px;" placeholder="10:00" >
-        <input type="time"  [(ngModel)] ="timesheet.checkin" (input)="onKey($event)" 
+        <input style="margin-left: 22px; width: 45px;" placeholder="10:00" >
+        <input type="time"  [(ngModel)] ="timesheet.checkin" 
                  placeholder="CheckIn Time"style="margin-left: 10px; width: 150px;" ><br><br>
 
         <label style="font-size: medium">CheckOut Time </label>
-        <input style="margin-left: 10px; width: 150px;" placeholder="18:30" >
-        <input type="time"  [(ngModel)] ="timesheet.checkout" (input)="onKey($event)" 
+        <input style="margin-left: 10px; width: 45px;" placeholder="18:30" >
+        <input  type="time"  [(ngModel)] ="timesheet.checkout"  
                  placeholder="CheckOut Time"style="margin-left: 10px; width: 150px;" >
+          <br>      <br>  
+        <button  mat-stroked-button (click)="saveTimesheet()"> Save / Update</button>
                  
     </div>
     <div  style="margin-left: 50%;">
         <mat-card class="inline-calendar-card" >
         <mat-calendar  (selectedChange)="calCheckUpdated($event)" [(selected)]="selected"></mat-calendar>  
       </mat-card>
-      <p (change)="convert($event)">Selected date: {{selected | date: 'yyyy-MM-dd' }}</p>
-      <input type="text"  [(ngModel)] ="selected">
+      <!-- <p (change)="convert($event)">Selected date: {{selected | date: 'yyyy-MM-dd' }}</p> -->
+      <!-- <input type="text"  [(ngModel)] ="selected">
       <input type="date"  [(ngModel)] ="selected">
       <p>checkinDis :{{timesheet.checkout}}</p>
       <p>checkoutDis :{{timesheet.checkin}}</p>
-      <p>time Id :{{timesheet.timeid}}</p>
-      <!-- <button (click)="upDate()"     class="btn btn-info">update date</button> -->
-      <button (click)="uTime()">time check</button>
-      <button (click)="saveTimesheet()">save data</button>
+      <p>time Id :{{timesheet.timeid}}</p> -->
+      <!-- <button (click)="uTime()">time check</button>
+      <button (click)="saveTimesheet()">save data</button> -->
       </div>
-      
+      <button mat-stroked-button (click)="saveTimesheet()"> Save / Update</button>
       
 <table class="table table-striped">
     <thead>
@@ -56,7 +57,7 @@
             <td>{{timesheet.checkin}}</td>
             <td>{{timesheet.checkout}}</td>
             <td>
-                <button (click) = "upTime(timesheet.checkin,timesheet.checkout)" class="btn btn-info">Update</button>
+                <!-- <button (click) = "upTime(timesheet.checkin,timesheet.checkout)" class="btn btn-info">Update</button> -->
             </td>
          </tr>
     </tbody>

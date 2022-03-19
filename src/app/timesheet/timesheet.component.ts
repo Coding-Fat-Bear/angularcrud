@@ -25,7 +25,6 @@ export class TimesheetComponent implements OnInit {
 
 calCheckUpdated(event)
 {
-  
   var str1 = this.dateCon(event);
   console.log(str1);
   this.timesheetService.getTimesheetBylogIdAndtsDate(4,str1).subscribe(data =>{
@@ -66,45 +65,18 @@ calCheckUpdated(event)
   //     console.log('Error Getting Location: ', msg);
   //   }
   // })
-  // console.log(this.timesheet.timeid);
   
-}uTime(){
-
-  console.log(this.timesheet.checkin);
-  console.log(this.timesheet.checkout);
 }
-
-
-
-
-    // upDate(){
-    //   console.log(this.selectedtest);
-      
-    //   this.selected = this.selectedtest;
-    // }
-    upTime(checkin:any,checkout :any)
-    {
-      console.log(checkin + checkout );
-      this.timesheet.checkin = checkin;
-      this.timesheet.checkout = checkout;
-      
-      this.checkinDis = checkin;
-      this.checkoutDis = checkout;
-    }
-   convert(event: any){
-    console.log("event : ", event);
-    console.log("selected :", this.selected);
-   }
 
    /////////on Start////////////
   ngOnInit(): void {
     
     this.getTimesheet();
   }
-  onKey(event: any)
-  {
+  // onKey(event: any)
+  // {
    
-  }
+  // }
 
   //////////// Servies/////////////
   private getTimesheet(){
@@ -132,6 +104,18 @@ calCheckUpdated(event)
       
     },error => console.log(error))
   }
-  
+     // upTime(checkin:any,checkout :any)
+    // {
+    //   console.log(checkin + checkout );
+    //   this.timesheet.checkin = checkin;
+    //   this.timesheet.checkout = checkout;
+      
+    //   this.checkinDis = checkin;
+    //   this.checkoutDis = checkout;
+    // }
+  //  convert(event: any){
+  //   console.log("event : ", event);
+  //   console.log("selected :", this.selected);
+  //  }
 
 }
