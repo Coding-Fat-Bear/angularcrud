@@ -22,6 +22,20 @@ export class TimesheetComponent implements OnInit {
   constructor(private timesheetService: TimesheetService,
     private router : Router) { }
 
+calCheckUpdated(event)
+{
+  console.log(this);
+  
+  var str1 = this.dateCon(event);
+  console.log(str1);
+  
+  // var str1 = "2022-03-16";
+  // this.timesheetService.getTimesheetBylogIdAndtsDate(3,str1).subscribe(
+  //   (v) => console.log(v),(e) => console.error(e),)
+}
+
+
+
 
 
     upDate(){

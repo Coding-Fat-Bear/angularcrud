@@ -27,7 +27,7 @@ export class TimesheetService {
   }
   getTimesheetBylogIdAndtsDate(logId:number,tsDate:String): Observable<Timesheet>
   {
-    return this.httpClient.get<Timesheet>(`${this.baseUrl}/gettimeBydateAndloginid/${logId}/${tsDate}`);
+    return this.httpClient.get<Timesheet>(`${this.baseUrl}/gettimeBydateAndloginid/${tsDate}/${logId}`);
   }
 
   updateTimesheet(id:number,Timesheet : Timesheet) :Observable<Object>{

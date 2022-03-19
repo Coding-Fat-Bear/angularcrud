@@ -24,7 +24,7 @@
     </div>
     <div  style="margin-left: 50%;">
         <mat-card class="inline-calendar-card" >
-        <mat-calendar  (selectedChange)="convert($event)" [(selected)]="selected"></mat-calendar>  
+        <mat-calendar  (selectedChange)="calCheckUpdated($event)" [(selected)]="selected"></mat-calendar>  
       </mat-card>
       <p (change)="convert($event)">Selected date: {{selected | date: 'yyyy-MM-dd' }}</p>
       <input type="text"  [(ngModel)] ="selected">
