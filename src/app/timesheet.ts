@@ -3,7 +3,7 @@
 export class Timesheet {
     timeid : number;
     loginid : number;
-    tsdate : Date;
+    tsdate : String;
     checkin : String;
     checkout : String;
     totalhours : number;
