@@ -1,4 +1,4 @@
-
+<br>
 <p class="md " >Timesheet</p>
 
  
@@ -7,24 +7,33 @@
   </mat-form-field> -->
     <!-- <label>Login Time </label><input (keyup)="onKey($event)" name="Key" placeholder="login time" style="margin-left: 10px;" >
   <p  >{{values}}</p> -->
-  <div style="width: 50%; float: left">
-    
-<input [(ngModel)]="timesheet.loginid"><input [(ngModel)]="timesheet.tsdate "><br><br><br>
+  <div class="container" style="width: 40%; float: left">
+    <div class="border border-1 rounded shadow-sm" style="padding: 10px;" >
+    <span>
+    <label style="font-size: small;">Login ID </label>
+    <input style="margin-left: 10px; width: 45px; height: 18px;" [(ngModel)]="timesheet.loginid"></span>
+    <span>
+    <label style="font-size: small; margin-left: 10px;">Date </label>
+    <input style="margin-left: 10px; width: 90px;height: 18px;" [(ngModel)]="timesheet.tsdate " disabled></span>
 
+    <br><br>
+
+    <span>
    <label style="font-size: medium;">CheckIn Time </label>
-        <input style="margin-left: 22px; width: 45px;" placeholder="10:00" >
-        <input type="time"  [(ngModel)] ="timesheet.checkin" 
-                 placeholder="CheckIn Time"style="margin-left: 10px; width: 150px;" ><br><br>
-
+    <input style="margin-left: 22px; width: 45px;" placeholder="10:00" >
+    <input type="time"  [(ngModel)] ="timesheet.checkin" 
+                 placeholder="CheckIn Time"style="margin-left: 10px; width: 150px;" ></span>
+     <br><br>
+     <span>
         <label style="font-size: medium">CheckOut Time </label>
         <input style="margin-left: 10px; width: 45px;" placeholder="18:30" >
         <input  type="time"  [(ngModel)] ="timesheet.checkout"  
-                 placeholder="CheckOut Time"style="margin-left: 10px; width: 150px;" >
-          <br>      <br>  
+                 placeholder="CheckOut Time"style="margin-left: 10px; width: 150px;" ></span>
+     <br><br>  
         <button  mat-stroked-button (click)="saveTimesheet()"> Save / Update</button>
-                 
-    </div>
-    <div  style="margin-left: 50%;">
+    </div> 
+    </div>     
+    <div  style="margin-left: 40%;">
         <mat-card class="inline-calendar-card" >
         <mat-calendar  (selectedChange)="calCheckUpdated($event)" [(selected)]="selected"></mat-calendar>  
       </mat-card>
@@ -36,8 +45,9 @@
       <p>time Id :{{timesheet.timeid}}</p> -->
       <!-- <button (click)="uTime()">time check</button>
       <button (click)="saveTimesheet()">save data</button> -->
+      <br>
       </div>
-      <button mat-stroked-button (click)="saveTimesheet()"> Save / Update</button>
+      <!-- <button mat-stroked-button (click)="saveTimesheet()"> Save / Update</button> -->
       
 <table class="table table-striped">
     <thead>
