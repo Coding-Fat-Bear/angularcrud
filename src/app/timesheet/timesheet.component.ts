@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TimesheetService } from '../Services/timesheet.service';
 import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
+import { MatSnackBar } from '@angular/material/snack-bar';
 // import { NgClass } from '@angular/common';
 
 @Component({
@@ -23,27 +24,37 @@ export class TimesheetComponent implements OnInit {
   checkoutDis : String;
  
   constructor(private timesheetService: TimesheetService,
-    private router : Router) { }
+    private router : Router,
+    private snackBar: MatSnackBar) { }
 
-
+////Calander Event///////
 calCheckUpdated(event)
 {
   var str1 = this.dateCon(event);
   console.log(str1);
   this.timesheetService.getTimesheetBylogIdAndtsDate(this.timesheet.loginid,str1).subscribe(data =>{
-    if(data == null){console.log("u nee god now");
-         this.timesheet.tsdate = this.dateCon(this.selected);
-         this.timesheet.checkin= "";
-          this.timesheet.checkout="";
-          this.timesheet.timeid=null;
+    if(data == null){
+      // console.log("u nee god now");
+      //    this.timesheet.tsdate = this.dateCon(this.selected);
+      //    this.timesheet.checkin= "";
+      //     this.timesheet.checkout="";
+      //     this.timesheet.timeid=null;
+          console.log("Null Process");
+          
     }else{console.log(data.tsdate);
-    
+      
+      console.log("Receiving Process");
       this.timesheet = data;
       console.log(this.timesheet.tsdate);
           this.timesheet.checkin=data.checkin.substring(0,5);
           this.timesheet.checkout=data.checkout.substring(0,5);
     }
-  },error => console.log(error));
+  },error => {this.timesheet.tsdate = this.dateCon(this.selected);
+    this.timesheet.checkin= "";
+     this.timesheet.checkout="";
+     this.timesheet.timeid=null;
+     console.log("Null Process");
+     this.openSnackBar("No Records Found", "Hide")});
   // var str1 = "2022-03-16";
   // this.timesheetService.getTimesheetBylogIdAndtsDate(3,str1).subscribe(
   // {
@@ -105,21 +116,13 @@ calCheckUpdated(event)
     this.timesheet.checkout = (this.timesheet.checkout+":00").substring(0,8);
     this.timesheetService.postTimesheet(this.timesheet).subscribe(data =>{
       console.log("saved");
-      
+      this.openSnackBar("Saved", "Hide")
     },error => console.log(error))
   }
-     // upTime(checkin:any,checkout :any)
-    // {
-    //   console.log(checkin + checkout );
-    //   this.timesheet.checkin = checkin;
-    //   this.timesheet.checkout = checkout;
-      
-    //   this.checkinDis = checkin;
-    //   this.checkoutDis = checkout;
-    // }
-  //  convert(event: any){
-  //   console.log("event : ", event);
-  //   console.log("selected :", this.selected);
-  //  }
+  ////snack bar pop up//////
+  openSnackBar(message: string, action: string) {
+    
+    let snackRef = this.snackBar.open(message,action,{duration : 1000});
+  }
 
 }
