@@ -4,6 +4,8 @@ import { Timesheet } from './../timesheet';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TimesheetService } from '../Services/timesheet.service';
+import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
+// import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-timesheet',
@@ -23,11 +25,12 @@ export class TimesheetComponent implements OnInit {
   constructor(private timesheetService: TimesheetService,
     private router : Router) { }
 
+
 calCheckUpdated(event)
 {
   var str1 = this.dateCon(event);
   console.log(str1);
-  this.timesheetService.getTimesheetBylogIdAndtsDate(4,str1).subscribe(data =>{
+  this.timesheetService.getTimesheetBylogIdAndtsDate(this.timesheet.loginid,str1).subscribe(data =>{
     if(data == null){console.log("u nee god now");
          this.timesheet.tsdate = this.dateCon(this.selected);
          this.timesheet.checkin= "";
@@ -72,6 +75,7 @@ calCheckUpdated(event)
   ngOnInit(): void {
     
     this.getTimesheet();
+    this.timesheet.loginid = 3;
   }
   // onKey(event: any)
   // {
