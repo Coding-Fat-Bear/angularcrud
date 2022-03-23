@@ -91,9 +91,6 @@ calCheckUpdated(event)
     
     this.getTimesheet();
     this.timesheet.loginid = 3;
-    // this.timesheet.tsdate = Date.now();
-    console.log(Date.now());
-    
   }
   // onKey(event: any)
   // {
