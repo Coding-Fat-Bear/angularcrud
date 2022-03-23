@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { TimesheetService } from '../Services/timesheet.service';
 import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+import {FormControl} from '@angular/forms';
 // import { NgClass } from '@angular/common';
 
 @Component({
@@ -52,6 +54,8 @@ calCheckUpdated(event)
   },error => {this.timesheet.tsdate = this.dateCon(this.selected);
     this.timesheet.checkin= "";
      this.timesheet.checkout="";
+     this.timesheet.btstart="";
+     this.timesheet.btend="";
      this.timesheet.timeid=null;
      console.log("Null Process");
      this.openSnackBar("No Records Found", "Hide")});
@@ -113,10 +117,26 @@ calCheckUpdated(event)
   saveTimesheet()
   {
     console.log(this.timesheet);
-    console.log((this.timesheet.checkin+":00").substring(0,8));
-    // this.timesheet.tsdate = 
-    this.timesheet.checkin = (this.timesheet.checkin+":00").substring(0,8);
-    this.timesheet.checkout = (this.timesheet.checkout+":00").substring(0,8);
+    if(this.timesheet.checkin == null){
+    }
+    else{
+      this.timesheet.checkin = (this.timesheet.checkin+":00").substring(0,8); 
+    }
+    if(this.timesheet.checkout == null){
+    }
+    else{
+      this.timesheet.checkout = (this.timesheet.checkout+":00").substring(0,8); 
+    }
+    if(this.timesheet.btstart == null){
+    }
+    else{
+      this.timesheet.btstart = (this.timesheet.btstart+":00").substring(0,8); 
+    }
+    if(this.timesheet.btend == null){
+    }
+    else{
+      this.timesheet.btend = (this.timesheet.btend+":00").substring(0,8); 
+    }
     this.timesheetService.postTimesheet(this.timesheet).subscribe(data =>{
       console.log("saved");
       this.openSnackBar("Saved", "Hide")
@@ -127,5 +147,22 @@ calCheckUpdated(event)
     
     let snackRef = this.snackBar.open(message,action,{duration : 1000});
   }
+
+  ctrl = new FormControl('', (control: FormControl) => {
+    const value = control.value;
+
+    if (!value) {
+      return null;
+    }
+
+    if (value.hour < 12) {
+      return {tooEarly: true};
+    }
+    if (value.hour > 13) {
+      return {tooLate: true};
+    }
+
+    return null;
+  });
 
 }

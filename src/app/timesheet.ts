@@ -7,4 +7,7 @@ export class Timesheet {
     checkin : String;
     checkout : String;
     totalhours : number;
+    btstart : String;
+    btend : String;
+    comment : String;
 }

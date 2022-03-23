@@ -1,13 +1,28 @@
 <br>
+<!-- <div class="mb-3">
+    <ngb-timepicker [formControl]="ctrl" required></ngb-timepicker>
+    <div *ngIf="ctrl.valid" class="small form-text text-success">Great choice</div>
+    <div *ngIf="ctrl.errors" class="small form-text text-danger">
+      <div *ngIf="ctrl.errors['required']">Select some time during lunchtime</div>
+      <div *ngIf="ctrl.errors['tooLate']">Oh no, it's way too late</div>
+      <div *ngIf="ctrl.errors['tooEarly']">It's a bit too early</div>
+    </div>
+  </div> -->
+<!-- <form>
+    <div>
+      <label for="appt-time">Choose an appointment time (opening hours 12:00 to 18:00): </label>
+      <input id="appt-time" type="time" name="appt-time"
+             min="12:00" max="18:00" required>
+      <span class="validity"></span>
+    </div>
+    <div>
+        <input type="submit" value="Submit form">
+    </div>
+  </form> -->
 <p class="md " >Timesheet</p>
 
- 
-<!-- <mat-form-field>
-    <input matInput type="datetime-local" placeholder="start date">
-  </mat-form-field> -->
-    <!-- <label>Login Time </label><input (keyup)="onKey($event)" name="Key" placeholder="login time" style="margin-left: 10px;" >
-  <p  >{{values}}</p> -->
-  <div class="container" style="width: 40%; float: left">
+<div class="container" style="width: 40%; float: left">
+ <!-- <div> -->
     <div class="border border-1 rounded shadow-sm" style="padding: 10px;" >
     <span>
     <label style="font-size: small;">Login ID </label>
@@ -20,31 +35,53 @@
 
     <span>
    <label style="font-size: medium;">CheckIn Time </label>
-    <input style="margin-left: 22px; width: 45px;" placeholder="10:00" >
     <input type="time"  [(ngModel)] ="timesheet.checkin" 
-                 placeholder="CheckIn Time"style="margin-left: 10px; width: 150px;" ></span>
+                 placeholder="CheckIn Time"style="margin-left: 22px; width: 150px;" ></span>
      <br><br>
      <span>
         <label style="font-size: medium">CheckOut Time </label>
-        <input style="margin-left: 10px; width: 45px;" placeholder="18:30" >
         <input  type="time"  [(ngModel)] ="timesheet.checkout"  
                  placeholder="CheckOut Time"style="margin-left: 10px; width: 150px;" ></span>
      <br><br>  
+     
         <button  mat-stroked-button (click)="saveTimesheet()"> Save / Update</button>
+</div> 
+    <div style="padding-top: 10px;">
+        <div class="border border-1 rounded shadow-sm" style="padding: 10px;" >
+             <span>
+            <label style="font-size: medium;">BreakTime Start </label>
+                <input type="time"  [(ngModel)] ="timesheet.btstart" [min]="timesheet.checkin" [max]="timesheet.checkout" required  
+                            placeholder="CheckIn Time"style="margin-left: 10px; width: 150px;" ></span>
+                    
+                <br><br>
+        <span>
+            <label style="font-size: medium">BreakTime End</label>
+            <input  type="time"  [(ngModel)] ="timesheet.btend"  [min]="timesheet.checkin" [max]="timesheet.checkout" required
+                    placeholder="CheckOut Time"style="margin-left: 18px; width: 150px;" ></span>
+     <br><br>  
+            <form class="example-form">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Leave a comment</mat-label>
+                    <textarea matInput placeholder="Ex. I had a great day " [(ngModel)]="timesheet.comment" [ngModelOptions]="{standalone: true}"></textarea>
+                </mat-form-field>
+            </form>
+        </div>
     </div> 
+
+
+  <!-- </div> -->
     </div>     
+
+    
+
+        
+        
+
     <div  style="margin-left: 40%;">
         <mat-card class="inline-calendar-card" >
         <mat-calendar  (selectedChange)="calCheckUpdated($event)" [(selected)]="selected"></mat-calendar>  
       </mat-card>
-      <!-- <p (change)="convert($event)">Selected date: {{selected | date: 'yyyy-MM-dd' }}</p> -->
-      <!-- <input type="text"  [(ngModel)] ="selected">
-      <input type="date"  [(ngModel)] ="selected">
-      <p>checkinDis :{{timesheet.checkout}}</p>
-      <p>checkoutDis :{{timesheet.checkin}}</p>
-      <p>time Id :{{timesheet.timeid}}</p> -->
-      <!-- <button (click)="uTime()">time check</button>
-      <button (click)="saveTimesheet()">save data</button> -->
+      
       <br>
       </div>
       <!-- <button mat-stroked-button (click)="saveTimesheet()"> Save / Update</button> -->
