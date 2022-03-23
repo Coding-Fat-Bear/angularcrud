@@ -1,6 +1,6 @@
+
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 <br>
-
-
 <p class="md " >Timesheet</p>
 
 <div class="container" style="width: 40%; float: left">
@@ -47,6 +47,8 @@
                     <textarea matInput placeholder="Ex. I had a great day " [(ngModel)]="timesheet.comment" [ngModelOptions]="{standalone: true}"></textarea>
                 </mat-form-field>
             </form>
+            
+        <button  mat-stroked-button (click)="checkts()"> check</button>
         </div>
     </div> 
 

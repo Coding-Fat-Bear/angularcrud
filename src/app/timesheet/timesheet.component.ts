@@ -8,6 +8,7 @@ import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import {FormControl} from '@angular/forms';
+import { delay } from 'rxjs';
 // import { NgClass } from '@angular/common';
 
 @Component({
@@ -25,7 +26,7 @@ export class TimesheetComponent implements OnInit {
   checkinDis : String;
   checkoutDis : String;
   today = new Date();
- 
+  loading : Boolean = false;
   constructor(private timesheetService: TimesheetService,
     private router : Router,
     private snackBar: MatSnackBar) { }
@@ -33,7 +34,10 @@ export class TimesheetComponent implements OnInit {
 ////Calander Event///////
 calCheckUpdated(event)
 {
+  console.log("loading");
+  this.loading = true;
   console.log(event);
+  console.log(this.timesheet);
   
   var str1 = this.dateCon(event);
   console.log(str1);
@@ -43,8 +47,8 @@ calCheckUpdated(event)
       //    this.timesheet.tsdate = this.dateCon(this.selected);
       //    this.timesheet.checkin= "";
       //     this.timesheet.checkout="";
-      //     this.timesheet.timeid=null;
-          console.log("Null Process");
+          this.timesheet.timeid=null;
+          console.log("Null Process how");
           
     }else{console.log(data.tsdate);
       
@@ -53,6 +57,8 @@ calCheckUpdated(event)
       console.log(this.timesheet.tsdate);
           this.timesheet.checkin=data.checkin.substring(0,5);
           this.timesheet.checkout=data.checkout.substring(0,5);
+          
+          this.loading = false;
     }
   },error => {this.timesheet.tsdate = this.dateCon(this.selected);
     this.timesheet.checkin= "";
@@ -62,30 +68,8 @@ calCheckUpdated(event)
      this.timesheet.timeid=null;
      console.log("Null Process");
      this.openSnackBar("No Records Found", "Hide")});
-  // var str1 = "2022-03-16";
-  // this.timesheetService.getTimesheetBylogIdAndtsDate(3,str1).subscribe(
-  // {
-  //   next(v) {
-  //     if(v == null)
-  //     {
-  //       console.log("null");
-        
-  //     }
-  //     else
-  //     {
-  //       console.log(this.timesheet);
-  //       this.timesheet = v;
-  //       // this.checkoutDis = this.timesheet.checkout;
-  //       // this.checkinDis = this.timesheet.checkin;
-  //       console.log(this.timesheet);
-  //       // console.log(this.checkinDis);
-  //       // console.log(this.checkoutDis);
-  //     }
-  //   },
-  //   error(msg) {
-  //     console.log('Error Getting Location: ', msg);
-  //   }
-  // })
+     
+     this.loading = false;
   
 }
 
@@ -94,7 +78,7 @@ calCheckUpdated(event)
 
     ///defualt date////
 
-
+    this.loading = true;
     this.getTimesheet();
     this.timesheet.loginid = 3;
 
@@ -104,6 +88,7 @@ calCheckUpdated(event)
     this.timesheetService.getTimesheetBylogIdAndtsDate(this.timesheet.loginid,thisDate).subscribe(data =>{
       if(data == null){
             console.log("Null Process");
+            this.loading = false;
             
       }else{console.log(data.tsdate);
         
@@ -112,14 +97,15 @@ calCheckUpdated(event)
         console.log(this.timesheet.tsdate);
             this.timesheet.checkin=data.checkin.substring(0,5);
             this.timesheet.checkout=data.checkout.substring(0,5);
+            this.timesheet.btstart=data.btstart.substring(0,5);
+            this.timesheet.btend=data.btend.substring(0,5);
+            this.loading = false;
       }
     },error => {this.timesheet.tsdate = this.dateCon(this.selected);
-      this.timesheet.checkin= "";
-       this.timesheet.checkout="";
-       this.timesheet.btstart="";
-       this.timesheet.btend="";
+      this.timesheet.tsdate=thisDate;
        this.timesheet.timeid=null;
        console.log("Null Process");
+       this.loading = false;
        this.openSnackBar("No Records Found", "Hide")});
 
     //////////////
@@ -187,6 +173,19 @@ calCheckUpdated(event)
   }
   checkbte(){
     console.log(this.timesheet.btend);
+  }
+  checkts(){
+    console.log(this.timesheet);
+    if(this.timesheet.btend==null){
+      console.log("null");
+    }
+      else{
+        console.log("not null");
+        
+      }
+      
+    
+    
   }
 
 }
