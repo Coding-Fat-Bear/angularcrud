@@ -1,24 +1,6 @@
 <br>
-<!-- <div class="mb-3">
-    <ngb-timepicker [formControl]="ctrl" required></ngb-timepicker>
-    <div *ngIf="ctrl.valid" class="small form-text text-success">Great choice</div>
-    <div *ngIf="ctrl.errors" class="small form-text text-danger">
-      <div *ngIf="ctrl.errors['required']">Select some time during lunchtime</div>
-      <div *ngIf="ctrl.errors['tooLate']">Oh no, it's way too late</div>
-      <div *ngIf="ctrl.errors['tooEarly']">It's a bit too early</div>
-    </div>
-  </div> -->
-<!-- <form>
-    <div>
-      <label for="appt-time">Choose an appointment time (opening hours 12:00 to 18:00): </label>
-      <input id="appt-time" type="time" name="appt-time"
-             min="12:00" max="18:00" required>
-      <span class="validity"></span>
-    </div>
-    <div>
-        <input type="submit" value="Submit form">
-    </div>
-  </form> -->
+
+
 <p class="md " >Timesheet</p>
 
 <div class="container" style="width: 40%; float: left">
@@ -50,14 +32,14 @@
         <div class="border border-1 rounded shadow-sm" style="padding: 10px;" >
              <span>
             <label style="font-size: medium;">BreakTime Start </label>
-                <input type="time"  [(ngModel)] ="timesheet.btstart" [min]="timesheet.checkin" [max]="timesheet.checkout" required  
-                            placeholder="CheckIn Time"style="margin-left: 10px; width: 150px;" ></span>
+                <input type="time"  [(ngModel)] ="timesheet.btstart"  (change)="checkbts()" 
+                            placeholder="CheckIn Time" style="margin-left: 10px; width: 150px;" ></span>
                     
                 <br><br>
         <span>
             <label style="font-size: medium">BreakTime End</label>
-            <input  type="time"  [(ngModel)] ="timesheet.btend"  [min]="timesheet.checkin" [max]="timesheet.checkout" required
-                    placeholder="CheckOut Time"style="margin-left: 18px; width: 150px;" ></span>
+            <input  type="time"  [(ngModel)] ="timesheet.btend"  (change)="checkbte()" 
+                    placeholder="CheckOut Time" style="margin-left: 18px; width: 150px;" ></span>
      <br><br>  
             <form class="example-form">
                 <mat-form-field class="example-full-width" appearance="fill">

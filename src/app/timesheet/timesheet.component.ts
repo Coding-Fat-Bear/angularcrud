@@ -24,6 +24,7 @@ export class TimesheetComponent implements OnInit {
   timesheet = new Timesheet();
   checkinDis : String;
   checkoutDis : String;
+  today = new Date();
  
   constructor(private timesheetService: TimesheetService,
     private router : Router,
@@ -32,6 +33,8 @@ export class TimesheetComponent implements OnInit {
 ////Calander Event///////
 calCheckUpdated(event)
 {
+  console.log(event);
+  
   var str1 = this.dateCon(event);
   console.log(str1);
   this.timesheetService.getTimesheetBylogIdAndtsDate(this.timesheet.loginid,str1).subscribe(data =>{
@@ -88,9 +91,41 @@ calCheckUpdated(event)
 
    /////////on Start////////////
   ngOnInit(): void {
-    
+
+    ///defualt date////
+
+
     this.getTimesheet();
     this.timesheet.loginid = 3;
+
+    let thisDate = this.dateCon(this.today);
+    console.log(thisDate);
+    
+    this.timesheetService.getTimesheetBylogIdAndtsDate(this.timesheet.loginid,thisDate).subscribe(data =>{
+      if(data == null){
+            console.log("Null Process");
+            
+      }else{console.log(data.tsdate);
+        
+        console.log("Receiving Process");
+        this.timesheet = data;
+        console.log(this.timesheet.tsdate);
+            this.timesheet.checkin=data.checkin.substring(0,5);
+            this.timesheet.checkout=data.checkout.substring(0,5);
+      }
+    },error => {this.timesheet.tsdate = this.dateCon(this.selected);
+      this.timesheet.checkin= "";
+       this.timesheet.checkout="";
+       this.timesheet.btstart="";
+       this.timesheet.btend="";
+       this.timesheet.timeid=null;
+       console.log("Null Process");
+       this.openSnackBar("No Records Found", "Hide")});
+
+    //////////////
+
+    
+    
   }
   // onKey(event: any)
   // {
@@ -145,21 +180,13 @@ calCheckUpdated(event)
     let snackRef = this.snackBar.open(message,action,{duration : 1000});
   }
 
-  ctrl = new FormControl('', (control: FormControl) => {
-    const value = control.value;
-
-    if (!value) {
-      return null;
-    }
-
-    if (value.hour < 12) {
-      return {tooEarly: true};
-    }
-    if (value.hour > 13) {
-      return {tooLate: true};
-    }
-
-    return null;
-  });
+  checkbts()
+  {
+    console.log(this.timesheet.btstart);
+    
+  }
+  checkbte(){
+    console.log(this.timesheet.btend);
+  }
 
 }
