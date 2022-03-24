@@ -2,7 +2,7 @@
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 <br>
 <p class="md " >Timesheet</p>
-
+<p *ngIf="E1" style="color: crimson; padding-left: 10px;">Fix Error in Break Time</p>
 <div class="container" style="width: 40%; float: left">
  <!-- <div> -->
     <div class="border border-1 rounded shadow-sm" style="padding: 10px;" >
@@ -17,12 +17,12 @@
 
     <span>
    <label style="font-size: medium;">CheckIn Time </label>
-    <input type="time"  [(ngModel)] ="timesheet.checkin" 
+    <input type="time"  [(ngModel)] ="timesheet.checkin" (change)="checkbt()" 
                  placeholder="CheckIn Time"style="margin-left: 22px; width: 150px;" ></span>
      <br><br>
      <span>
         <label style="font-size: medium">CheckOut Time </label>
-        <input  type="time"  [(ngModel)] ="timesheet.checkout"  
+        <input  type="time"  [(ngModel)] ="timesheet.checkout"  (change)="checkbt()" 
                  placeholder="CheckOut Time"style="margin-left: 10px; width: 150px;" ></span>
      <br><br>  
      
@@ -32,13 +32,13 @@
         <div class="border border-1 rounded shadow-sm" style="padding: 10px;" >
              <span>
             <label style="font-size: medium;">BreakTime Start </label>
-                <input type="time"  [(ngModel)] ="timesheet.btstart"  (change)="checkbts()" 
+                <input type="time"  [(ngModel)] ="timesheet.btstart"  (change)="checkbt()" 
                             placeholder="CheckIn Time" style="margin-left: 10px; width: 150px;" ></span>
                     
                 <br><br>
         <span>
             <label style="font-size: medium">BreakTime End</label>
-            <input  type="time"  [(ngModel)] ="timesheet.btend"  (change)="checkbte()" 
+            <input  type="time"  [(ngModel)] ="timesheet.btend"  (change)="checkbt()" 
                     placeholder="CheckOut Time" style="margin-left: 18px; width: 150px;" ></span>
      <br><br>  
             <form class="example-form">
@@ -55,11 +55,6 @@
 
   <!-- </div> -->
     </div>     
-
-    
-
-        
-        
 
     <div  style="margin-left: 40%;">
         <mat-card class="inline-calendar-card" >

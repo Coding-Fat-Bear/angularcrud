@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TimesheetService } from '../Services/timesheet.service';
 import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-timesheet',
@@ -12,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./timesheet.component.css']
 })
 export class TimesheetComponent implements OnInit {
+  E1 : Boolean = false;
   selected : Date;
   timesheets : Timesheet[];
   // values:any;
@@ -124,6 +126,9 @@ calCheckUpdated(event)
 
   saveTimesheet()
   {
+    if(this.E1){
+
+    
     console.log(this.timesheet);
     if(this.timesheet.checkin == null){
     }
@@ -149,22 +154,85 @@ calCheckUpdated(event)
       console.log("saved");
       this.openSnackBar("Saved", "Hide")
     },error => console.log(error))
+    }
+    else{
+      this.openSnackBar("Fix Error", "Hide")
+    }
+   
   }
   ////snack bar pop up//////
   openSnackBar(message: string, action: string) {
     
     let snackRef = this.snackBar.open(message,action,{duration : 1000});
   }
+  checkbt(){
+    if(this.timesheet.btend ==null ||this.timesheet.btstart ==null ){
 
+    }else{
+      this.checkbts();
+      this.checkbte();
+    }
+    
+  }
+  
+  ////start check
   checkbts()
   {
+
+    ////checin out check
+    if (!(this.timesheet.checkin == null) )
+    {
+        console.log(this.timesheet.checkin < this.timesheet.btstart);
+        console.log(this.timesheet.btstart < this.timesheet.checkout);
+        
+        
+      if(this.timesheet.checkin < this.timesheet.btstart && this.timesheet.btstart < this.timesheet.checkout)
+      {
+        this.E1 = false;
+        console.log("ok");
+      }
+      else
+      {
+        
+        console.log("in early");
+        console.log("start error");
+        this.E1 = true;
+      }
+    }
+    
     console.log(this.timesheet.btstart);
     
   }
+/////endcheck
   checkbte(){
+    ////checin out check
+    if (!(this.timesheet.checkin == null) )
+    {
+        console.log(this.timesheet.checkin < this.timesheet.btend);
+        console.log(this.timesheet.btend < this.timesheet.checkout);
+        
+        
+      if(this.timesheet.checkin < this.timesheet.btend && this.timesheet.btend < this.timesheet.checkout)
+      {
+        this.E1 = false;
+        console.log("ok");
+      }
+      else
+      {
+        console.log(" error");
+        this.E1 = true;
+      }
+    }
+  
+
     console.log(this.timesheet.btend);
-  }
+  
+}
+
+
   checkts(){
+    console.log(this.E1);
+    
     console.log(this.timesheet);
     if(this.timesheet.btend==null){
       console.log("null");
@@ -174,8 +242,9 @@ calCheckUpdated(event)
         
       }
       
-    
-    
+   
   }
+
+  
 
 }
