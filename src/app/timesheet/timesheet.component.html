@@ -73,11 +73,11 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Lgin ID</th>
+            <th>L0gin ID</th>
             <th>Date</th>
             <th>CheckIn</th>
             <th>CheckOut</th>
-            <th>Actions</th>
+            <th>hoursworked</th>
 
         </tr>
     </thead>
@@ -87,6 +87,7 @@
             <td>{{timesheet.tsdate}}</td>
             <td>{{timesheet.checkin}}</td>
             <td>{{timesheet.checkout}}</td>
+            <td>{{timesheet.totalhours}}</td>
             <td>
                 <!-- <button (click) = "upTime(timesheet.checkin,timesheet.checkout)" class="btn btn-info">Update</button> -->
             </td>

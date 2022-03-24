@@ -1,15 +1,10 @@
 
-import * as moment from 'moment';
 import { Timesheet } from './../timesheet';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TimesheetService } from '../Services/timesheet.service';
 import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-import {FormControl} from '@angular/forms';
-import { delay } from 'rxjs';
-// import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-timesheet',
@@ -18,8 +13,6 @@ import { delay } from 'rxjs';
 })
 export class TimesheetComponent implements OnInit {
   selected : Date;
-  // selectedtest = new Date("2022-03-15");
-  // selectedPre :String;
   timesheets : Timesheet[];
   // values:any;
   timesheet = new Timesheet();
@@ -43,10 +36,9 @@ calCheckUpdated(event)
   console.log(str1);
   this.timesheetService.getTimesheetBylogIdAndtsDate(this.timesheet.loginid,str1).subscribe(data =>{
     if(data == null){
-      // console.log("u nee god now");
-      //    this.timesheet.tsdate = this.dateCon(this.selected);
-      //    this.timesheet.checkin= "";
-      //     this.timesheet.checkout="";
+         this.timesheet.tsdate = this.dateCon(this.selected);
+         this.timesheet.checkin= "";
+          this.timesheet.checkout="";
           this.timesheet.timeid=null;
           console.log("Null Process how");
           
@@ -66,6 +58,7 @@ calCheckUpdated(event)
      this.timesheet.btstart="";
      this.timesheet.btend="";
      this.timesheet.timeid=null;
+     this.timesheet.comment="";
      console.log("Null Process");
      this.openSnackBar("No Records Found", "Hide")});
      
@@ -78,13 +71,10 @@ calCheckUpdated(event)
 
     ///defualt date////
 
-    this.loading = true;
     this.getTimesheet();
     this.timesheet.loginid = 3;
-
     let thisDate = this.dateCon(this.today);
-    console.log(thisDate);
-    
+    // console.log(thisDate);
     this.timesheetService.getTimesheetBylogIdAndtsDate(this.timesheet.loginid,thisDate).subscribe(data =>{
       if(data == null){
             console.log("Null Process");
