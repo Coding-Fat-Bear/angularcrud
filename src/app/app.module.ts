@@ -13,6 +13,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MaterialModule} from './material-module'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 // import{Ma} from '@angular/material'
 // import { ResearchComponent } from './research/research.component';
 // import { TestingComponent } from './testing/testing.component';

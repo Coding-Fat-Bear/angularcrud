@@ -2,7 +2,10 @@
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 <br>
 <p class="md " >Timesheet</p>
-<p *ngIf="E1" style="color: crimson; padding-left: 10px;">Fix Error in Break Time</p>
+
+
+
+<!-- <p *ngIf="E1" style="color: crimson; padding-left: 10px;">Fix Error in Break Time</p> -->
 <div class="container" style="width: 40%; float: left">
  <!-- <div> -->
     <div class="border border-1 rounded shadow-sm" style="padding: 10px;" >
@@ -17,28 +20,29 @@
 
     <span>
    <label style="font-size: medium;">CheckIn Time </label>
-    <input type="time"  [(ngModel)] ="timesheet.checkin" (change)="checkbt()" 
+    <input type="time"  [(ngModel)] ="timesheet.checkin" 
                  placeholder="CheckIn Time"style="margin-left: 22px; width: 150px;" ></span>
      <br><br>
      <span>
         <label style="font-size: medium">CheckOut Time </label>
-        <input  type="time"  [(ngModel)] ="timesheet.checkout"  (change)="checkbt()" 
+        <input  type="time"  [(ngModel)] ="timesheet.checkout"
                  placeholder="CheckOut Time"style="margin-left: 10px; width: 150px;" ></span>
-     <br><br>  
+                 
+     <br><mat-checkbox style="padding-left: 30%;" (change)="breakbox($event.checked)">Overtime</mat-checkbox><br>  
      
         <button  mat-stroked-button (click)="saveTimesheet()"> Save / Update</button>
 </div> 
-    <div style="padding-top: 10px;">
+    <div style="padding-top: 10px;" *ngIf="btShow">
         <div class="border border-1 rounded shadow-sm" style="padding: 10px;" >
              <span>
             <label style="font-size: medium;">BreakTime Start </label>
-                <input type="time"  [(ngModel)] ="timesheet.btstart"  (change)="checkbt()" 
+                <input type="time"  [(ngModel)] ="timesheet.btstart"  
                             placeholder="CheckIn Time" style="margin-left: 10px; width: 150px;" ></span>
                     
                 <br><br>
         <span>
             <label style="font-size: medium">BreakTime End</label>
-            <input  type="time"  [(ngModel)] ="timesheet.btend"  (change)="checkbt()" 
+            <input  type="time"  [(ngModel)] ="timesheet.btend"  
                     placeholder="CheckOut Time" style="margin-left: 18px; width: 150px;" ></span>
      <br><br>  
             <form class="example-form">
@@ -48,7 +52,7 @@
                 </mat-form-field>
             </form>
             
-        <button  mat-stroked-button (click)="checkts()"> check</button>
+        <button  mat-stroked-button (click)="check()"> check</button>
         </div>
     </div> 
 

@@ -13,6 +13,8 @@ import { IfStmt } from '@angular/compiler';
   styleUrls: ['./timesheet.component.css']
 })
 export class TimesheetComponent implements OnInit {
+  public isCollapsed = false;
+  btShow : boolean;
   E1 : Boolean = false;
   selected : Date;
   timesheets : Timesheet[];
@@ -35,7 +37,7 @@ calCheckUpdated(event)
   console.log(this.timesheet);
   
   var str1 = this.dateCon(event);
-  console.log(str1);
+  // console.log(str1);
   this.timesheetService.getTimesheetBylogIdAndtsDate(this.timesheet.loginid,str1).subscribe(data =>{
     if(data == null){
          this.timesheet.tsdate = this.dateCon(this.selected);
@@ -48,10 +50,15 @@ calCheckUpdated(event)
       
       console.log("Receiving Process");
       this.timesheet = data;
-      console.log(this.timesheet.tsdate);
-          this.timesheet.checkin=data.checkin.substring(0,5);
-          this.timesheet.checkout=data.checkout.substring(0,5);
-          
+      // console.log(this.timesheet.tsdate);
+          // this.timesheet.checkin=data.checkin.substring(0,5);
+          // this.timesheet.checkout=data.checkout.substring(0,5);
+          if(this.timesheet.breakflag == "X"){
+            this.btShow = true;
+          }else{
+            this.btShow = false;
+          }
+
           this.loading = false;
     }
   },error => {this.timesheet.tsdate = this.dateCon(this.selected);
@@ -65,6 +72,7 @@ calCheckUpdated(event)
      this.openSnackBar("No Records Found", "Hide")});
      
      this.loading = false;
+     this.btShow = false;
   
 }
 
@@ -126,7 +134,7 @@ calCheckUpdated(event)
 
   saveTimesheet()
   {
-    if(this.E1){
+    // if(this.E1){
 
     
     console.log(this.timesheet);
@@ -154,10 +162,10 @@ calCheckUpdated(event)
       console.log("saved");
       this.openSnackBar("Saved", "Hide")
     },error => console.log(error))
-    }
-    else{
-      this.openSnackBar("Fix Error", "Hide")
-    }
+    // }
+    // else{
+    //   this.openSnackBar("Fix Error", "Hide")
+    // }
    
   }
   ////snack bar pop up//////
@@ -165,86 +173,26 @@ calCheckUpdated(event)
     
     let snackRef = this.snackBar.open(message,action,{duration : 1000});
   }
-  checkbt(){
-    if(this.timesheet.btend ==null ||this.timesheet.btstart ==null ){
 
-    }else{
-      this.checkbts();
-      this.checkbte();
-    }
+
+/// break checkbox/////
+breakbox(checked:boolean){
+  if(checked == true){
+    console.log("checked");
+    this.btShow = true;
+    this.timesheet.breakflag = "X";
+  }
+  else{
+    console.log("unchecked");
+    this.timesheet.breakflag = "";
+    this.btShow = false;
     
   }
-  
-  ////start check
-  checkbts()
-  {
-
-    ////checin out check
-    if (!(this.timesheet.checkin == null) )
-    {
-        console.log(this.timesheet.checkin < this.timesheet.btstart);
-        console.log(this.timesheet.btstart < this.timesheet.checkout);
-        
-        
-      if(this.timesheet.checkin < this.timesheet.btstart && this.timesheet.btstart < this.timesheet.checkout)
-      {
-        this.E1 = false;
-        console.log("ok");
-      }
-      else
-      {
-        
-        console.log("in early");
-        console.log("start error");
-        this.E1 = true;
-      }
-    }
-    
-    console.log(this.timesheet.btstart);
-    
-  }
-/////endcheck
-  checkbte(){
-    ////checin out check
-    if (!(this.timesheet.checkin == null) )
-    {
-        console.log(this.timesheet.checkin < this.timesheet.btend);
-        console.log(this.timesheet.btend < this.timesheet.checkout);
-        
-        
-      if(this.timesheet.checkin < this.timesheet.btend && this.timesheet.btend < this.timesheet.checkout)
-      {
-        this.E1 = false;
-        console.log("ok");
-      }
-      else
-      {
-        console.log(" error");
-        this.E1 = true;
-      }
-    }
-  
-
-    console.log(this.timesheet.btend);
+}
+check(){
+  console.log(this.timesheet);
   
 }
-
-
-  checkts(){
-    console.log(this.E1);
-    
-    console.log(this.timesheet);
-    if(this.timesheet.btend==null){
-      console.log("null");
-    }
-      else{
-        console.log("not null");
-        
-      }
-      
-   
-  }
-
   
 
 }

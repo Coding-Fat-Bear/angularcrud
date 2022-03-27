@@ -10,5 +10,6 @@ export class Timesheet {
     totalhours : number;
     btstart : String;
     btend : String;
+     breakflag : String;
     comment : String;
 }
