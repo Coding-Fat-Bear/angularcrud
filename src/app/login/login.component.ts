@@ -23,7 +23,14 @@ export class LoginComponent implements OnInit {
 
     // console.log(this.logi.username +""+ this.logi.password );
 
-    this.loginService.LoginByUsernameAndPassword(this.logi).subscribe(data =>{})
+    this.loginService.LoginByUsernameAndPassword(this.logi).subscribe(data =>{
+      // if(data !== null){
+        console.log("log success");
+
+
+    },error =>{
+      console.log("log error");
+    })
   }
 
 }
