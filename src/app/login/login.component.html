@@ -1,0 +1,45 @@
+<body id="logbody" >
+  <!-- <header id="loghead">
+  <div class="header-inner1">
+<h1><a href="index.htm">
+          <img src="http://www.agnieconsulting.com/assets/img/logo.gif" class="logo" alt="Agnie India" >
+      </a></h1>
+</div>
+</header> -->
+
+<div id="frm" class="form1">
+
+      <form action="login2"  method="post">
+          <!--<pre>-->
+          <input type="text" id="bodybgc" name="bodybgc" hidden/>
+          <input type="text" id="headbgc" name="headbgc" hidden/>
+          <input type="text" id="tablinkbgc" name="tablinkbgc" hidden/>
+          <input type="text" id="tabcontbgc" name="tabcontbgc" hidden/>
+          <input type="text" id="tablebgc" name="tablebgc" hidden/>
+              <!-- <lable id="lab" style="display:none;color:red;background-color:pink">Please check username and password...!</lable> -->
+              <label for="uname" >Username:</label>
+              <li><input id='uname' [(ngModel)]="logi.username" placeholder="enter username" oninvalid="this.setCustomValidity('Enter Username')"  type="text"  name="uname" required #uname></li>
+              <label for="pass">Password:</label>
+              <li><input id="pass" [(ngModel)]="logi.password" placeholder="enter password" oninvalid="this.setCustomValidity('Enter Password')" type="password" name="pass" required></li>
+              <li><label  for="weblng" style="width:196px" >Language : </label>
+                  <select type="text"  style="width:120px;text-transform:uppercase"  name="weblng" id="weblng" >
+                   <!--<option value=""></option>-->
+                   <option value="EN">English</option>
+                   <option value="JA">Japanese</option>
+               </select></li>
+
+
+              <li><button type="button" id="lgb" (click)="login()" class="but" >Login</button></li>
+
+      </form>
+    <div>
+                  <!--<form action="usrcre" mothed="post">-->
+                  <button type="button" onclick="usrcre()" class="but1">Create User</button>
+                  <!--</form>-->
+                  <a href="#" style="float:right;margin-top:-25px">New Password</a>
+              </div>
+</div>
+
+
+
+</body>

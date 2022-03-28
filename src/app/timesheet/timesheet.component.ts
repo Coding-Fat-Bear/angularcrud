@@ -31,7 +31,7 @@ calCheckUpdated(event)
   this.loading = true;
   console.log(event);
   console.log(this.timesheet);
-  
+
   var str1 = this.dateCon(event);
   console.log(str1);
   this.timesheetService.getTimesheetBylogIdAndtsDate(this.timesheet.loginid,str1).subscribe(data =>{
@@ -41,15 +41,15 @@ calCheckUpdated(event)
           this.timesheet.checkout="";
           this.timesheet.timeid=null;
           console.log("Null Process how");
-          
+
     }else{console.log(data.tsdate);
-      
+
       console.log("Receiving Process");
       this.timesheet = data;
       console.log(this.timesheet.tsdate);
           this.timesheet.checkin=data.checkin.substring(0,5);
           this.timesheet.checkout=data.checkout.substring(0,5);
-          
+
           this.loading = false;
     }
   },error => {this.timesheet.tsdate = this.dateCon(this.selected);
@@ -61,9 +61,9 @@ calCheckUpdated(event)
      this.timesheet.comment="";
      console.log("Null Process");
      this.openSnackBar("No Records Found", "Hide")});
-     
+
      this.loading = false;
-  
+
 }
 
    /////////on Start////////////
@@ -79,9 +79,9 @@ calCheckUpdated(event)
       if(data == null){
             console.log("Null Process");
             this.loading = false;
-            
+
       }else{console.log(data.tsdate);
-        
+
         console.log("Receiving Process");
         this.timesheet = data;
         console.log(this.timesheet.tsdate);
@@ -100,12 +100,12 @@ calCheckUpdated(event)
 
     //////////////
 
-    
-    
+
+
   }
   // onKey(event: any)
   // {
-   
+
   // }
 
   //////////// Servies/////////////
@@ -128,22 +128,22 @@ calCheckUpdated(event)
     if(this.timesheet.checkin == null){
     }
     else{
-      this.timesheet.checkin = (this.timesheet.checkin+":00").substring(0,8); 
+      this.timesheet.checkin = (this.timesheet.checkin+":00").substring(0,8);
     }
     if(this.timesheet.checkout == null){
     }
     else{
-      this.timesheet.checkout = (this.timesheet.checkout+":00").substring(0,8); 
+      this.timesheet.checkout = (this.timesheet.checkout+":00").substring(0,8);
     }
     if(this.timesheet.btstart == null){
     }
     else{
-      this.timesheet.btstart = (this.timesheet.btstart+":00").substring(0,8); 
+      this.timesheet.btstart = (this.timesheet.btstart+":00").substring(0,8);
     }
     if(this.timesheet.btend == null){
     }
     else{
-      this.timesheet.btend = (this.timesheet.btend+":00").substring(0,8); 
+      this.timesheet.btend = (this.timesheet.btend+":00").substring(0,8);
     }
     this.timesheetService.postTimesheet(this.timesheet).subscribe(data =>{
       console.log("saved");
@@ -152,14 +152,14 @@ calCheckUpdated(event)
   }
   ////snack bar pop up//////
   openSnackBar(message: string, action: string) {
-    
+
     let snackRef = this.snackBar.open(message,action,{duration : 1000});
   }
 
   checkbts()
   {
     console.log(this.timesheet.btstart);
-    
+
   }
   checkbte(){
     console.log(this.timesheet.btend);
@@ -171,11 +171,11 @@ calCheckUpdated(event)
     }
       else{
         console.log("not null");
-        
+
       }
-      
-    
-    
+
+
+
   }
 
 }

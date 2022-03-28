@@ -1,3 +1,35 @@
+header{
+  width:100%;
+  margin: 0;
+  padding:0;
+  background: rgba(42,55,123,0.9);
+  position: fixed top;
+  height: 120px;
+  overflow: hidden;
+  z-index: 50
+}
+
+ header::after{
+  content: "";
+  display: table;
+  clear: both;
+  bottom: 0px;
+}
+
+.header-inner{
+    float: left;
+    width: 30px;
+    margin: auto;
+    position: relative;
+}
+
+.header-inner1{
+    float: right;
+    width: 146px;
+    margin: 30px
+/*    position:relative; */
+}
+
 .aligned-with-icon{
   position: absolute;
   margin-top: 3px;

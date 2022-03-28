@@ -12,7 +12,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatNativeDateModule} from '@angular/material/core';
-import {MaterialModule} from './material-module'
+import {MaterialModule} from './material-module';
+import { LoginComponent } from './login/login.component'
 // import{Ma} from '@angular/material'
 // import { ResearchComponent } from './research/research.component';
 // import { TestingComponent } from './testing/testing.component';
@@ -24,6 +25,7 @@ import {MaterialModule} from './material-module'
     CreateProjectComponent,
     UpdateProjectComponent,
     TimesheetComponent,
+    LoginComponent,
     
     // ResearchComponent,
     // TestingComponent,
