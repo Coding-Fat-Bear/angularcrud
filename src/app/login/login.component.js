@@ -1,4 +1,4 @@
-function login(){
-
-  alert("welcome sri");
+function usr(){
+  // var usrnm = document.getElementById("uname").value;
+  alert("welcome ");
 }

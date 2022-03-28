@@ -10,13 +10,15 @@
       </div>
     </div>
   </nav> -->
- <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
-  <!-- <header id="loghead"> -->
-    <!-- <div class="header-inner1">
+
+  <header id="loghead" *ngIf="hedoff">
+     <div class="header-inner1">
   <h1><a href="index.htm">
             <img src="http://www.agnieconsulting.com/assets/img/logo.gif" class="logo" alt="Agnie India" >
-        </a></h1> -->
-
+        </a></h1>
+         </div>
+</header>
+        <nav class="navbar navbar-expand-sm bg-primary navbar-dark" *ngIf="navoff">
     <ul class="navbar-nav">
         <li >
             <a routerLink="projects" routerLinkActive='active' class="nav-link">Projects List</a>
@@ -29,8 +31,7 @@
         </li>
     </ul>
 
-  <!-- </div> -->
-<!-- </header> -->
+
 </nav>
 <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
 <!-- <h1 class="text-center">Project master</h1>  -->

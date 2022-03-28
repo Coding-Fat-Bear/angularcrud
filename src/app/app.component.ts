@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'get';
+  static hedoff: boolean;
+  static navoff:boolean;
+  hedoff = true;
+  navoff = false;
 }
