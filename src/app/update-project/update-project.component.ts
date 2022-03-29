@@ -22,6 +22,7 @@ export class UpdateProjectComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    console.log(this.route);
     this.id = this.route.snapshot.params['id'];
     this.projectService.getProjectById(this.id).subscribe(data =>{
       this.project = data;

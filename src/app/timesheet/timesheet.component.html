@@ -28,23 +28,13 @@
         <input  type="time"  [(ngModel)] ="timesheet.checkout"
                  placeholder="CheckOut Time"style="margin-left: 10px; width: 150px;" ></span>
                  
-     <br><mat-checkbox style="padding-left: 30%;" (change)="breakbox($event.checked)">Overtime</mat-checkbox><br>  
-     
+     <br>
+     <mat-checkbox style="padding-left: 30%;" (change)="breakbox($event.checked)">Overtime</mat-checkbox><br>  
+      
         <button  mat-stroked-button (click)="saveTimesheet()"> Save / Update</button>
 </div> 
-    <div style="padding-top: 10px;" *ngIf="btShow">
+    <div style="padding-top: 10px;" >
         <div class="border border-1 rounded shadow-sm" style="padding: 10px;" >
-             <span>
-            <label style="font-size: medium;">BreakTime Start </label>
-                <input type="time"  [(ngModel)] ="timesheet.btstart"  
-                            placeholder="CheckIn Time" style="margin-left: 10px; width: 150px;" ></span>
-                    
-                <br><br>
-        <span>
-            <label style="font-size: medium">BreakTime End</label>
-            <input  type="time"  [(ngModel)] ="timesheet.btend"  
-                    placeholder="CheckOut Time" style="margin-left: 18px; width: 150px;" ></span>
-     <br><br>  
             <form class="example-form">
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Leave a comment</mat-label>
@@ -54,6 +44,19 @@
             
         <button  mat-stroked-button (click)="check()"> check</button>
         </div>
+    </div> 
+    <div style="padding-top: 10px;" *ngIf="btShow">
+            <div class="border border-1 rounded shadow-sm" style="padding: 10px;" >
+                <span>
+                <label style="font-size: medium;">BreakTime Start </label>
+                    <input type="time"  [(ngModel)] ="timesheet.btstart"  
+                                placeholder="CheckIn Time" style="margin-left: 10px; width: 150px;" ></span>    
+                    <br><br>
+            <span>
+                <label style="font-size: medium">BreakTime End</label>
+                <input  type="time"  [(ngModel)] ="timesheet.btend"  
+                        placeholder="CheckOut Time" style="margin-left: 18px; width: 150px;" ></span>
+            </div>
     </div> 
 
 
