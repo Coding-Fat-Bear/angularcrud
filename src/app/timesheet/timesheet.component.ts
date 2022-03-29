@@ -16,6 +16,7 @@ export class TimesheetComponent implements OnInit {
   public isCollapsed = false;
   btShow : boolean;
   E1 : Boolean = false;
+  selectbt : any;
   selected : Date;
   timesheets : Timesheet[];
   // values:any;

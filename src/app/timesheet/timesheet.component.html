@@ -35,6 +35,17 @@
 </div> 
     <div style="padding-top: 10px;" >
         <div class="border border-1 rounded shadow-sm" style="padding: 10px;" >
+            
+                <label style="padding-right:10px;">Other Time Adjustments</label>
+                <mat-form-field>
+                <mat-select [(value)]="selectbt">
+                  <mat-option>None</mat-option>
+                  <mat-option value="1">Overtime</mat-option>
+                  <mat-option value="2">Overtime's breaktime</mat-option>
+                  <mat-option value="3">Change usual Breaktime</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <p>You selected: {{selectbt}}</p>
             <form class="example-form">
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Leave a comment</mat-label>
@@ -45,20 +56,51 @@
         <button  mat-stroked-button (click)="check()"> check</button>
         </div>
     </div> 
-    <div style="padding-top: 10px;" *ngIf="btShow">
-            <div class="border border-1 rounded shadow-sm" style="padding: 10px;" >
+
+<div >
+    
+    <div style="padding-top: 10px;" [ngSwitch]="selectbt" >
+            <div class="border border-1 rounded shadow-sm" style="padding: 10px;" *ngSwitchCase="3" >
                 <span>
                 <label style="font-size: medium;">BreakTime Start </label>
                     <input type="time"  [(ngModel)] ="timesheet.btstart"  
-                                placeholder="CheckIn Time" style="margin-left: 10px; width: 150px;" ></span>    
+                                placeholder="HH:MM" style="margin-left: 10px; width: 150px;" ></span>    
                     <br><br>
             <span>
                 <label style="font-size: medium">BreakTime End</label>
                 <input  type="time"  [(ngModel)] ="timesheet.btend"  
-                        placeholder="CheckOut Time" style="margin-left: 18px; width: 150px;" ></span>
+                        placeholder="HH:MM" style="margin-left: 18px; width: 150px;" ></span>
             </div>
-    </div> 
 
+            <div class="border border-1 rounded shadow-sm" style="padding: 10px;" *ngSwitchCase="2" >
+                <span>
+                <label style="font-size: medium;">OT BreakTime Start </label>
+                    <input type="time"    
+                                placeholder="HH:MM" style="margin-left: 10px; width: 150px;" ></span>    
+                    <br><br>
+            <span>
+                <label style="font-size: medium">OT BreakTime End</label>
+                <input  type="time"    
+                        placeholder="HH:MM" style="margin-left: 18px; width: 150px;" ></span>
+            </div>
+
+
+            <div class="border border-1 rounded shadow-sm" style="padding: 10px;" *ngSwitchCase="1" >
+                <span>
+                <label style="font-size: medium;">OverTime Start </label>
+                    <input type="time"    
+                                placeholder="HH:MM" style="margin-left: 10px; width: 150px;" ></span>    
+                    <br><br>
+            <span>
+                <label style="font-size: medium">OverTime End</label>
+                <input  type="time"   
+                        placeholder="HH:MM" style="margin-left: 18px; width: 150px;" ></span>
+            </div>
+
+
+
+    </div> 
+</div>
 
   <!-- </div> -->
     </div>     
