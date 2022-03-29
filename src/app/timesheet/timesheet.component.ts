@@ -65,6 +65,10 @@ calCheckUpdated(event)
   },error => {this.timesheet.tsdate = this.dateCon(this.selected);
     this.timesheet.checkin= "";
      this.timesheet.checkout="";
+     this.timesheet.otstart="";
+     this.timesheet.otend="";
+     this.timesheet.otbtstart="";
+     this.timesheet.otbtend="";
      this.timesheet.btstart="";
      this.timesheet.btend="";
      this.timesheet.timeid=null;
@@ -85,6 +89,7 @@ calCheckUpdated(event)
     this.getTimesheet();
     this.timesheet.loginid = 3;
     let thisDate = this.dateCon(this.today);
+    // let thisDate = "2022-03-13";
     // console.log(thisDate);
     this.timesheetService.getTimesheetBylogIdAndtsDate(this.timesheet.loginid,thisDate).subscribe(data =>{
       if(data == null){
@@ -98,6 +103,10 @@ calCheckUpdated(event)
         console.log(this.timesheet.tsdate);
             this.timesheet.checkin=data.checkin.substring(0,5);
             this.timesheet.checkout=data.checkout.substring(0,5);
+            this.timesheet.btstart=data.otbtstart.substring(0,5);
+            this.timesheet.btend=data.otbtend.substring(0,5);
+            this.timesheet.btstart=data.otstart.substring(0,5);
+            this.timesheet.btend=data.otend.substring(0,5);
             this.timesheet.btstart=data.btstart.substring(0,5);
             this.timesheet.btend=data.btend.substring(0,5);
             this.loading = false;
@@ -149,6 +158,7 @@ calCheckUpdated(event)
     else{
       this.timesheet.checkout = (this.timesheet.checkout+":00").substring(0,8); 
     }
+
     if(this.timesheet.btstart == null){
     }
     else{
@@ -159,6 +169,31 @@ calCheckUpdated(event)
     else{
       this.timesheet.btend = (this.timesheet.btend+":00").substring(0,8); 
     }
+
+    if(this.timesheet.otbtstart == null){
+    }
+    else{
+      this.timesheet.otbtstart = (this.timesheet.otbtstart+":00").substring(0,8); 
+    }
+    if(this.timesheet.otbtend == null){
+    }
+    else{
+      this.timesheet.otbtend = (this.timesheet.otbtend+":00").substring(0,8); 
+    }
+
+    if(this.timesheet.otstart == null){
+    }
+    else{
+      this.timesheet.otstart = (this.timesheet.otstart+":00").substring(0,8); 
+    }
+    if(this.timesheet.otend == null){
+    }
+    else{
+      this.timesheet.otend = (this.timesheet.otend+":00").substring(0,8); 
+    }
+
+
+
     this.timesheetService.postTimesheet(this.timesheet).subscribe(data =>{
       console.log("saved");
       this.openSnackBar("Saved", "Hide")
@@ -187,7 +222,6 @@ breakbox(checked:boolean){
     console.log("unchecked");
     this.timesheet.breakflag = "";
     this.btShow = false;
-    
   }
 }
 check(){

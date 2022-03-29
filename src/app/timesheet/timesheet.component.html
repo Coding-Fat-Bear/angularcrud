@@ -45,7 +45,6 @@
                   <mat-option value="3">Change usual Breaktime</mat-option>
                 </mat-select>
               </mat-form-field>
-              <p>You selected: {{selectbt}}</p>
             <form class="example-form">
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Leave a comment</mat-label>
@@ -75,12 +74,12 @@
             <div class="border border-1 rounded shadow-sm" style="padding: 10px;" *ngSwitchCase="2" >
                 <span>
                 <label style="font-size: medium;">OT BreakTime Start </label>
-                    <input type="time"    
+                    <input type="time"    [(ngModel)] ="timesheet.otbtstart"
                                 placeholder="HH:MM" style="margin-left: 10px; width: 150px;" ></span>    
                     <br><br>
             <span>
                 <label style="font-size: medium">OT BreakTime End</label>
-                <input  type="time"    
+                <input  type="time"    [(ngModel)] ="timesheet.otbtend" 
                         placeholder="HH:MM" style="margin-left: 18px; width: 150px;" ></span>
             </div>
 
@@ -88,12 +87,12 @@
             <div class="border border-1 rounded shadow-sm" style="padding: 10px;" *ngSwitchCase="1" >
                 <span>
                 <label style="font-size: medium;">OverTime Start </label>
-                    <input type="time"    
+                    <input type="time"    [(ngModel)] ="timesheet.otstart"
                                 placeholder="HH:MM" style="margin-left: 10px; width: 150px;" ></span>    
                     <br><br>
             <span>
                 <label style="font-size: medium">OverTime End</label>
-                <input  type="time"   
+                <input  type="time"   [(ngModel)] ="timesheet.otend" 
                         placeholder="HH:MM" style="margin-left: 18px; width: 150px;" ></span>
             </div>
 

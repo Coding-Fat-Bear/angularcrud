@@ -12,4 +12,8 @@ export class Timesheet {
     btend : String;
      breakflag : String;
     comment : String;
+    otstart : String;
+    otend : String;
+    otbtstart : String;
+    otbtend : String;
 }
