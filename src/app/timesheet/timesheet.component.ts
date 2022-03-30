@@ -15,11 +15,9 @@ import { IfStmt } from '@angular/compiler';
 export class TimesheetComponent implements OnInit {
   public isCollapsed = false;
   btShow : boolean;
-  E1 : Boolean = false;
   selectbt : number;
   selected : Date;
   timesheets : Timesheet[];
-  // values:any;
   timesheet = new Timesheet();
   checkinDis : String;
   checkoutDis : String;
@@ -124,10 +122,6 @@ calCheckUpdated(event)
     
     
   }
-  // onKey(event: any)
-  // {
-   
-  // }
 
   //////////// Servies/////////////
   private getTimesheet(){
@@ -145,7 +139,6 @@ calCheckUpdated(event)
 
   saveTimesheet()
   {
-    // if(this.E1){
 
     
     console.log(this.timesheet);
