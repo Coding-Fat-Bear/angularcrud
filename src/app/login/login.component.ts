@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Login } from '../login';
 import { LoginService } from '../Services/login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppComponent } from '../app.component';
+// import { ViewChild } from '@angular/core';
 
 declare const usr:any;
+
 
 @Component({
   selector: 'app-login',
@@ -17,6 +19,11 @@ export class LoginComponent implements OnInit {
 
   // logins : Login[];
   logi = new Login();
+
+  private appcomponent:AppComponent;
+
+
+
   openSnackBar(message: string, action: string){
     let snackRef = this.snackBar.open(message,action,{duration : 5000});
   };
@@ -36,9 +43,7 @@ export class LoginComponent implements OnInit {
     this.loginService.LoginByUsernameAndPassword(this.logi).subscribe(data =>{
       // if(data !== null){
         console.log("log success");
-        this.router.navigate(['/projects']);
-        AppComponent.hedoff = false;
-        AppComponent.navoff = true;
+        this.router.navigate(['/home']);
 
 
     },error =>{

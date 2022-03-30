@@ -5,6 +5,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UpdateProjectComponent } from './update-project/update-project.component';
 import { LoginComponent } from './login/login.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { HomeComponent } from './home/home.component';
+
 
 const routes: Routes = [
   {path:'projects',component: ProjectListComponent},
@@ -12,7 +15,9 @@ const routes: Routes = [
   {path:'', redirectTo:'login',pathMatch:'full'},
   {path:'update/:id',component: UpdateProjectComponent},
   {path:'timesheet',component: TimesheetComponent},
-  {path:'login',component: LoginComponent}
+  {path:'login',component: LoginComponent},
+  {path:'employee',component: EmployeeComponent},
+  {path:'home',component: HomeComponent}
 ];
 
 @NgModule({

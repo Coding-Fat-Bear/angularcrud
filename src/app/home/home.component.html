@@ -1,0 +1,26 @@
+<div class="tildiv">
+  <div (click)="emptile()" id="em1" class="tile" title="Employee Master" *ngIf="tileoff">
+      <div class="mstic" style="margin-left:8px" >
+          <label style="font-size:15px;color:black">Employee Master</label>
+          <i id="em1" class='fas fa-id-card' style='font-size:93px;margin: 15px'></i></div>
+
+      </div>
+      <div id="em1" class="content" *ngIf="chldtiloff">
+        <ul>
+        <li><button title="Create Employee Master" (click)="empcre()" class="opt" >
+                <i class='fas fa-file' style='font-size:25px;'></i></button></li>
+<li><button title="Change Employee Master" class="opt">
+                <i class='fas fa-edit' style='font-size:25px;'></i></button></li>
+        </ul>
+        <ul>
+<li><button title="Display Employee Master" class="opt">
+                <i class='fas fa-glasses' style='font-size:25px;'></i></button></li>
+        <li><button title="Delete Employee Master" class="opt">
+                <i class='fas fa-trash' style='font-size:25px;'></i></button></li>
+        </ul>
+<!--                        <ul>
+            <button type="button" id="em1" onclick="retn(this.id);" class="ret" >cre</button>
+        </ul>-->
+      </div>
+              <button type="button" id="em1" (click)="retn();" class="ret" *ngIf="rtnbutoff" ><i class="fa fa-undo"></i></button>
+      </div>
