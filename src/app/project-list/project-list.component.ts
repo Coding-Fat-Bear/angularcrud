@@ -20,6 +20,7 @@ export class ProjectListComponent implements OnInit {
   ngOnInit(): void {
     this.getProject();
   }
+  
   private getProject(){
     this.projectService.getProjectList().subscribe(data =>{
       this.projects = data;

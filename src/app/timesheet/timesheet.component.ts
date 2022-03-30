@@ -16,7 +16,7 @@ export class TimesheetComponent implements OnInit {
   public isCollapsed = false;
   btShow : boolean;
   E1 : Boolean = false;
-  selectbt : any;
+  selectbt : number;
   selected : Date;
   timesheets : Timesheet[];
   // values:any;
@@ -83,7 +83,8 @@ calCheckUpdated(event)
 
    /////////on Start////////////
   ngOnInit(): void {
-
+    console.log(this.today.getFullYear() +":"+(this.today.getMonth()+1));
+    
     ///defualt date////
 
     this.getTimesheet();
@@ -137,9 +138,9 @@ calCheckUpdated(event)
 
    dateCon(str) {
     var date = new Date(str),
-      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      month = ("0" + (date.getMonth() + 1)).slice(-2),
       day = ("0" + date.getDate()).slice(-2);
-    return [date.getFullYear(), mnth, day].join("-");
+    return [date.getFullYear(), month, day].join("-");
   }
 
   saveTimesheet()
