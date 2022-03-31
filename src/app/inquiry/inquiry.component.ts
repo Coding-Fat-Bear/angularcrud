@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inquiry.component.css']
 })
 export class InquiryComponent implements OnInit {
+  title = 'PIMS';
+  active = 0;
 
   constructor() { }
 
