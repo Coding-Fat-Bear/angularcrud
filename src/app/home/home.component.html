@@ -1,11 +1,11 @@
-<div class="tildiv">
-  <div (click)="emptile()" id="em1" class="tile" title="Employee Master" *ngIf="tileoff">
+<div class="tildiv"   >
+  <div   id="em1" class="tile" title="Employee Master" *ngIf="tileoff" (mouseenter)="emptile()">
       <div class="mstic" style="margin-left:8px" >
           <label style="font-size:15px;color:black">Employee Master</label>
           <i id="em1" class='fas fa-id-card' style='font-size:93px;margin: 15px'></i></div>
 
       </div>
-      <div id="em1" class="content" *ngIf="chldtiloff">
+      <div id="em1" class="content" *ngIf="chldtiloff" (mouseleave)="retn();">
         <ul>
         <li><button title="Create Employee Master" (click)="empcre()" class="opt" >
                 <i class='fas fa-file' style='font-size:25px;'></i></button></li>
@@ -22,5 +22,5 @@
             <button type="button" id="em1" onclick="retn(this.id);" class="ret" >cre</button>
         </ul>-->
       </div>
-              <button type="button" id="em1" (click)="retn();" class="ret" *ngIf="rtnbutoff" ><i class="fa fa-undo"></i></button>
+              <!-- <button type="button" id="em1" (click)="retn();" class="ret" *ngIf="rtnbutoff" ><i class="fa fa-undo"></i></button> -->
       </div>

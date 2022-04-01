@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  @HostListener('contextmenu', ['$event'])
+  onLeftClick(_event){
+      alert("Left click is working");
+  }
+
 
   emptile(){
     this.tileoff = !this.tileoff;

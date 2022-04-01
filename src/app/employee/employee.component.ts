@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Employee } from '../employee';
+import { EmployeeService } from '../Services/employee.service';
 
 @Component({
   selector: 'app-employee',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeComponent implements OnInit {
 
-  constructor() { }
+empgt = new Employee();
+
+  constructor(private employeeService : EmployeeService,
+    private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  getemp(){
+    // this.employeeService.getEmployeeByID(this.empgt).subscribe(data =>{
+    //   // if(data !== null){
+    //     console.log("log success");
+    //     this.router.navigate(['/home']);
+
+
+    // },error =>{
+    //   console.log("log error");
+    //   this.openSnackBar("Username or Password Invalied","Hide")
+    // })
   }
 
 }
