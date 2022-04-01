@@ -1,127 +1,127 @@
-
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 
 <br>
 
-<p class="md " >Timesheet</p>
+<p class="md ">Timesheet</p>
 
 <div class="container" style="width: 40%; float: left">
 
-    <div class="border border-1 rounded shadow-sm" style="padding: 10px;" >
-    <span>
-    <label style="font-size: small;">Login ID </label>
-    <input style="margin-left: 10px; width: 45px; height: 18px;" [(ngModel)]="timesheet.loginid"></span>
-    <span>
-    <label style="font-size: small; margin-left: 10px;">Date </label>
-    <input style="margin-left: 10px; width: 90px;height: 18px;" [(ngModel)]="timesheet.tsdate " disabled></span>
-    
-    <br><br>
+    <div class="border border-1 rounded shadow-sm" style="padding: 10px;">
+        <span>
+            <label style="font-size: small;">Login ID </label>
+            <input style="margin-left: 10px; width: 45px; height: 18px;" [(ngModel)]="timesheet.loginid"></span>
+        <span>
+            <label style="font-size: small; margin-left: 10px;">Date </label>
+            <input style="margin-left: 10px; width: 90px;height: 18px;" [(ngModel)]="timesheet.tsdate " disabled></span>
+
+        <br><br>
 
 
-    <span><label style="font-size: medium;">CheckIn Time </label>
-        <input type="time"   [(ngModel)] ="timesheet.checkin"  placeholder="CheckIn Time"style="margin-left: 22px; width: 150px;"
-                  min="06:30" max="10:30"  (change)="chtime()" ></span>
-     <br><br>
-     <span> 
-        <label style="font-size: medium">CheckOut Time </label>
-        <input  type="time"  [(ngModel)] ="timesheet.checkout"
-                 placeholder="CheckOut Time"style="margin-left: 10px; width: 150px;" (change)="chtime()"></span>
-                 
-     <br>
+        <span><label style="font-size: medium;">CheckIn Time </label>
+            <input type="time" [(ngModel)]="timesheet.checkin" placeholder="CheckIn Time"
+                style="margin-left: 22px; width: 150px;" min="06:30" max="10:30" (change)="chtime()"></span>
+        <br><br>
+        <span>
+            <label style="font-size: medium">CheckOut Time </label>
+            <input type="time" [(ngModel)]="timesheet.checkout" placeholder="CheckOut Time"
+                style="margin-left: 10px; width: 150px;" (change)="chtime()"></span>
+
+        <br>
         <div>
-        <span *ngIf="ctShow" style="color: Red;"> Range must be betwwen 10:00 and 18:30 </span>
-        <span *ngIf="!ctShowb()" style="color: Red;"> checkin must be after checkout
-        </span>
+            <span *ngIf="ctShow" style="color: Red;"> Range must be betwwen 10:00 and 18:30 </span>
+            <span *ngIf="!ctShowb()" style="color: Red;"> checkin must be after checkout
+            </span>
         </div>
 
 
-     <mat-checkbox style="padding-left: 30%;" (change)="breakbox($event.checked)">Overtime</mat-checkbox><br>  
-      
-        <button  mat-stroked-button (click)="saveTimesheet()"> Save / Update</button>
-        
-</div> 
-    <div style="padding-top: 10px;" >
-        <div class="border border-1 rounded shadow-sm" style="padding: 10px;" >
-            
-                <label style="padding-right:10px;">Other Time Adjustments</label>
-                <mat-form-field>
+        <mat-checkbox style="padding-left: 30%;" (change)="breakbox($event.checked)">Overtime</mat-checkbox><br>
+
+        <button mat-stroked-button (click)="saveTimesheet()"> Save / Update</button>
+
+    </div>
+    <div style="padding-top: 10px;">
+        <div class="border border-1 rounded shadow-sm" style="padding: 10px;">
+
+            <label style="padding-right:10px;">Other Time Adjustments</label>
+            <mat-form-field>
                 <mat-select [(value)]="selectbt">
-                  <mat-option>None</mat-option>
-                  <mat-option value="1">Overtime</mat-option>
-                  <mat-option value="2 " >Overtime's breaktime</mat-option>
-                  <mat-option value="3">Change usual Breaktime</mat-option>
+                    <mat-option>None</mat-option>
+                    <mat-option value="1">Overtime</mat-option>
+                    <mat-option value="2 ">Overtime's breaktime</mat-option>
+                    <mat-option value="3">Change usual Breaktime</mat-option>
                 </mat-select>
-              </mat-form-field>
+            </mat-form-field>
 
             <form class="example-form">
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Leave a comment</mat-label>
-                    <textarea matInput placeholder="Ex. I had a great day " [(ngModel)]="timesheet.comment" [ngModelOptions]="{standalone: true}"></textarea>
+                    <textarea matInput placeholder="Ex. I had a great day " [(ngModel)]="timesheet.comment"
+                        [ngModelOptions]="{standalone: true}"></textarea>
                 </mat-form-field>
             </form>
-            
-        <button  mat-stroked-button (click)="check()"> check</button>
+
+            <button mat-stroked-button (click)="check()"> check</button>
         </div>
-    </div> 
+    </div>
 
-<div >
-    
-    <div style="padding-top: 10px;" [ngSwitch]="selectbt" >
-            <div class="border border-1 rounded shadow-sm" style="padding: 10px;" *ngSwitchCase="3" >
+    <div>
+
+        <div style="padding-top: 10px;" [ngSwitch]="selectbt">
+            <div class="border border-1 rounded shadow-sm" style="padding: 10px;" *ngSwitchCase="3">
                 <span>
-                <label style="font-size: medium;">BreakTime Start </label>
-                    <input type="time"  [(ngModel)] ="timesheet.btstart"   (change)="cusbtcheck()"
-                                placeholder="HH:MM" style="margin-left: 10px; width: 150px;" ></span>    
-                    <br><br>
-            <span>
-                <label style="font-size: medium">BreakTime End</label>
-                <input  type="time"  [(ngModel)] ="timesheet.btend"  (change)="cusbtcheck()"
-                        placeholder="HH:MM" style="margin-left: 18px; width: 150px;" ></span><br>
-                        <span *ngIf="cusbtcheck()" style="color: red;">Invalid Breaktime </span>
+                    <label style="font-size: medium;">BreakTime Start </label>
+                    <input type="time" [(ngModel)]="timesheet.btstart" (change)="cusbtcheck()" placeholder="HH:MM"
+                        style="margin-left: 10px; width: 150px;"></span>
+                <br><br>
+                <span>
+                    <label style="font-size: medium">BreakTime End</label>
+                    <input type="time" [(ngModel)]="timesheet.btend" (change)="cusbtcheck()" placeholder="HH:MM"
+                        style="margin-left: 18px; width: 150px;"></span><br>
+                <span *ngIf="cusbtcheck()" style="color: red;">Invalid Breaktime </span>
             </div>
 
-            <div class="border border-1 rounded shadow-sm" style="padding: 10px;" *ngSwitchCase="2" >
+            <div class="border border-1 rounded shadow-sm" style="padding: 10px;" *ngSwitchCase="2">
                 <span>
-                <label style="font-size: medium;">OT BreakTime Start </label>
-                    <input type="time"    [(ngModel)] ="timesheet.otbtstart" (change)="cusotbtcheck()"
-                                placeholder="HH:MM" style="margin-left: 10px; width: 150px;" ></span>    
-                    <br><br>
-            <span>
-                <label style="font-size: medium">OT BreakTime End</label>
-                <input  type="time"    [(ngModel)] ="timesheet.otbtend" (change)="cusotbtcheck()"
-                        placeholder="HH:MM" style="margin-left: 18px; width: 150px;" ></span><br>
-                        <span *ngIf="cusotbtcheck()" style="color: red;">invalid overtime's breaktime </span>
-            </div>
-
-
-            <div class="border border-1 rounded shadow-sm" style="padding: 10px;" *ngSwitchCase="1" >
+                    <label style="font-size: medium;">OT BreakTime Start </label>
+                    <input type="time" [(ngModel)]="timesheet.otbtstart" (change)="cusotbtcheck()" placeholder="HH:MM"
+                        style="margin-left: 10px; width: 150px;"></span>
+                <br><br>
                 <span>
-                <label style="font-size: medium;">OverTime Start </label>
-                    <input type="time"    [(ngModel)] ="timesheet.otstart" (change)="cusotcheck()"
-                                placeholder="HH:MM" style="margin-left: 10px; width: 150px;" ></span>    
-                    <br><br>
-            <span>
-                <label style="font-size: medium">OverTime End</label>
-                <input  type="time"   [(ngModel)] ="timesheet.otend" (change)="cusotcheck()"
-                        placeholder="HH:MM" style="margin-left: 18px; width: 150px;" ></span><br>
-                        <span *ngIf="cusotcheck()" style="color: red;">Invalid overtime </span>
+                    <label style="font-size: medium">OT BreakTime End</label>
+                    <input type="time" [(ngModel)]="timesheet.otbtend" (change)="cusotbtcheck()" placeholder="HH:MM"
+                        style="margin-left: 18px; width: 150px;"></span><br>
+                <span *ngIf="cusotbtcheck()" style="color: red;">invalid overtime's breaktime </span>
             </div>
 
 
+            <div class="border border-1 rounded shadow-sm" style="padding: 10px;" *ngSwitchCase="1">
+                <span>
+                    <label style="font-size: medium;">OverTime Start </label>
+                    <input type="time" [(ngModel)]="timesheet.otstart" (change)="cusotcheck()" placeholder="HH:MM"
+                        style="margin-left: 10px; width: 150px;"></span>
+                <br><br>
+                <span>
+                    <label style="font-size: medium">OverTime End</label>
+                    <input type="time" [(ngModel)]="timesheet.otend" (change)="cusotcheck()" placeholder="HH:MM"
+                        style="margin-left: 18px; width: 150px;"></span><br>
+                <span *ngIf="cusotcheck()" style="color: red;">Invalid overtime </span>
+            </div>
 
-    </div> 
+
+
+        </div>
+    </div>
+
 </div>
 
-    </div>     
+<div style="margin-left: 40%;">
+    <mat-card class="inline-calendar-card">
+        <mat-calendar (selectedChange)="calCheckUpdated($event)" [(selected)]="selected"></mat-calendar>
+    </mat-card>
 
-    <div  style="margin-left: 40%;">
-        <mat-card class="inline-calendar-card" >
-        <mat-calendar  (selectedChange)="calCheckUpdated($event)" [(selected)]="selected"></mat-calendar>  
-      </mat-card>
-      
-      <br>
-      </div>
-      
+    <br>
+</div>
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -134,7 +134,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor = "let timesheet of timesheets">
+        <tr *ngFor="let timesheet of timesheets">
             <td>{{timesheet.loginid}}</td>
             <td>{{timesheet.tsdate}}</td>
             <td>{{timesheet.checkin}}</td>
@@ -142,6 +142,6 @@
             <td>{{timesheet.totalhours}}</td>
             <td>
             </td>
-         </tr>
+        </tr>
     </tbody>
 </table>
