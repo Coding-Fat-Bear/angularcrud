@@ -1,0 +1,69 @@
+input{
+  margin: 15px;
+}
+
+.top li{
+
+  display: inline-block
+}
+
+.head ul {
+
+	margin:30px;
+        text-decoration: none;
+	list-style-type: none;
+        margin-left: 10px;
+
+}
+
+.head ul li{
+	/*display:grid;*/
+	margin-right:0px;
+        color: black;
+        text-decoration: none;
+        margin-bottom: 5px
+}
+
+ mat-label{
+	color: black;
+	font-size:100%;
+        display: inline-block;
+        text-align: left;
+        width: 200px;
+}
+
+input[type=number].no-spinner::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+
+}
+
+.sald{
+  display: inline-block
+}
+
+.ortb{
+  display: inline-block;
+
+}
+
+.emrol{
+  margin-left: 10px;
+  transition-property: height;
+  transition-duration: 2s;
+  /*width:100%;*/
+  /*overflow: visible;*/
+
+}
+.emrol thead, th, td{
+  background-color: #555;
+  /*width: 200px;*/
+  border: 1px solid black;
+  font-size: 20px;
+/*    margin-left: 10px;
+  margin-right: 10px;*/
+  /*position: absolute;*/
+  /*top: 0;*/
+/*    color: white;*/
+
+}

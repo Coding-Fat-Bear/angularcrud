@@ -14,7 +14,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialModule } from './material-module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { LoginComponent } from './login/login.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { HomeComponent } from './home/home.component'
 
 @NgModule({
   declarations: [
@@ -23,6 +25,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CreateProjectComponent,
     UpdateProjectComponent,
     TimesheetComponent,
+    LoginComponent,
+    EmployeeComponent,
+    HomeComponent,
+    
   ],
   imports: [
     BrowserModule,

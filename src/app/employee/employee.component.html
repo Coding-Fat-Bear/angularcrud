@@ -1,0 +1,193 @@
+
+<button (click)="getemp()"><mat-icon >search</mat-icon></button>
+
+<ul class="top">
+
+  <li><label  for="empid" style="width:100px" >Employee ID</label>
+      <input type="text" style="width:70px;" maxlength="7" name="empid" oninvalid="this.setCustomValidity('Enter Employee Number')" title="Enter Employee Number" id="empid" /></li>
+  <li><label for="ccod" style="width:150px" >Company Code</label>
+    <input type="text" style="width:40px;text-transform:uppercase" maxlength="4" name="ccod" id="ccod"></li>
+    </ul>
+
+<mat-tab-group class="head" animationDuration="800ms" dynamicHeight>
+
+  <mat-tab label="Basic Data1">
+    <ul>
+
+    <li><mat-label for="empnam">Employee Name</mat-label>
+    <input id="empnam" name="empnam" type="text" /></li>
+    <li><mat-label for="dob">DOB</mat-label>
+    <input type="date"  style="width:140px;text-transform: uppercase" placeholder="MM/DD/YYYY" onchange="dob();"  name="dob" id="dob" /></li>
+    <li><mat-label style="width:216px" for="gnd">Gender</mat-label>
+      <select id="gnd" name="gnd" type="text">
+        <option value=""></option>
+        <option value="1">FEMALE</option>
+        <option value="1">MALE</option>
+        </select>
+    </li>
+    <li><mat-label  for="age" style="width:201px" >Age</mat-label>
+      <input maxlength="2" style="width:30px;" class="no-spinner" id="age" type="number" min="1" max="99" name="age" /></li>
+
+      <li><mat-label style="width:216px" for="splnex">Spoken Language</mat-label>
+        <select id="splnex" name="splnex" type="text">
+          <option value=""></option>
+          <option value="1">japanese</option>
+          <option value="2">English</option>
+          </select>
+      </li>
+
+      <li><mat-label for="actstrt">Start Date</mat-label>
+        <input type="date"  width="120px" style="width:130px;text-transform: uppercase" id="actstrt" name="actstrt" /></li>
+      <li><mat-label for="actend">End Date</mat-label>
+        <input type="date" width="120px" style="width:130px;text-transform: uppercase" onchange="datval();" type="date" id="actend" name="actend" /></li>
+
+  </ul>
+
+  </mat-tab>
+  <mat-tab label="Basic Data2"  dynamicHeight>
+    <ul>
+    <li><mat-label  for="str1">Street1</mat-label>
+      <input maxlength="30" style="width:226px;" type="text" id="str1" name="str1" /></li>
+      <li><mat-label  for="str2">Street2</mat-label>
+        <input maxlength="30" style="width:226px;" type="text" id="str2" name="str2" /></li>
+      <li><mat-label  for="str3">Street3</mat-label>
+        <input maxlength="30" style="width:226px;" type="text" id="str3" name="str3" /></li>
+      <li><mat-label  for="city" >City</mat-label>
+        <input maxlength="30" style="width:226px;" type="text" id="city" name="city" /></li>
+      <li><mat-label  for="stat" >State</mat-label>
+        <input maxlength="30" style="width:226px;" type="text" id="stat" name="stat" /></li>
+
+      <li>
+        <mat-label  for="cntry" style="width:216px" >Country</mat-label>
+          <select maxlength="2" style="width:100px;text-transform:uppercase" type="text" id="cntry" name="cntry" >
+              <option value=""></option>
+          </select>
+      </li>
+
+      <li><mat-label  for="lang" style="width:216px" >Language</mat-label>
+        <select type="text" maxlength="2" style="width:100px;text-transform:uppercase" id="lang" name="lang" >
+           <option value=""></option>
+        </select>
+      </li>
+      <li><mat-label for="pstl" >Postal Code</mat-label>
+        <input type="text" maxlength="10" style="width:80px;" inputmode="numeric" id="pstl" name="pstl" /></li>
+          <li><mat-label  for="phn1" >Phone1</mat-label>
+            <input type="tel" maxlength="30" style="width:226px;" id="phn1" name="phn1" /></li>
+          <li><mat-label  for="phn2" >Phone2</mat-label>
+            <input maxlength="30" style="width:226px;" type="text" id="phn2" name="phn2" /></li>
+          <li><mat-label  for="fax" >Fax</mat-label>
+            <input type="text" maxlength="30" style="width:226px;" id="fax" name="fax" /></li>
+          <li><mat-label  for="emil" >E-mail</mat-label>
+            <input maxlength="50" style="width:226px;" type="text" id="emil" name="emil" /></li>
+
+      </ul>
+  </mat-tab>
+  <mat-tab label="Salary Detail">
+    <ul class="sald">
+      <li><mat-label  for="bnk" style="width:216px" >Bank</mat-label>
+          <select type="text" maxlength="2" style="width:100px;text-transform:uppercase" id="bnk" name="bnk" >
+              <option value=""></option>
+          </select>
+        </li>
+
+        <li><mat-label  for="bsal">Base Salary</mat-label>
+          <input maxlength="13" class="no-spinner" onchange="grs()" style="width:100px;text-align: right" value="0.00" placeholder="0.00" type="number" step="0.01" id="bsal" name="bsal" /></li>
+      <li><mat-label for="hrawl" >House rental Allowance</mat-label>
+        <input maxlength="13" class="no-spinner" onchange="grs()" style="width:100px;text-align: right" value="0.00" placeholder="0.00" type="number" step="0.01" id="hrawl" name="hrawl" /></li>
+      <li><mat-label  for="conawl" >Conveyance Allowance</mat-label>
+        <input maxlength="13" class="no-spinner" onchange="grs()" style="width:100px;text-align: right" value="0.00" placeholder="0.00" type="number" step="0.01" id="conawl" name="conawl" /></li>
+      <li><mat-label  for="sttben" >Statutory Benifits</mat-label>
+        <input maxlength="13" class="no-spinner" onchange="grs()" style="width:100px;text-align: right" value="0.00" placeholder="0.00" type="number" step="0.01" id="sttben" name="sttben" /></li>
+      <li><mat-label  for="incnt">Incentive</mat-label>
+        <input maxlength="13" class="no-spinner" style="width:100px;text-align: right" value="0.00" placeholder="0.00" type="text"id="incnt" name="incnt" /></li>
+      <li><mat-label  for="bons">Bonus</mat-label>
+        <input maxlength="13" class="no-spinner" style="width:100px;text-align: right" value="0.00" placeholder="0.00" type="text" id="bons" name="bons" /></li>
+      <li><mat-label  for="sclins" >Social Insurance</mat-label>
+        <input maxlength="13" class="no-spinner" style="width:100px;text-align: right" value="0.00" placeholder="0.00" type="text" id="sclins" name="sclins" /></li>
+
+    </ul>
+    <ul class="sald">
+      <li><mat-label  for="helins" >Health Insurance</mat-label>
+        <input maxlength="13" class="no-spinner" style="width:100px;text-align: right" value="0.00" placeholder="0.00" type="text" id="helins" name="helins" /></li>
+      <li><mat-label  for="epf" >Pension EPF</mat-label>
+        <input onchange="dtct()" type="text" maxlength="13" class="no-spinner" style="width:100px;text-align: right" value="0.00" placeholder="0.00" id="epf" name="epf" /></li>
+      <li><mat-label  for="advnc" >Loan</mat-label>
+        <input onchange="dtct()" type="text" maxlength="13" class="no-spinner" style="width:100px;text-align: right" value="0.00" placeholder="0.00" id="advnc" name="advnc" /></li>
+      <li><mat-label  for="tax" >Tax</mat-label>
+        <input onchange="dtct()" type="text" maxlength="13" class="no-spinner" style="width:100px;text-align: right" value="0.00" placeholder="0.00" id="tax" name="tax" /></li>
+      <li><mat-label  for="totdt" >Total Detection</mat-label>
+        <input maxlength="13" class="no-spinner" style="width:100px;text-align: right" value="0.00" placeholder="0.00" type="text" id="totdt" name="totdt" /></li>
+      <li><mat-label  for="bilrat" >Billing Rate</mat-label>
+        <input maxlength="13" class="no-spinner" style="width:100px;text-align: right" value="0.00" placeholder="0.00" type="text" id="bilrat" name="bilrat" /></li>
+      <li><mat-label  for="grssal" >Gross Salary</mat-label>
+        <input maxlength="13" class="no-spinner" style="width:100px;text-align: right" value="0.00" placeholder="0.00" type="text" id="grssal" name="grssal" /></li>
+      <li><mat-label  for="netsal" >Net Salary</mat-label>
+        <input maxlength="13" class="no-spinner" style="width:100px;text-align: right" value="0.00" placeholder="0.00" type="text" id="netsal" name="netsal" /></li>
+  </ul>
+  </mat-tab>
+  <mat-tab label="Organization Detail">
+    <ul class="ortb">
+      <li><mat-label for="bslin">Business Line</mat-label>
+          <select maxlength="2" style="width:80px;text-transform:uppercase" width="120px" type="text" id="bslin" name="bslin" >
+            <option value=""></option>
+
+          </select></li>
+      <li><mat-label for="dept">Department</mat-label>
+          <select maxlength="2" style="width:180px;text-transform:uppercase" type="text" id="dept" name="dept" >
+              <option value=""></option>
+
+          </select></li>
+      <li><mat-label for="emptyp">Employee Type</mat-label>
+          <select maxlength="2" style="width:160px;text-transform:uppercase" type="text" id="emptyp" name="emptyp" >
+              <option value=""></option>
+
+          </select></li>
+      <li><mat-label for="rank" >Rank</mat-label>
+          <select maxlength="2" style="width:150px;text-transform:uppercase" type="text" id="rank" name="rank" >
+              <option value=""></option>
+
+          </select></li>
+
+  </ul>
+
+  <ul class="ortb">
+    <table style="height: 150px;display:block;" id="emrol" name="emrol" class="emrol" >
+    <thead style="position:sticky;top: 0;">
+      <tr>
+          <th>Role</th>
+      <tr>
+</thead>
+<tbody style="overflow-y:scroll">
+<tr>
+<td id="col0" name="col0" ><select class="emprol" style="width: 100px;" maxlength="5"  value="1" type="text" name="emprol" id="emprol" >
+        <option value=""></option>
+      </select></td>
+    </tr>
+  </tbody>
+    </table>
+</ul>
+  </mat-tab>
+  <mat-tab label="Experience">
+    <ul>
+      <li><mat-label for="resv" >Reserve</mat-label>
+        <input maxlength="30" style="width:226px;" type="text" id="resv" name="resv" /></li>
+      <li><mat-label for="modexp" style="width:216px" >Module</mat-label>
+          <select maxlength="4" style="width:150px;text-transform:uppercase" width="120px" type="text" id="modexp" name="modexp" >
+              <option value=""></option>
+
+          </select></li>
+      <li><mat-label for="pmglnex" style="width:216px" >Programming Language</mat-label>
+          <select maxlength="2" style="width:100px;text-transform:uppercase" type="text" id="pmglnex" name="pmglnex" >
+              <option value=""></option>
+
+          </select></li>
+          <li><mat-label for="exsap">Experiencr in SAP</mat-label>
+            <input maxlength="2" style="width:32px;" type="number" id="exsap" name="exsap" /></li>
+          <li><mat-label for="exit" >Experience in IT</mat-label>
+            <input maxlength="2" style="width:32px;" type="number" id="exit" name="exit" /></li>
+          <li><mat-label for="quli" >Qualification</mat-label>
+            <input maxlength="30" style="width:226px;" type="text" id="quli" name="quli" /></li>
+  </ul>
+  </mat-tab>
+
+</mat-tab-group>

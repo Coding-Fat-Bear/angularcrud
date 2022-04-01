@@ -1,19 +1,29 @@
 <!-- <nav  class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
     <div class="container">
       <div class="navbar-brand">
-        
-     <img src="https://bootstrapious.com/i/snippets/sn-nav-logo/logo.png" width="45" alt="" class="d-inline-block align-middle mr-2"> 
-     <img src="http://www.agnieindia.com/assets/logo.gif" heigth="60" width="110" alt="" class="d-inline-block  mr-2 "> 
+
+     <img src="https://bootstrapious.com/i/snippets/sn-nav-logo/logo.png" width="45" alt="" class="d-inline-block align-middle mr-2">
+     <img src="http://www.agnieindia.com/assets/logo.gif" heigth="60" width="110" alt="" class="d-inline-block  mr-2 ">
          Logo Text
         <mat-icon  aria-label="Example home icon">date_range</mat-icon>
         <span class="text-uppercase font-weight-bold aligned-with-icon" >Agn</span>
       </div>
     </div>
   </nav> -->
-<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+<!-- <nav class="navbar navbar-expand-sm bg-primary navbar-dark"> -->
 
+
+  <header id="loghead" *ngIf="hedoff">
+     <div class="header-inner1">
+  <h1><a href="index.htm">
+            <img src="http://www.agnieconsulting.com/assets/img/logo.gif" class="logo" alt="Agnie India" >
+        </a></h1>
+         </div>
+</header>
+        <nav class="navbar navbar-expand-sm bg-primary navbar-dark" *ngIf="navoff">
+>>>>>>> pims/angular_sriram
     <ul class="navbar-nav">
-        <li class="nav=item">
+        <li >
             <a routerLink="projects" routerLinkActive='active' class="nav-link">Projects List</a>
         </li>
         <li>
