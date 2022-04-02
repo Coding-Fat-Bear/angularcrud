@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TimesheetService } from '../Services/timesheet.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-timesheet',
@@ -32,12 +31,81 @@ export class TimesheetComponent implements OnInit {
   today = new Date();
   date1 = new Date();
   date2 = new Date();
-  date3 = new Date();
-  date4 = new Date();
+
+  otbkdischk :boolean = true;
+
+
   loading: Boolean = false;
   constructor(private timesheetService: TimesheetService,
     private router: Router,
     private snackBar: MatSnackBar) { }
+
+    
+  /////////on Start////////////
+  ngOnInit(): void {
+    this.d10.setHours(10);
+    this.d10.setMinutes(0);
+    this.d10.setSeconds(0);
+
+    this.d1830.setHours(18);
+    this.d1830.setMinutes(30);
+    this.d1830.setSeconds(0);
+
+    this.d2359.setHours(23);
+    this.d2359.setMinutes(59);
+    this.d2359.setSeconds(0);
+    this.otbtshow();
+    console.log(this.today.getFullYear() + ":" + (this.today.getMonth() + 1));
+
+    ///defualt date////
+
+    this.getTimesheet();
+    this.timesheet.loginid = 3;
+    let thisDate = this.dateCon(this.today);
+    this.timesheetService.getTimesheetBylogIdAndtsDate(this.timesheet.loginid, thisDate).subscribe(data => {
+      if (data == null) {
+        console.log("Null Process");
+        this.loading = false;
+
+      } else {
+        console.log(data.tsdate);
+
+        console.log("Receiving Process");
+        this.timesheet = data;
+        console.log(this.timesheet.tsdate);
+        this.timesheet.checkin = data.checkin.substring(0, 5);
+        this.timesheet.checkout = data.checkout.substring(0, 5);
+        this.timesheet.btstart = data.otbtstart.substring(0, 5);
+        this.timesheet.btend = data.otbtend.substring(0, 5);
+        this.timesheet.btstart = data.otstart.substring(0, 5);
+        this.timesheet.btend = data.otend.substring(0, 5);
+        this.timesheet.btstart = data.btstart.substring(0, 5);
+        this.timesheet.btend = data.btend.substring(0, 5);
+        this.loading = false;
+      }
+    }, error => {
+      this.timesheet.tsdate = this.dateCon(this.selected);
+      this.timesheet.tsdate = thisDate;
+      this.timesheet.timeid = null;
+      console.log("Null Process");
+      this.loading = false;
+      this.openSnackBar("No Records Found", "Hide")
+    });
+
+  }
+  ///// dropdown otbt show/////
+  otbtshow(){
+    
+    try{
+    if (this.timesheet.otstart.length !== 0 && this.timesheet.otend.length !== 0 ) {
+      this.otbkdischk = false;
+
+    }else{
+      this.otbkdischk = true;
+    }} catch(e) {
+      this.otbkdischk = true;
+    }
+  }
 
   /////date validation checkin and out order/////
   ctShowb(): boolean {
@@ -144,20 +212,22 @@ export class TimesheetComponent implements OnInit {
         this.dateotend.setHours(otouthr);
         this.dateotend.setMinutes(otoutmin);
         this.dateotend.setSeconds(0);
-
+        this.otbtshow();
         return !(this.d1830 < this.dateotstart && this.d2359 > this.dateotend && this.dateotstart < this.dateotend);
 
 
       }
       else {
+        this.otbtshow();
         return false;
       }
     } catch (e) {
       console.log("string null : valid over time");
-
+      this.otbtshow();
       return false;
     }
-
+    
+    
   }
   //////////date validation checkin and out valid overtime's breaktime///////////
   cusotbtcheck() {
@@ -214,7 +284,7 @@ export class TimesheetComponent implements OnInit {
     this.loading = true;
     console.log(event);
     console.log(this.timesheet);
-
+    
     var str1 = this.dateCon(event);
     // console.log(str1);
     this.timesheetService.getTimesheetBylogIdAndtsDate(this.timesheet.loginid, str1).subscribe(data => {
@@ -259,66 +329,7 @@ export class TimesheetComponent implements OnInit {
 
     this.loading = false;
     this.btShow = false;
-
-  }
-
-  /////////on Start////////////
-  ngOnInit(): void {
-    this.d10.setHours(10);
-    this.d10.setMinutes(0);
-    this.d10.setSeconds(0);
-
-    this.d1830.setHours(18);
-    this.d1830.setMinutes(30);
-    this.d1830.setSeconds(0);
-
-    this.d2359.setHours(23);
-    this.d2359.setMinutes(59);
-    this.d2359.setSeconds(0);
-
-    console.log(this.today.getFullYear() + ":" + (this.today.getMonth() + 1));
-
-    ///defualt date////
-
-    this.getTimesheet();
-    this.timesheet.loginid = 3;
-    let thisDate = this.dateCon(this.today);
-    // let thisDate = "2022-03-13";
-    // console.log(thisDate);
-    this.timesheetService.getTimesheetBylogIdAndtsDate(this.timesheet.loginid, thisDate).subscribe(data => {
-      if (data == null) {
-        console.log("Null Process");
-        this.loading = false;
-
-      } else {
-        console.log(data.tsdate);
-
-        console.log("Receiving Process");
-        this.timesheet = data;
-        console.log(this.timesheet.tsdate);
-        this.timesheet.checkin = data.checkin.substring(0, 5);
-        this.timesheet.checkout = data.checkout.substring(0, 5);
-        this.timesheet.btstart = data.otbtstart.substring(0, 5);
-        this.timesheet.btend = data.otbtend.substring(0, 5);
-        this.timesheet.btstart = data.otstart.substring(0, 5);
-        this.timesheet.btend = data.otend.substring(0, 5);
-        this.timesheet.btstart = data.btstart.substring(0, 5);
-        this.timesheet.btend = data.btend.substring(0, 5);
-        this.loading = false;
-      }
-    }, error => {
-      this.timesheet.tsdate = this.dateCon(this.selected);
-      this.timesheet.tsdate = thisDate;
-      this.timesheet.timeid = null;
-      console.log("Null Process");
-      this.loading = false;
-      this.openSnackBar("No Records Found", "Hide")
-    });
-
-    //////////////
-
-
-
+    this.otbtshow();
   }
 
   //////////// Servies/////////////

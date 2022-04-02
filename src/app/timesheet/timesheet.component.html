@@ -45,9 +45,9 @@
             <label style="padding-right:10px;">Other Time Adjustments</label>
             <mat-form-field>
                 <mat-select [(value)]="selectbt">
-                    <mat-option>None</mat-option>
+                    <mat-option >None</mat-option>
                     <mat-option value="1">Overtime</mat-option>
-                    <mat-option value="2 ">Overtime's breaktime</mat-option>
+                    <mat-option value="2 " [disabled]="otbkdischk">Overtime's breaktime</mat-option>
                     <mat-option value="3">Change usual Breaktime</mat-option>
                 </mat-select>
             </mat-form-field>
