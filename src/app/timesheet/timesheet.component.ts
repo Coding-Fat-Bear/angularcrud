@@ -111,14 +111,21 @@ export class TimesheetComponent implements OnInit {
   ctShowb(): boolean {
     try {
       var inhr: any;
+      var inmin :any;
+      inmin = this.timesheet.checkin.substring(3, 5);
       inhr = this.timesheet.checkin.substring(0, 2);
-      var outhr: any;
+      
       this.date1.setHours(inhr);
-      var oumin: any;
+      this.date1.setMinutes(inmin);
+      this.date1.setSeconds(0);
+      
+      var outhr: any;
+      var outmin: any;
       outhr = this.timesheet.checkout.substring(0, 2);
-      oumin = this.timesheet.checkout.substring(3, 5);
+      outmin = this.timesheet.checkout.substring(3, 5);
       this.date2.setHours(outhr);
-      this.date2.setMinutes(oumin)
+      this.date2.setMinutes(outmin);
+      this.date2.setSeconds(0);
 
       // return true;
       return this.date1 < this.date2;
@@ -143,7 +150,11 @@ export class TimesheetComponent implements OnInit {
         var oumin: any;
         outhr = this.timesheet.checkout.substring(0, 2);
         oumin = this.timesheet.checkout.substring(3, 5);
-        this.ctShow = !(this.date1 >= this.d10 && this.date2 < this.d1830);
+        this.ctShow = !(this.date1 >= this.d10 && this.d1830 >= this.date2);
+        console.log("second"+this.date2);
+        
+        console.log(this.d1830 >= this.date2);
+        
       }
       else {
         this.ctShow = false;
