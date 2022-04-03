@@ -15,7 +15,7 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient) { }
 
-  LoginByUsernameAndPassword(logn:Login):Observable<Object>{
+  LoginByUsernameAndPassword(logn:Login):Observable<any>{
     return this.httpClient.post(`${this.baseUrl}/login`,logn)
   }
 }

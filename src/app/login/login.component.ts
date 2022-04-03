@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   // logins : Login[];
   logi = new Login();
-
+  logins = new Login();
   private appcomponent:AppComponent;
 
 
@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
               private router:Router,
               private snackBar: MatSnackBar ) { }
   uname: string = '';
+  // id :any;
   ngOnInit(): void {
 
   }
@@ -42,8 +43,10 @@ export class LoginComponent implements OnInit {
 
     this.loginService.LoginByUsernameAndPassword(this.logi).subscribe(data =>{
       // if(data !== null){
+        this.logins = data;
         console.log("log success");
-        this.router.navigate(['/home']);
+        var id = this.logins.loginid;
+        this.router.navigate(['home',id]);
 
 
     },error =>{

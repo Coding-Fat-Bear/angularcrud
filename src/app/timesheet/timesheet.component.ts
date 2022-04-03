@@ -1,7 +1,7 @@
 
 import { Timesheet } from './../timesheet';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TimesheetService } from '../Services/timesheet.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -33,16 +33,18 @@ export class TimesheetComponent implements OnInit {
   date2 = new Date();
 
   otbkdischk :boolean = true;
-
+  id :any;
 
   loading: Boolean = false;
   constructor(private timesheetService: TimesheetService,
+    private route :ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar) { }
 
     
   /////////on Start////////////
   ngOnInit(): void {
+    this.id = this.route.snapshot.params['id'];
     this.d10.setHours(10);
     this.d10.setMinutes(0);
     this.d10.setSeconds(0);
@@ -60,7 +62,7 @@ export class TimesheetComponent implements OnInit {
     ///defualt date////
 
     this.getTimesheet();
-    this.timesheet.loginid = 3;
+    this.timesheet.loginid = this.id;
     let thisDate = this.dateCon(this.today);
     this.timesheetService.getTimesheetBylogIdAndtsDate(this.timesheet.loginid, thisDate).subscribe(data => {
       if (data == null) {
@@ -73,14 +75,14 @@ export class TimesheetComponent implements OnInit {
         console.log("Receiving Process");
         this.timesheet = data;
         console.log(this.timesheet.tsdate);
-        this.timesheet.checkin = data.checkin.substring(0, 5);
-        this.timesheet.checkout = data.checkout.substring(0, 5);
-        this.timesheet.btstart = data.otbtstart.substring(0, 5);
-        this.timesheet.btend = data.otbtend.substring(0, 5);
-        this.timesheet.btstart = data.otstart.substring(0, 5);
-        this.timesheet.btend = data.otend.substring(0, 5);
-        this.timesheet.btstart = data.btstart.substring(0, 5);
-        this.timesheet.btend = data.btend.substring(0, 5);
+        this.timesheet.checkin = this.timesheet.checkin.substring(0, 5);
+        this.timesheet.checkout = this.timesheet.checkout.substring(0, 5);
+        if(this.timesheet.otbtstart !== null){this.timesheet.otbtstart = this.timesheet.otbtstart.substring(0, 5);}
+        if(this.timesheet.otbtend !== null){this.timesheet.otbtend = this.timesheet.otbtend.substring(0, 5);}
+        if(this.timesheet.otstart !== null){this.timesheet.otstart = this.timesheet.otstart.substring(0, 5);}
+        if(this.timesheet.otend !== null){this.timesheet.otend = this.timesheet.otend.substring(0, 5);}
+        if(this.timesheet.btstart !== null){this.timesheet.btstart = this.timesheet.btstart.substring(0, 5);}
+        if(this.timesheet.btend){this.timesheet.btend = this.timesheet.btend.substring(0, 5);}
         this.loading = false;
       }
     }, error => {
@@ -97,7 +99,7 @@ export class TimesheetComponent implements OnInit {
   otbtshow(){
     
     try{
-    if (this.timesheet.otstart.length !== 0 && this.timesheet.otend.length !== 0 ) {
+    if (this.timesheet.otstart !== null && this.timesheet.otend !== null ) {
       this.otbkdischk = false;
 
     }else{
@@ -139,7 +141,7 @@ export class TimesheetComponent implements OnInit {
     console.log("checks works");
 
     try {
-      if (this.timesheet.checkin.length !== 0 && this.timesheet.checkout.length !== 0 && !(this.ctShowbefore)) {
+      if (this.timesheet.checkin !== null && this.timesheet.checkout !== null && !(this.ctShowbefore)) {
         console.log('works');
 
 
@@ -170,7 +172,7 @@ export class TimesheetComponent implements OnInit {
   /////date validation checkin and out valid breaktime /////
   cusbtcheck() {
     try {
-      if (this.timesheet.btstart.length !== 0 && this.timesheet.btend.length !== 0 && !(this.ctShowbefore)) {
+      if (this.timesheet.btstart !== null && this.timesheet.btend !== null && !(this.ctShowbefore)) {
         var btinhr: any;
         var btinmin: any;
         btinhr = this.timesheet.btstart.substring(0, 2);
@@ -205,7 +207,7 @@ export class TimesheetComponent implements OnInit {
   /////date validation checkin and out valid over time/////
   cusotcheck() {
     try {
-      if (this.timesheet.otstart.length !== 0 && this.timesheet.otend.length !== 0 && !(this.ctShowbefore)) {
+      if (this.timesheet.otstart !== null && this.timesheet.otend !== null && !(this.ctShowbefore)) {
         var otinhr: any;
         var otinmin: any;
         otinhr = this.timesheet.otstart.substring(0, 2);
@@ -243,7 +245,7 @@ export class TimesheetComponent implements OnInit {
   //////////date validation checkin and out valid overtime's breaktime///////////
   cusotbtcheck() {
     try {
-      if (this.timesheet.otbtstart.length !== 0 && this.timesheet.otbtend.length !== 0 && !(this.ctShowbefore)) {
+      if (this.timesheet.otbtstart !== null && this.timesheet.otbtend !== null && !(this.ctShowbefore)) {
         var otbtinhr: any;
         var otbtinmin: any;
         otbtinhr = this.timesheet.otbtstart.substring(0, 2);
@@ -280,13 +282,6 @@ export class TimesheetComponent implements OnInit {
   //////check///////
   check() {
     console.log(this.timesheet);
-
-    console.log(this.d10);
-    console.log(this.d1830);
-
-    console.log(this.dateotstart);
-    console.log(this.dateotend);
-
   }
 
   ////Calander Event///////
@@ -324,16 +319,16 @@ export class TimesheetComponent implements OnInit {
       }
     }, error => {
       this.timesheet.tsdate = this.dateCon(this.selected);
-      this.timesheet.checkin = "";
-      this.timesheet.checkout = "";
-      this.timesheet.otstart = "";
-      this.timesheet.otend = "";
-      this.timesheet.otbtstart = "";
-      this.timesheet.otbtend = "";
-      this.timesheet.btstart = "";
-      this.timesheet.btend = "";
-      this.timesheet.timeid = null;
-      this.timesheet.comment = "";
+      this.timesheet.checkin = null;
+      this.timesheet.checkout = null;
+      this.timesheet.otstart = null;
+      this.timesheet.otend = null;
+      this.timesheet.otbtstart = null;
+      this.timesheet.otbtend = null;
+      this.timesheet.btstart = null;
+      this.timesheet.btend = null;
+      this.timesheet.timeid = null;;
+      this.timesheet.comment = null;
       console.log("Null Process");
       this.openSnackBar("No Records Found", "Hide")
     });

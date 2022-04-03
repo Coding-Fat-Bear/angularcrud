@@ -8,13 +8,20 @@
 
     <div class="border border-1 rounded shadow-sm" style="padding: 10px;">
         <span>
-            <label style="font-size: small;">Login ID </label>
-            <input style="margin-left: 10px; width: 45px; height: 18px;" [(ngModel)]="timesheet.loginid"></span>
-        <span>
-            <label style="font-size: small; margin-left: 10px;">Date </label>
-            <input style="margin-left: 10px; width: 90px;height: 18px;" [(ngModel)]="timesheet.tsdate " disabled></span>
+            <!-- <label style="font-size: small; margin-right: 1px;">User :  </label>{{id}} -->
+            <input style="margin-left: 10px; width: 45px; height: 18px;" [(ngModel)]="timesheet.loginid"></span><br>
+        <span style="margin-left: 100px;">
+            <!-- <mat-form-field style="padding-left:20px;width: 170px;">
+                <mat-label>Classification</mat-label>
+                <mat-select >
+                    <mat-option *ngFor="let classif of classifs" [value]="classif.name">{{classif.name}}</mat-option>
+                </mat-select>
+            </mat-form-field> -->
+            <!-- <label style="font-size: small; margin-left: 10px;">Date </label>
+            <input style="margin-left: 10px; width: 90px;height: 18px;" [(ngModel)]="timesheet.tsdate " disabled> -->
+        </span>
 
-        <br><br>
+        <br>
 
 
         <span><label style="font-size: medium;">CheckIn Time </label>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HostListener } from '@angular/core';
 
 @Component({
@@ -9,13 +9,15 @@ import { HostListener } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private route :ActivatedRoute,
+          private router:Router) { }
 
   tileoff:boolean = true;
   chldtiloff:boolean = false;
   rtnbutoff:boolean = false;
-
+  id :any;
   ngOnInit(): void {
+    this.id = this.route.snapshot.params['id'];
   }
 
   @HostListener('contextmenu', ['$event'])
@@ -42,4 +44,9 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/employee']);
   }
 
+  timesheetnav(){
+    this.router.navigate(['timesheet',this.id]);
+  console.log("work");
+  
+  }
 }
