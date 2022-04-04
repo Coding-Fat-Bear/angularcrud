@@ -1,4 +1,4 @@
-import { MainmanuComponent } from './mainmanu/mainmanu.component';
+
 import { TimesheetComponent } from './timesheet/timesheet.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { ProjectListComponent } from './project-list/project-list.component';
@@ -18,8 +18,7 @@ const routes: Routes = [
   {path:'timesheet/:id',component: TimesheetComponent},
   {path:'login',component: LoginComponent},
   {path:'employee',component: EmployeeComponent},
-  {path:'home/:id',component: HomeComponent},
-  {path:'mm',component: MainmanuComponent}
+  {path:'home/:id',component: HomeComponent}
 ];
 
 @NgModule({

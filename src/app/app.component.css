@@ -4,7 +4,7 @@ header{
   padding:0;
   background: rgba(42,55,123,0.9);
   position: fixed top;
-  height: 120px;
+  height: 90px;
   overflow: hidden;
   z-index: 50
 }
@@ -25,9 +25,11 @@ header{
 
 .header-inner1{
     float: right;
-    width: 146px;
-    margin: 30px
-/*    position:relative; */
+    width: 120px;
+    /* height: 10px; */
+    margin-top: 10px;
+    margin-right: 40px;
+   /* position : relative; */
 }
 
 .aligned-with-icon{

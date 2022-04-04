@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./timesheet.component.css']
 })
 export class TimesheetComponent implements OnInit {
+
   btShow: boolean;
   ctShow: boolean = false;
   ctShowbefore: boolean = false;
@@ -31,7 +32,7 @@ export class TimesheetComponent implements OnInit {
   today = new Date();
   date1 = new Date();
   date2 = new Date();
-
+  classifs = [{id:1,name:'AM Leave'},{id:2,name:'PM Leave'}]
   otbkdischk :boolean = true;
   id :any;
 
@@ -373,6 +374,7 @@ export class TimesheetComponent implements OnInit {
       this.timesheet.btstart = (this.timesheet.btstart + ":00").substring(0, 8);
     }
     if (this.timesheet.btend == null) {
+
     }
     else {
       this.timesheet.btend = (this.timesheet.btend + ":00").substring(0, 8);
