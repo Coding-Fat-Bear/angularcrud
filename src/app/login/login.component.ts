@@ -17,9 +17,10 @@ declare const usr:any;
 })
 export class LoginComponent implements OnInit {
 
-  // logins : Login[];
+  logins : Login[];
   logi = new Login();
-
+  lusername:String
+  lpassword:String
   private appcomponent:AppComponent;
 
 
@@ -31,17 +32,19 @@ export class LoginComponent implements OnInit {
   constructor(private loginService : LoginService,
               private router:Router,
               private snackBar: MatSnackBar ) { }
-  uname: string = '';
+
   ngOnInit(): void {
 
   }
 
   login(){
 
-    // console.log(this.logi.username +""+ this.logi.password );
 
+    let data:any = this.logi;
     this.loginService.LoginByUsernameAndPassword(this.logi).subscribe(data =>{
-      // if(data !== null){
+
+        this.lusername = this.logi.username;
+        this.lpassword = this.logi.password;
         console.log("log success");
         this.router.navigate(['/home']);
 

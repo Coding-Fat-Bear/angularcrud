@@ -31,4 +31,10 @@ empgt = new Employee();
     // })
   }
 
+  bckhm(){
+
+    this.router.navigate(['/home']);
+
+  }
+
 }

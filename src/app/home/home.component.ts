@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HostListener } from '@angular/core';
+import { LoginService } from '../Services/login.service';
+// import { Console } from 'console';
 
 @Component({
   selector: 'app-home',
@@ -9,13 +11,20 @@ import { HostListener } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private loginservice : LoginService,
+    private router:Router,private route :ActivatedRoute) { }
+
+
 
   tileoff:boolean = true;
   chldtiloff:boolean = false;
   rtnbutoff:boolean = false;
 
+  huname:String
+  hpword:String
+
   ngOnInit(): void {
+    
   }
 
   @HostListener('contextmenu', ['$event'])
