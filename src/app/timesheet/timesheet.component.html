@@ -41,7 +41,7 @@
         </div>
 
 
-        <mat-checkbox style="padding-left: 30%;" (change)="breakbox($event.checked)">Skipped Breaktime</mat-checkbox><br>
+        <mat-checkbox style="padding-left: 30%;" [checked]="btShow" (change)="breakbox($event.checked)">Skipped Breaktime</mat-checkbox><br>
 
         <button mat-stroked-button (click)="saveTimesheet()"> Save / Update</button>
 

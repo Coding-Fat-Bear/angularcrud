@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class TimesheetComponent implements OnInit {
 
-  btShow: boolean;
+  btShow: boolean = false;
   ctShow: boolean = false;
   ctShowbefore: boolean = false;
   selectbt: number;
@@ -88,7 +88,15 @@ export class TimesheetComponent implements OnInit {
         if(this.timesheet.btstart !== null){this.timesheet.btstart = this.timesheet.btstart.substring(0, 5);}
         if(this.timesheet.btend){this.timesheet.btend = this.timesheet.btend.substring(0, 5);}
         this.loading = false;
-        this.timesheet.breakflag = '';
+        
+        if(this.timesheet.breakflag == null)
+        {
+          if(this.timesheet.breakflag.length == 0 )
+        this.btShow = false;
+        }else if (this.timesheet.breakflag == 'X')
+        {
+          this.btShow = true;
+        }
       }
     }, error => {
       this.timesheet.tsdate = this.dateCon(this.selected);
@@ -96,6 +104,7 @@ export class TimesheetComponent implements OnInit {
       this.timesheet.timeid = null;
       console.log("Null Process");
       this.loading = false;
+      this.btShow = false;
       this.openSnackBar("No Records Found", "Hide")
     });
 
@@ -297,6 +306,8 @@ export class TimesheetComponent implements OnInit {
   check() {
     console.log(this.timesheet);
     console.log(this.otbkdischk);
+    console.log(this.btShow);
+    
     
   }
 
@@ -315,6 +326,7 @@ export class TimesheetComponent implements OnInit {
         this.timesheet.checkin = "";
         this.timesheet.checkout = "";
         this.timesheet.timeid = null;
+        this.breakbox(false)
         console.log("Null Process how");
 
       } else {
