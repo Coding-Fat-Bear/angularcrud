@@ -29,11 +29,13 @@ export class TimesheetComponent implements OnInit {
 
   timesheets: Timesheet[];
   timesheet = new Timesheet();
+  
   today = new Date();
   date1 = new Date();
   date2 = new Date();
   classifs = [{id:1,name:'AM Leave'},{id:2,name:'PM Leave'}]
   otbkdischk :boolean = true;
+  
   id :any;
 
   loading: Boolean = false;
@@ -45,6 +47,7 @@ export class TimesheetComponent implements OnInit {
     
   /////////on Start////////////
   ngOnInit(): void {
+    this.timesheet.breakflag ='';
     this.id = this.route.snapshot.params['id'];
     this.d10.setHours(10);
     this.d10.setMinutes(0);
@@ -85,6 +88,7 @@ export class TimesheetComponent implements OnInit {
         if(this.timesheet.btstart !== null){this.timesheet.btstart = this.timesheet.btstart.substring(0, 5);}
         if(this.timesheet.btend){this.timesheet.btend = this.timesheet.btend.substring(0, 5);}
         this.loading = false;
+        this.timesheet.breakflag = '';
       }
     }, error => {
       this.timesheet.tsdate = this.dateCon(this.selected);
@@ -101,8 +105,10 @@ export class TimesheetComponent implements OnInit {
     
     try{
     if (this.timesheet.otstart !== null && this.timesheet.otend !== null ) {
+      if(this.timesheet.otstart.length !== 0 && this.timesheet.otend.length !== 0){
       this.otbkdischk = false;
-
+      console.log("check");
+      }
     }else{
       this.otbkdischk = true;
     }} catch(e) {
@@ -138,6 +144,13 @@ export class TimesheetComponent implements OnInit {
 
   }
   /////date validation checkin and out valid work time/////
+  // chbrflag()
+  // {
+  //   if(this.timesheet.breakflag!='X')
+  //   {
+  //     this.
+  //   }
+  // }
   chtime() {
     console.log("checks works");
 
@@ -156,7 +169,7 @@ export class TimesheetComponent implements OnInit {
         this.ctShow = !(this.date1 >= this.d10 && this.d1830 >= this.date2);
         console.log("second"+this.date2);
         
-        console.log(this.d1830 >= this.date2);
+        console.log(this.d1830 > this.date2);
         
       }
       else {
@@ -283,6 +296,8 @@ export class TimesheetComponent implements OnInit {
   //////check///////
   check() {
     console.log(this.timesheet);
+    console.log(this.otbkdischk);
+    
   }
 
   ////Calander Event///////
@@ -425,13 +440,11 @@ export class TimesheetComponent implements OnInit {
   breakbox(checked: boolean) {
     if (checked == true) {
       console.log("checked");
-      this.btShow = true;
       this.timesheet.breakflag = "X";
     }
     else {
       console.log("unchecked");
       this.timesheet.breakflag = "";
-      this.btShow = false;
     }
   }
 

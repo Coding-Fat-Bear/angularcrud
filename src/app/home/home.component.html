@@ -1,10 +1,11 @@
-<!-- <li>
-        <ul style="height: 150px;"> -->
+
 <div class="tildiv"   >
+        <!-- <div class="mstic" style="margin-left:8px" > -->
   <div   id="em1" class="tile" title="Employee Master" *ngIf="tileoff" (mouseenter)="emptile()">
-      <div class="mstic" style="margin-left:8px" >
-          <label style="font-size:15px;color:black">Employee Master</label>
-          <i id="em1" class='fas fa-id-card' style='font-size:93px;margin: 15px'></i></div>
+      
+          <label style="font-size:15px;color:black;margin-left: 5px;"> Employee Master</label>
+          <i id="em1" class='fas fa-id-card' style='font-size:93px;margin: 15px'></i>
+        
 
       </div>
       <div id="em1" class="content" *ngIf="chldtiloff" (mouseleave)="retn();">
@@ -21,8 +22,9 @@
                 <i class='fas fa-trash' style='font-size:25px;'></i></button></li>
         </ul>
       </div>
+        </div>
               <!-- <button type="button" id="em1" (click)="retn();" class="ret" *ngIf="rtnbutoff" ><i class="fa fa-undo"></i></button> -->
-      </div>
+      <!-- </div> -->
       <div class="tildiv"   >
         <div   id="ts1" class="tile" title="Timesheet"  (click)="timesheetnav()">
             <div  style="margin-left:8px" >
@@ -31,7 +33,6 @@
       
         </div>
         </div>
-                <!-- </ul>
-        </li> -->
+               
 
       

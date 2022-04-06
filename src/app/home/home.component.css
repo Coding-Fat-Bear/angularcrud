@@ -1,6 +1,9 @@
 
+/* .mstic{
+  width: 180px;
+} */
 .tile{
-  width:150px;height:150px;
+  width:180px;height:150px;
   display: inline-block;
   cursor: pointer;
   margin: 20px;
@@ -24,8 +27,9 @@ transform: translateY(4px);
   display: inline-block;
   cursor: pointer;
   margin-bottom: 20px;
-  /* height: 150px;
-  width:160px; */
+  overflow: hidden;
+  /* height: 150px; */
+  width:200px;
 }
 
 .content {
