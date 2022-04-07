@@ -1,0 +1,84 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~font-awesome/css/font-awesome.css";
+.page{
+    background-color: transparent;
+    width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow: auto;
+} 
+.header{
+    text-align: center;
+}
+.tbar{
+ height: auto;
+ width: 900px;
+ background-color: aqua;
+ color: blue;
+}
+.buttons{
+    height: auto;
+    padding-left: 5px;
+    margin-left: 15px;
+}
+.buttons ul{
+    size: 30px;
+}
+.labip{
+    width: auto;
+    text-align: left;
+    font-size: medium;
+    font-family: 'Times New Roman', Times, serif;
+    display: inline-flexbox;
+    margin-left: 15px;
+}
+.labip ul li{
+    display: inline-block;
+}
+.labip mat-label{
+    width: 180px;
+}
+.labip ul input{
+    width: 100px;
+} 
+.tabs{
+    margin-left: 15px;
+    padding-left: 15px;
+    background-color: rgb(94 132 156);
+    width: 900px;
+    margin-left: 15px;
+}
+.tabs:hover{
+    /* background-color: #555; */
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+}
+.tabs ul{
+    color: black;
+    font-size: medium;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: rgb(94 132 156);
+}
+.tabs label{
+    /* background-color: #555; */
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    background-origin: padding-box;
+    border-radius: 2px solid;
+}
+.tabs ul {
+    display: inline-block;
+    padding-bottom: 10px;
+    padding-top: 25px;
+    padding-left: 10px;
+    border-radius: 25px;
+}
+.tabs ul mat-label{
+    width: 180px;
+    display: inline-block;
+}
+.tabs ul input{
+    width: 100px;
+}
+
+

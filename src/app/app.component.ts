@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'PIMS';
-  active = 0;
+ /*  active = 0; */
 }

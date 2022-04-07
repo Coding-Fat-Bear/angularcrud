@@ -1,0 +1,141 @@
+<div class="page">
+    <h1 class="header">Inquiry Master</h1>
+    <div class="tbar">
+        <mat-toolbar>
+            <button mat-button [matMenuTriggerFor]="menu">Inquiry</button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>Create</button>
+                <button mat-menu-item>Edit</button>
+                <button mat-menu-item>Delete</button>
+                <button mat-menu-item>Display</button>
+            </mat-menu>
+        </mat-toolbar>
+    </div>
+    <div class="buttons">
+        <ul>
+            <button mat-icon-button color="primary" type="submit" (click)="createInquiry()">
+                <mat-icon>save</mat-icon>
+            </button>
+            <button mat-icon-button color="primary">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="primary">
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" type="button" (click)="getInquiryById()">
+                <mat-icon>list</mat-icon>
+            </button>
+            <button mat-icon-button color="primary">
+                <mat-icon>arrow_left_alt</mat-icon>
+            </button>
+        </ul>
+    </div>
+    <form>
+        <div class="labip">
+            <ul>
+                <li>
+                    <mat-label for="inqno">Inquiry</mat-label> 
+                    <input type="text" name="inqno" id="inqno">
+                </li>
+                <li>
+                    <mat-label for="ccod">Company Code</mat-label>
+                     <input type="text" name="ccod" id="ccod" [(ngModel)] = "inquiry.ccod">
+                </li>
+                <li>
+                    <mat-label for="empno">Employee</mat-label> 
+                    <input type="text" name="empno" id="empno" [(ngModel)] = "inquiry.empno">
+                </li>
+                <li>
+                    <mat-label for="prjdes">Project Description</mat-label>
+                     <input type="text" name="prjdes" id="prjdes" [(ngModel)] = "inquiry.prjdes">
+                </li>
+            </ul>
+        </div>
+        <div class="tabs">
+            <mat-tab-group [selectedIndex]="active" animationDuration="0ms">
+                <mat-tab label="Inquiry Terms" class="tabhd">
+                    <ul>
+                        <mat-label for="assnper">Assignment Percentage</mat-label> 
+                        <input type="text" name="assnper" id="assnper" [(ngModel)] = "inquiry.assnper"> <br>
+                        <mat-label for="bizid">Business Line</mat-label>
+                       <!--  <input type="text" name="bizid" id="bizid" [(ngModel)] = "inquiry.bizid"> -->
+                    <select name="bizid" id="bizid" [(ngModel)]="businessline" [(ngModel)]="inquiry.bizid">
+                        <option disabled>Select Business Line</option>
+                        <option *ngFor="let businessline of businesslines" [ngValue]="businessline.bizid">{{businessline.biz_text}}</option>
+                    </select> <br>
+                        <mat-label for="modul">Module</mat-label>
+                        <!--  <input type="text" name="modul" id="modul" [(ngModel)] = "inquiry.modul"> -->
+                        <select name="modul" id="modul" [(ngModel)]="module" [(ngModel)] = "inquiry.modul">
+                            <option disabled>Select Module</option>
+                            <option *ngFor="let module of modules" [ngValue]="module.modul">{{module.mod_text}}</option>
+                        </select> <br>
+                        <mat-label for="lngid">Language</mat-label> 
+                       <!--  <input type="text" name="lngid" id="lngid" [(ngModel)] = "inquiry.lngid"> -->
+                        <select name="lngid" id="lngid" [(ngModel)]="language"  [(ngModel)] = "inquiry.lngid">
+                            <option disabled>Select Language</option>
+                            <option *ngFor="let language of languages" [ngValue]="language.lngid">{{language.lng_text}}</option>
+                        </select>  <br>
+                        <mat-label for="posbper">Possible Percentage</mat-label>
+                         <input type="text" name="posbper" id="posbper" [(ngModel)] = "inquiry.posbper">
+                        <br>
+                    </ul>
+                </mat-tab>
+                <mat-tab label="Inquiry Termss">
+                    <ul>
+                        <mat-label for="frmdt">Inquiry Start Date</mat-label>
+                         <input type="text" name="frmdt" id="frmdt" [(ngModel)] = "inquiry.frmdt"> <br>
+                        <mat-label for="todt">Inquiry End Date</mat-label> 
+                        <input type="text" name="todt" id="todt" [(ngModel)] = "inquiry.todt"> <br>
+                        <mat-label for="status">Status</mat-label>
+                         <input type="text" name="status" id="status" [(ngModel)] = "inquiry.prjsts"> <br>
+                        <mat-label for="phaseid">Phase</mat-label>
+                      <!--   <input type="text" name="phaseid" id="phaseid" [(ngModel)] = "inquiry.phaseid">  -->
+                        <select name="phaseid" id="phaseid"  [(ngModel)]="phase" [(ngModel)]="inquiry.phaseid">
+                            <option disabled>Select Phase</option>
+                            <option *ngFor="let phase of phases" [ngValue]="phase.phaseid">{{phase.phase}}</option>
+                        </select> <br>
+                    </ul>
+                </mat-tab>
+                <mat-tab label="Estimations">
+                    <ul>
+                        <mat-label for="estmamt">Estimation Amount</mat-label>
+                         <input type="text" name="estmamt" id="estmamt" [(ngModel)] = "inquiry.estmamt"> <br>
+                        <mat-label for="curr">Currency</mat-label>
+                         <!--  <input type="text" name="curr" id="curr" [(ngModel)] = "inquiry.curr">  -->
+                        <select name="curr" id="curr" [(ngModel)]="currency" [(ngModel)]="inquiry.curr">
+                        <option disabled>Select Currency</option>
+                        <option *ngFor="let currency of currencies" [ngValue]="currency.curr">{{currency.currency}}</option>
+                        </select> <br>
+                        <mat-label for="tax">Tax Amount</mat-label> 
+                        <input type="text" name="tax" id="tax" [(ngModel)] = "inquiry.tax">  <br>
+                        <mat-label for="unit">Unit</mat-label> 
+                        <!-- <input type="text" name="unit" id="unit" [(ngModel)] = "inquiry.unit">  -->
+                        <select name="unit" id="unit" [(ngModel)]="unit" [(ngModel)]="inquiry.unit">
+                            <option disabled>Select Unit</option>
+                            <option *ngFor="let unit of units" [ngValue]="unit.unit">{{unit.unittext}}</option>
+                        </select> <br>
+                        <mat-label for="qty">Quantity</mat-label>
+                         <input type="text" name="qty" id="qty" [(ngModel)] = "inquiry.qty"> <br>
+                        <mat-label for="rate">Rate</mat-label>
+                         <input type="text" name="rate" id="rate" [(ngModel)] = "inquiry.rate"> <br>
+                    </ul>
+                </mat-tab>
+                <mat-tab label="Organization Details">
+                    <ul>
+                        <mat-label for="custno">Customer No</mat-label>
+                         <input type="text" name="custno" id="custno" [(ngModel)] = "inquiry.custno"> <br>
+                        <mat-label for="eusrno">End User</mat-label>
+                         <input type="text" name="eusrno" id="eusrno" [(ngModel)] = "inquiry.eusrno"> <br>
+                        <mat-label for="custinfo">Customer Info</mat-label>
+                        <input type="text" name="custinfo" id="custinfo" [(ngModel)] = "inquiry.custinfo"> <br>
+                        <mat-label for="remarks">Remarks</mat-label>
+                         <input type="text" name="remarks" id="remarks" [(ngModel)] = "inquiry.remarks"> <br>
+                    </ul>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+        <!-- <div>
+            <h2>{{message}}</h2>
+        </div> -->
+    </form>
+</div>

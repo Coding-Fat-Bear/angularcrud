@@ -1,0 +1,63 @@
+   <div class="container">
+        <div class="card">
+            <h3 class="text-center">Inquiry List</h3>
+            <mat-label for="inqno">Inquiry</mat-label>
+            <input type="text" name="inqno" id="inqno">
+            <div class="card-body">
+               <table class="table table-striped">
+                   <thead>
+                       <tr>
+                       <th>Inquiry</th>
+                       <th>Company Code</th>
+                       <th>Employee</th>
+                       <th>Project Description</th>
+                       <th>Assignment Percentage</th>
+                       <th>Business Line</th>
+                       <th>Module</th>
+                       <th>Language</th>
+                       <th>Possible Percentage</th>
+                       <th>Inquiry Start Date</th>
+                       <th>Inquiry End Date</th>
+                       <th>Status</th>
+                       <th>Phase</th>
+                       <th>Esimation Amount</th>
+                       <th>Currency</th>
+                       <th>Unit </th>
+                       <th>Qunatity</th>
+                       <th>Rate</th>
+                       <th>Customer</th>
+                       <th>End user</th>
+                       <th>Customer Info</th>
+                       <th>Remarks</th>
+                    </tr>
+                   </thead>
+                   <tbody>
+                       <tr *ngFor = "let inquiry of inquiries">
+                         <td>{{inquiry.inqno}}</td>
+                         <td>{{inquiry.ccod}}</td>
+                         <td>{{inquiry.empno}}</td>
+                         <td>{{inquiry.prjdes}}</td>
+                         <td>{{inquiry.assnper}}</td>
+                         <td>{{inquiry.bizid}}</td>
+                         <td>{{inquiry.modul}}</td>
+                         <td>{{inquiry.lngid}}</td>
+                         <td>{{inquiry.posbper}}</td>
+                         <td>{{inquiry.frmdt}}</td>
+                         <td>{{inquiry.todt}}</td>
+                         <td>{{inquiry.prjsts}}</td>
+                         <td>{{inquiry.phaseid}}</td>
+                         <td>{{inquiry.estmamt}}</td>
+                         <td>{{inquiry.curr}}</td>
+                         <td>{{inquiry.unit}}</td>
+                         <td>{{inquiry.qty}}</td>
+                         <td>{{inquiry.rate}}</td>
+                         <td>{{inquiry.custno}}</td>
+                         <td>{{inquiry.eusrno}}</td>
+                         <td>{{inquiry.custinfo}}</td>
+                         <td>{{inquiry.remarks}}</td>
+                       </tr>
+                   </tbody>
+               </table>
+            </div>
+        </div>
+    </div>
