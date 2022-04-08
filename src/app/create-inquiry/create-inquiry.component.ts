@@ -25,7 +25,6 @@ export class CreateInquiryComponent implements OnInit {
      currency: String = "";
      units: any;
      unit: String = "";
-     inqno!: number;
   constructor(private inquiryService: InquiryService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -81,12 +80,17 @@ export class CreateInquiryComponent implements OnInit {
   }
 
   public getInquiryById(){
-    let id = parseInt(this.route.snapshot.params['inqno']);
-    this.inquiryService.getInquiry(id).subscribe(data => console.log(data),
-      error => console.log(error));
+
+    console.log(this.inquiry.inqno);
+    
+    this.inquiryService.getInquiry(this.inquiry.inqno).subscribe(data => 
+     { this.inquiry = data;
+      console.log(data)},
+      error => console.log(error));   
+
+      
   }
-/*   onSubmit(){
-    this.createInquiry();
-  } */
 
 }
+
+

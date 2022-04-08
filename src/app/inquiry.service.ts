@@ -18,8 +18,8 @@ export class InquiryService {
       return this.http.get<Inquiry[]>(`${this.baseUrl + "Inquiries"}`);
     }
     
-    getInquiry(inqno:number): Observable<any>{
-      return this.http.get<any>("http://localhost:8080/Inquiries/" + inqno);
+    getInquiry(inqno:number): Observable<Inquiry>{
+      return this.http.get<Inquiry>(`${this.baseUrl}Inquiries/${inqno}`);
     }
 
     public saveInquiry(inquiry: Inquiry){
