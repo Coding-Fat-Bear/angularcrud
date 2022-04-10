@@ -1,9 +1,11 @@
+import { LoginService } from './../Services/login.service';
 
 import { Timesheet } from './../timesheet';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TimesheetService } from '../Services/timesheet.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Login } from '../login';
 
 @Component({
   selector: 'app-timesheet',
@@ -29,17 +31,21 @@ export class TimesheetComponent implements OnInit {
 
   timesheets: Timesheet[];
   timesheet = new Timesheet();
-  
+  login = new Login();
   today = new Date();
   date1 = new Date();
   date2 = new Date();
-  classifs = [{id:1,name:'AM Leave'},{id:2,name:'PM Leave'}]
+  classifs = [{id:1,name:'AM Leave',type:'firsthalf'},
+  {id:2,name:'PM Leave',type:'secondhalf'},
+  {id:3,name:'Holiday',type:'full'},
+  {id:4,name:'leave',type:'full'},]
   otbkdischk :boolean = true;
   
   id :any;
 
   loading: Boolean = false;
   constructor(private timesheetService: TimesheetService,
+    private loginservice :LoginService,
     private route :ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar) { }
@@ -62,6 +68,10 @@ export class TimesheetComponent implements OnInit {
     this.d2359.setSeconds(0);
     this.otbtshow();
     console.log(this.today.getFullYear() + ":" + (this.today.getMonth() + 1));
+
+    this.loginservice.getloginById(this.id). subscribe(data => {
+      this.login = data;
+    })
 
     ///defualt date////
 
@@ -88,7 +98,7 @@ export class TimesheetComponent implements OnInit {
         if(this.timesheet.btstart !== null){this.timesheet.btstart = this.timesheet.btstart.substring(0, 5);}
         if(this.timesheet.btend){this.timesheet.btend = this.timesheet.btend.substring(0, 5);}
         this.loading = false;
-        
+
         if(this.timesheet.breakflag == null)
         {
           if(this.timesheet.breakflag.length == 0 )

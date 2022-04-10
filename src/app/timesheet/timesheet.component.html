@@ -8,12 +8,12 @@
 
     <div class="border border-1 rounded shadow-sm" style="padding: 10px;">
         <span>
-            <!-- <label style="font-size: small; margin-right: 1px;">User :  </label>{{id}} -->
-            <input style="margin-left: 10px; width: 45px; height: 18px;" [(ngModel)]="timesheet.loginid"></span><br>
+            <label style="font-size: small; margin-right: 1px;">User :  </label>{{login.username}}
+            <input style="margin-left: 10px; width: 45px; height: 18px;" [(ngModel)]="timesheet.loginid" disabled=""></span><br>
         <span style="margin-left: 100px;">
             <mat-form-field style="padding-left:20px;width: 170px;">
                 <mat-label>Classification</mat-label>
-                <mat-select >
+                <mat-select [(ngModel)]="timesheet.breakflag" >
                     <mat-option *ngFor="let classif of classifs" [value]="classif.name">{{classif.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -26,7 +26,7 @@
 
         <span><label style="font-size: medium;">CheckIn Time </label>
             <input type="time" [(ngModel)]="timesheet.checkin" placeholder="CheckIn Time"
-                style="margin-left: 22px; width: 150px;" min="06:30" max="10:30" (change)="chtime()"></span>
+                style="margin-left: 22px; width: 150px;" (change)="chtime()"></span>
         <br><br>
         <span>
             <label style="font-size: medium">CheckOut Time </label>

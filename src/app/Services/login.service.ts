@@ -18,4 +18,9 @@ export class LoginService {
   LoginByUsernameAndPassword(logn:Login):Observable<any>{
     return this.httpClient.post(`${this.baseUrl}/login`,logn)
   }
+
+  getloginById(id:number): Observable<Login>
+  {
+    return this.httpClient.get<Login>(`${this.baseUrl}/getlogin/${id}`);
+  }
 }
