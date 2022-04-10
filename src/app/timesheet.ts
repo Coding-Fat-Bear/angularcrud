@@ -16,4 +16,5 @@ export class Timesheet {
     otend : String;
     otbtstart : String;
     otbtend : String;
+    daytype : String;
 }

@@ -13,7 +13,7 @@
         <span style="margin-left: 100px;">
             <mat-form-field style="padding-left:20px;width: 170px;">
                 <mat-label>Classification</mat-label>
-                <mat-select [(ngModel)]="timesheet.breakflag" >
+                <mat-select [(ngModel)]="timesheet.daytype"(selectionChange)="checktimechange()" >
                     <mat-option *ngFor="let classif of classifs" [value]="classif.name">{{classif.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -35,7 +35,8 @@
 
         <br>
         <div>
-            <span *ngIf="ctShow" style="color: Red;"> Range must be betwwen 10:00 and 18:30 </span>
+            <span *ngIf="ctShow" style="color: Red;"> 
+                Range must be betwwen {{d10.getHours()}}:{{d10.getMinutes()}} and {{d1830.getHours()}}:{{d1830.getMinutes()}}</span>
             <span *ngIf="!ctShowb()" style="color: Red;"> checkin must be after checkout
             </span>
         </div>

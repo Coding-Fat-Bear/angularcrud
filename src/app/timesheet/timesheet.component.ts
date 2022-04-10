@@ -35,10 +35,26 @@ export class TimesheetComponent implements OnInit {
   today = new Date();
   date1 = new Date();
   date2 = new Date();
-  classifs = [{id:1,name:'AM Leave',type:'firsthalf'},
-  {id:2,name:'PM Leave',type:'secondhalf'},
-  {id:3,name:'Holiday',type:'full'},
-  {id:4,name:'leave',type:'full'},]
+  classifs = [
+  {id:0,name:'none',type:'none'},
+  {id:1,name:'AM Leave',type:'halffirs'},
+  {id:2,name:'PM Leave',type:'halfseco'},
+  {id:3,name:'Holiday',type:'fullpaid'},
+  {id:4,name:'Leave',type:'full'},
+  {id:5,name:'Absence',type:'full'},
+  {id:6,name:'Relocation',type:'full'},
+  {id:7,name:'Menstrual Leave (Paid)',type:'full'},
+  {id:17,name:'Menstrual Leave (unpaid)',type:'fullunpd'},
+  {id:8,name:'New Year Holiday',type:'full'},
+  {id:9,name:'Child Nursing Leave',type:'full'},
+  {id:10,name:'Maternity leave',type:'full'},
+  {id:11,name:'Disater',type:'full'},
+  {id:12,name:'Industrial Accident',type:'full'},
+  {id:13,name:'Summer Vacation',type:'full'},
+  {id:14,name:'Paid Holiday',type:'full'},
+  {id:15,name:'Special Absence',type:'full'},
+  {id:16,name:'Medical Examination',type:'full'},]
+
   otbkdischk :boolean = true;
   
   id :any;
@@ -80,7 +96,7 @@ export class TimesheetComponent implements OnInit {
     let thisDate = this.dateCon(this.today);
     this.timesheetService.getTimesheetBylogIdAndtsDate(this.timesheet.loginid, thisDate).subscribe(data => {
       if (data == null) {
-        console.log("Null Process");
+        console.log("Null 1 Process");
         this.loading = false;
 
       } else {
@@ -96,7 +112,7 @@ export class TimesheetComponent implements OnInit {
         if(this.timesheet.otstart !== null){this.timesheet.otstart = this.timesheet.otstart.substring(0, 5);}
         if(this.timesheet.otend !== null){this.timesheet.otend = this.timesheet.otend.substring(0, 5);}
         if(this.timesheet.btstart !== null){this.timesheet.btstart = this.timesheet.btstart.substring(0, 5);}
-        if(this.timesheet.btend){this.timesheet.btend = this.timesheet.btend.substring(0, 5);}
+        if(this.timesheet.btend !== null){this.timesheet.btend = this.timesheet.btend.substring(0, 5);}
         this.loading = false;
 
         if(this.timesheet.breakflag == null)
@@ -115,6 +131,7 @@ export class TimesheetComponent implements OnInit {
       console.log("Null Process");
       this.loading = false;
       this.btShow = false;
+      this.timesheet.daytype = "none";
       this.openSnackBar("No Records Found", "Hide")
     });
 
@@ -134,7 +151,6 @@ export class TimesheetComponent implements OnInit {
       this.otbkdischk = true;
     }
   }
-
   /////date validation checkin and out order/////
   ctShowb(): boolean {
     try {
@@ -163,13 +179,6 @@ export class TimesheetComponent implements OnInit {
 
   }
   /////date validation checkin and out valid work time/////
-  // chbrflag()
-  // {
-  //   if(this.timesheet.breakflag!='X')
-  //   {
-  //     this.
-  //   }
-  // }
   chtime() {
     console.log("checks works");
 
@@ -235,7 +244,6 @@ export class TimesheetComponent implements OnInit {
       return false;
     }
   }
-
 
   /////date validation checkin and out valid over time/////
   cusotcheck() {
@@ -310,17 +318,16 @@ export class TimesheetComponent implements OnInit {
       return false;
     }
   }
-
-
   //////check///////
   check() {
-    console.log(this.timesheet);
-    console.log(this.otbkdischk);
-    console.log(this.btShow);
+    console.log(this.d10.getHours());
     
-    
-  }
-
+    this.classifs.forEach(element => {
+      if(element.name == this.timesheet.daytype){
+        console.log(element.type);
+      }
+    });
+   }
   ////Calander Event///////
   calCheckUpdated(event) {
     console.log("loading");
@@ -336,6 +343,7 @@ export class TimesheetComponent implements OnInit {
         this.timesheet.checkin = "";
         this.timesheet.checkout = "";
         this.timesheet.timeid = null;
+        this.timesheet.daytype = "none";
         this.breakbox(false)
         console.log("Null Process how");
 
@@ -367,6 +375,7 @@ export class TimesheetComponent implements OnInit {
       this.timesheet.btend = null;
       this.timesheet.timeid = null;;
       this.timesheet.comment = null;
+      this.timesheet.daytype = "none";
       console.log("Null Process");
       this.openSnackBar("No Records Found", "Hide")
     });
@@ -375,7 +384,6 @@ export class TimesheetComponent implements OnInit {
     this.btShow = false;
     this.otbtshow();
   }
-
   //////////// Servies/////////////
   private getTimesheet() {
     this.timesheetService.getTimesheetList().subscribe(data => {
@@ -456,8 +464,6 @@ export class TimesheetComponent implements OnInit {
 
     let snackRef = this.snackBar.open(message, action, { duration: 1000 });
   }
-
-
   /// break checkbox/////
   breakbox(checked: boolean) {
     if (checked == true) {
@@ -469,5 +475,40 @@ export class TimesheetComponent implements OnInit {
       this.timesheet.breakflag = "";
     }
   }
+  //// work time change//////
+  checktimechange() {
+    this.classifs.forEach(element => {
+      if(element.name == this.timesheet.daytype){
+        console.log(element.type);
+        if(element.type == "halffirs"){
+          this.d10.setHours(10);
+          this.d10.setMinutes(0);
+          this.d10.setSeconds(0);
+      
+          this.d1830.setHours(12);
+          this.d1830.setMinutes(30);
+          this.d1830.setSeconds(0);
+        }
+        if(element.type == "halfseco"){
+          this.d10.setHours(12);
+          this.d10.setMinutes(30);
+          this.d10.setSeconds(0);
 
+          this.d1830.setHours(18);
+          this.d1830.setMinutes(30);
+          this.d1830.setSeconds(0);
+        }
+        if(element.type == "none" || element.type == "fullpaid" || element.type == "fullunpd"  ){
+          this.d10.setHours(10);
+          this.d10.setMinutes(0);
+          this.d10.setSeconds(0);
+
+          this.d1830.setHours(18);
+          this.d1830.setMinutes(30);
+          this.d1830.setSeconds(0);
+        }
+      }
+    });
+    this.chtime();
+   }
 }
