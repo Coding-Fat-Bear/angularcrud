@@ -10,7 +10,6 @@ import { BusinessLine, Currency, Inquiry, Language, Module, Phase, Unit } from '
 export class InquiryService {
 
   private baseUrl = "http://localhost:8080/";
-  /* private baseUrl1 = "http://localhost:8080/";  */
 
   constructor(private http: HttpClient) { }
 
@@ -23,8 +22,22 @@ export class InquiryService {
     }
 
     public saveInquiry(inquiry: Inquiry){
-      return this.http.post("http://localhost:8080/createInquiry",inquiry);
+      return this.http.post(`${this.baseUrl}createInquiry`,inquiry);
     }
+
+  /*   public updateInquiry(inqno:number, inquiry: Inquiry): Observable<Inquiry>
+    {
+      return this.http.put<Inquiry>(`${this.baseUrl}editInquiry/${inqno}`, inquiry);
+    } */
+    
+    public updateInquiry(inqno:number, inquiry: Inquiry){
+      return this.http.put(`${this.baseUrl}editInquiry/${inqno}`, inquiry);
+    }
+
+    deleteInquiry(inqno:number){
+      return this.http.delete(`${this.baseUrl}Inquiries/${inqno}`);
+    }
+
 
   getModules(): Observable<Module[]> {
     return this.http.get<Module[]>(`${this.baseUrl + "Modules"}`);

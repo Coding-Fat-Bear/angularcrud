@@ -79,17 +79,24 @@ export class CreateInquiryComponent implements OnInit {
   
   }
 
-  public getInquiryById(){
-
-    console.log(this.inquiry.inqno);
-    
+  public getInquiryById(){   
     this.inquiryService.getInquiry(this.inquiry.inqno).subscribe(data => 
      { this.inquiry = data;
       console.log(data)},
       error => console.log(error));   
+     }
 
-      
-  }
+   public editInquiry(){
+     this.inquiryService.updateInquiry(this.inquiry.inqno, this.inquiry).subscribe
+     (data => console.log(data),
+     error => console.log(error)); 
+   }  
+
+   public removeInquiry(){
+     this.inquiryService.deleteInquiry(this.inquiry.inqno).subscribe
+     (data => console.log(data),
+     error => console.error(error));
+   }
 
 }
 
