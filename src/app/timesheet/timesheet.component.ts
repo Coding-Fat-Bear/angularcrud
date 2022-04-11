@@ -13,7 +13,7 @@ import { Login } from '../login';
   styleUrls: ['./timesheet.component.css']
 })
 export class TimesheetComponent implements OnInit {
-
+  holihide : boolean = false;
   btShow: boolean = false;
   ctShow: boolean = false;
   savebtdis: boolean = false;
@@ -36,25 +36,26 @@ export class TimesheetComponent implements OnInit {
   today = new Date();
   date1 = new Date();
   date2 = new Date();
+
   classifs = [
   {id:0,name:'none',type:'none'},
   {id:1,name:'AM Leave',type:'halffirs'},
   {id:2,name:'PM Leave',type:'halfseco'},
   {id:3,name:'Holiday',type:'fullpaid'},
-  {id:4,name:'Leave',type:'full'},
-  {id:5,name:'Absence',type:'full'},
-  {id:6,name:'Relocation',type:'full'},
-  {id:7,name:'Menstrual Leave (Paid)',type:'full'},
+  {id:4,name:'Leave',type:'fullunpd'},
+  {id:5,name:'Absence',type:'fullunpd'},
+  {id:6,name:'Relocation',type:'fullunpd'},
+  {id:7,name:'Menstrual Leave (Paid)',type:'fullpaid'},
   {id:17,name:'Menstrual Leave (unpaid)',type:'fullunpd'},
-  {id:8,name:'New Year Holiday',type:'full'},
-  {id:9,name:'Child Nursing Leave',type:'full'},
-  {id:10,name:'Maternity leave',type:'full'},
-  {id:11,name:'Disater',type:'full'},
-  {id:12,name:'Industrial Accident',type:'full'},
-  {id:13,name:'Summer Vacation',type:'full'},
-  {id:14,name:'Paid Holiday',type:'full'},
-  {id:15,name:'Special Absence',type:'full'},
-  {id:16,name:'Medical Examination',type:'full'},]
+  {id:8,name:'New Year Holiday',type:'fullunpd'},
+  {id:9,name:'Child Nursing Leave',type:'fullunpd'},
+  {id:10,name:'Maternity leave',type:'fullpaid'},
+  {id:11,name:'Disater',type:'fullpaid'},
+  {id:12,name:'Industrial Accident',type:'fullpaid'},
+  {id:13,name:'Summer Vacation',type:'fullpaid'},
+  {id:14,name:'Paid Holiday',type:'fullpaid'},
+  {id:15,name:'Special Absence',type:'fullpaid'},
+  {id:16,name:'Medical Examination',type:'fullpaid'},]
 
   otbkdischk :boolean = true;
   
@@ -68,7 +69,7 @@ export class TimesheetComponent implements OnInit {
     private snackBar: MatSnackBar) { }
 
     
-  /////////on Start////////////
+  ////////////on Start//////////////
   ngOnInit(): void {
     this.timesheet.breakflag ='';
     this.id = this.route.snapshot.params['id'];
@@ -115,7 +116,7 @@ export class TimesheetComponent implements OnInit {
         if(this.timesheet.btstart !== null){this.timesheet.btstart = this.timesheet.btstart.substring(0, 5);}
         if(this.timesheet.btend !== null){this.timesheet.btend = this.timesheet.btend.substring(0, 5);}
         this.loading = false;
-
+        this.holihidedis();
         if(this.timesheet.breakflag == null)
         {
           if(this.timesheet.breakflag.length == 0 )
@@ -132,12 +133,34 @@ export class TimesheetComponent implements OnInit {
       console.log("Null Process");
       this.loading = false;
       this.btShow = false;
+      this.holihide = false;
       this.timesheet.daytype = "none";
       this.openSnackBar("No Records Found", "Hide")
     });
 
   }
-  ///// dropdown otbt show/////
+  ////////date type input hide//////
+  holihidedis(){
+    
+
+    this.classifs.forEach(element => {
+      if(element.name == this.timesheet.daytype){
+        console.log(element.type);
+        
+        
+        if( element.type == "fullpaid" || element.type == "fullunpd"  ){
+          this.holihide = true;
+          this.timesheet.checkin = null;
+          this.timesheet.checkout = null;
+        }
+        else{
+          this.holihide = false;
+        }
+      }
+    });
+  }
+
+  //////// dropdown otbt show///////
   otbtshow(){
     
     try{
@@ -152,7 +175,7 @@ export class TimesheetComponent implements OnInit {
       this.otbkdischk = true;
     }
   }
-  /////date validation checkin and out order/////
+  ////////////date validation checkin and out order/////////
   ctShowb(): boolean {
     try {
       var inhr: any;
@@ -186,7 +209,7 @@ export class TimesheetComponent implements OnInit {
     }
 
   }
-  /////date validation checkin and out valid work time/////
+  //////date validation checkin and out valid work time/////
   chtime() {
 
     try {
@@ -286,7 +309,7 @@ export class TimesheetComponent implements OnInit {
     
     
   }
-  //////////date validation checkin and out valid overtime's breaktime///////////
+  //////date validation checkin and out valid overtime's breaktime///////
   cusotbtcheck() {
     try {
       if (this.timesheet.otbtstart !== null && this.timesheet.otbtend !== null && !(this.ctShowbefore)) {
@@ -321,10 +344,9 @@ export class TimesheetComponent implements OnInit {
       return false;
     }
   }
-  //////check///////
+  ////////////check/////////////
   check() {
     console.log("////");
-    
     console.log(this.savebtdis);
     console.log(this.ctShow);
     console.log("////");
@@ -334,7 +356,7 @@ export class TimesheetComponent implements OnInit {
     //   }
     // });
    }
-  ////Calander Event///////
+  ////Calander Event/////////////
   calCheckUpdated(event) {
     console.log("loading");
     this.loading = true;
@@ -382,6 +404,7 @@ export class TimesheetComponent implements OnInit {
       this.timesheet.timeid = null;;
       this.timesheet.comment = null;
       this.timesheet.daytype = "none";
+      this.holihide = false;
       console.log("Null Process");
       this.openSnackBar("No Records Found", "Hide")
     });
@@ -390,9 +413,9 @@ export class TimesheetComponent implements OnInit {
     this.btShow = false;
     this.otbtshow();
   }
-  //////////// Servies/////////////
-  private getTimesheet() {
-    this.timesheetService.getTimesheetList().subscribe(data => {
+  //////////// Services///////////
+   getTimesheet() {
+      this.timesheetService.getTimesheetList().subscribe(data => {
       this.timesheets = data;
     })
   }
@@ -403,7 +426,7 @@ export class TimesheetComponent implements OnInit {
       day = ("0" + date.getDate()).slice(-2);
     return [date.getFullYear(), month, day].join("-");
   }
-  ///// Save Button Logic////////////
+  ///// Save Button Logic/////////
   saveTimesheet() {
 
 
@@ -465,12 +488,12 @@ export class TimesheetComponent implements OnInit {
     // }
 
   }
-  ////snack bar pop up//////
+  ////snack bar pop up///////////
   openSnackBar(message: string, action: string) {
 
     let snackRef = this.snackBar.open(message, action, { duration: 1000 });
   }
-  /// break checkbox/////
+  /// break checkbox///////////
   breakbox(checked: boolean) {
     if (checked == true) {
       console.log("checked");

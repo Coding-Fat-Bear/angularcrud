@@ -15,7 +15,7 @@
         <span style="margin-left: 100px;">
             <mat-form-field style="padding-left:20px;width: 170px;">
                 <mat-label>Classification</mat-label>
-                <mat-select [(ngModel)]="timesheet.daytype"(selectionChange)="checktimechange()" >
+                <mat-select [(ngModel)]="timesheet.daytype"(selectionChange)="checktimechange(); holihidedis()" >
                     <mat-option *ngFor="let classif of classifs" [value]="classif.name">{{classif.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
@@ -28,18 +28,18 @@
 
         <span><label style="font-size: medium;">CheckIn Time </label>
             <input type="time" [(ngModel)]="timesheet.checkin" placeholder="CheckIn Time"
-                style="margin-left: 22px; width: 150px;" (change)="chtime()"></span>
+                style="margin-left: 22px; width: 150px;" (change)="chtime()" [disabled]="holihide"></span>
         <br><br>
         <span>
             <label style="font-size: medium">CheckOut Time </label>
             <input type="time" [(ngModel)]="timesheet.checkout" placeholder="CheckOut Time"
-                style="margin-left: 10px; width: 150px;" (change)="chtime()"></span>
+                style="margin-left: 10px; width: 150px;" (change)="chtime()" [disabled]="holihide"></span>
 
         <br>
         <div>
-            <span *ngIf="ctShow" style="color: Red;"> 
+            <span [hidden]="!ctShow" style="color: Red;"> 
                 Range must be betwwen {{d10.getHours()}}:{{d10.getMinutes()}} and {{d1830.getHours()}}:{{d1830.getMinutes()}}</span>
-            <span *ngIf="!ctShowb()" style="color: Red;"> checkin must be after checkout
+            <span [hidden]="ctShowb()" style="color: Red;"> checkin must be after checkout
             </span>
         </div>
 
@@ -87,7 +87,7 @@
                     <label style="font-size: medium">BreakTime End</label>
                     <input type="time" [(ngModel)]="timesheet.btend" (change)="cusbtcheck()" placeholder="HH:MM"
                         style="margin-left: 18px; width: 150px;"></span><br>
-                <span *ngIf="cusbtcheck()" style="color: red;">Invalid Breaktime </span>
+                <span [hidden]="!cusbtcheck()" style="color: red;">Invalid Breaktime </span>
             </div>
 
             <div class="border border-1 rounded shadow-sm" style="padding: 10px;" *ngSwitchCase="2">
@@ -100,7 +100,7 @@
                     <label style="font-size: medium">OT BreakTime End</label>
                     <input type="time" [(ngModel)]="timesheet.otbtend" (change)="cusotbtcheck()" placeholder="HH:MM"
                         style="margin-left: 18px; width: 150px;"></span><br>
-                <span *ngIf="cusotbtcheck()" style="color: red;">invalid overtime's breaktime </span>
+                <span [hidden]="!cusotbtcheck()" style="color: red;">invalid overtime's breaktime </span>
             </div>
 
 
@@ -114,7 +114,7 @@
                     <label style="font-size: medium">OverTime End</label>
                     <input type="time" [(ngModel)]="timesheet.otend" (change)="cusotcheck()" placeholder="HH:MM"
                         style="margin-left: 18px; width: 150px;"></span><br>
-                <span *ngIf="cusotcheck()" style="color: red;">Invalid overtime </span>
+                <span [hidden]="!cusotcheck()" style="color: red;">Invalid overtime </span>
             </div>
         </div>
     </div>
