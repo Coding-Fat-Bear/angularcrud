@@ -4,12 +4,14 @@
 
 <p class="md ">Timesheet</p>
 
-<div class="container" style="width: 40%; float: left">
+<div class="container" style="width: 40%; float: left" >
 
     <div class="border border-1 rounded shadow-sm" style="padding: 10px;">
         <span>
             <label style="font-size: small; margin-right: 1px;">User :  </label>{{login.username}}
-            <input style="margin-left: 10px; width: 45px; height: 18px;" [(ngModel)]="timesheet.loginid" disabled=""></span><br>
+            <!-- <input style="margin-left: 10px; width: 45px; height: 18px;" [(ngModel)]="timesheet.loginid" disabled=""> -->
+        </span>
+            <br>
         <span style="margin-left: 100px;">
             <mat-form-field style="padding-left:20px;width: 170px;">
                 <mat-label>Classification</mat-label>
@@ -42,9 +44,9 @@
         </div>
 
 
-        <mat-checkbox style="padding-left: 30%;" [checked]="btShow" (change)="breakbox($event.checked)">Skipped Breaktime</mat-checkbox><br>
+        <mat-checkbox style="padding-left: 120px;" [checked]="btShow" (change)="breakbox($event.checked)">Skipped Breaktime</mat-checkbox><br>
 
-        <button mat-stroked-button (click)="saveTimesheet()"> Save / Update</button>
+        <br><button mat-stroked-button (click)="saveTimesheet()" [disabled]="this.savebtdis"> Save / Update</button>
 
     </div>
     <div style="padding-top: 10px;">
@@ -114,9 +116,6 @@
                         style="margin-left: 18px; width: 150px;"></span><br>
                 <span *ngIf="cusotcheck()" style="color: red;">Invalid overtime </span>
             </div>
-
-
-
         </div>
     </div>
 
@@ -133,12 +132,11 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>L0gin ID</th>
+            <th>Login ID</th>
             <th>Date</th>
             <th>CheckIn</th>
             <th>CheckOut</th>
             <th>hoursworked</th>
-
         </tr>
     </thead>
     <tbody>

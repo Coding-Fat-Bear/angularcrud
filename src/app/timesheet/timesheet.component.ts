@@ -16,6 +16,7 @@ export class TimesheetComponent implements OnInit {
 
   btShow: boolean = false;
   ctShow: boolean = false;
+  savebtdis: boolean = false;
   ctShowbefore: boolean = false;
   selectbt: number;
   selected: Date;
@@ -172,41 +173,43 @@ export class TimesheetComponent implements OnInit {
       this.date2.setSeconds(0);
 
       // return true;
+      this.savebtdis = (!(this.date1 < this.date2))||this.ctShow;
+      console.log("date"+""+!(this.date1 < this.date2));
+      console.log("ctshow"+this.ctShow);
+      
+      console.log((!(this.date1 < this.date2)) || this.ctShow);
+      
       return this.date1 < this.date2;
     } catch (e) {
+      this.savebtdis = false;
       return true;
     }
 
   }
   /////date validation checkin and out valid work time/////
   chtime() {
-    console.log("checks works");
 
     try {
-      if (this.timesheet.checkin !== null && this.timesheet.checkout !== null && !(this.ctShowbefore)) {
-        console.log('works');
-
-
+      if (this.timesheet.checkin !== null && this.timesheet.checkout !== null || !(this.ctShowbefore)) {
         var inhr: any;
         inhr = this.timesheet.checkin.substring(0, 2);
-
         var outhr: any;
         var oumin: any;
         outhr = this.timesheet.checkout.substring(0, 2);
         oumin = this.timesheet.checkout.substring(3, 5);
         this.ctShow = !(this.date1 >= this.d10 && this.d1830 >= this.date2);
-        console.log("second"+this.date2);
-        
-        console.log(this.d1830 > this.date2);
+        this.savebtdis = this.ctShow;
+        console.log("savebu"+this.savebtdis);
         
       }
       else {
         this.ctShow = false;
+        this.savebtdis = this.ctShow;
       }
     } catch (e) {
-      console.log(e);
 
       this.ctShow = false;
+      this.savebtdis = this.ctShow;
     }
 
 
@@ -320,13 +323,16 @@ export class TimesheetComponent implements OnInit {
   }
   //////check///////
   check() {
-    console.log(this.d10.getHours());
+    console.log("////");
     
-    this.classifs.forEach(element => {
-      if(element.name == this.timesheet.daytype){
-        console.log(element.type);
-      }
-    });
+    console.log(this.savebtdis);
+    console.log(this.ctShow);
+    console.log("////");
+    // this.classifs.forEach(element => {
+    //   if(element.name == this.timesheet.daytype){
+    //     console.log(element.type);
+    //   }
+    // });
    }
   ////Calander Event///////
   calCheckUpdated(event) {
@@ -390,14 +396,14 @@ export class TimesheetComponent implements OnInit {
       this.timesheets = data;
     })
   }
-
+  ///////date converter //////////
   dateCon(str) {
     var date = new Date(str),
       month = ("0" + (date.getMonth() + 1)).slice(-2),
       day = ("0" + date.getDate()).slice(-2);
     return [date.getFullYear(), month, day].join("-");
   }
-
+  ///// Save Button Logic////////////
   saveTimesheet() {
 
 
@@ -480,7 +486,7 @@ export class TimesheetComponent implements OnInit {
     this.classifs.forEach(element => {
       if(element.name == this.timesheet.daytype){
         console.log(element.type);
-        if(element.type == "halffirs"){
+        if(element.type == "halfseco"){
           this.d10.setHours(10);
           this.d10.setMinutes(0);
           this.d10.setSeconds(0);
@@ -489,7 +495,7 @@ export class TimesheetComponent implements OnInit {
           this.d1830.setMinutes(30);
           this.d1830.setSeconds(0);
         }
-        if(element.type == "halfseco"){
+        if(element.type == "halffirs"){
           this.d10.setHours(12);
           this.d10.setMinutes(30);
           this.d10.setSeconds(0);
