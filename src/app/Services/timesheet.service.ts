@@ -34,6 +34,10 @@ export class TimesheetService {
     return this.httpClient.put(`${this.baseUrl}/puttime/${id}`,Timesheet)
   }
 
+  getTimesheetByMonthAndYear(month:number,year:number,id:number): Observable<Timesheet[]>
+  {
+    return this.httpClient.get<Timesheet[]>(`${this.baseUrl}/gettimeBymonthandyear/${year}/${month}/${id}`);
+  }
 
 
 }

@@ -16,7 +16,8 @@ import { MaterialModule } from './material-module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { EmployeeComponent } from './employee/employee.component';
-import { HomeComponent } from './home/home.component'
+import { HomeComponent } from './home/home.component';
+import { MonthsheetComponent } from './monthsheet/monthsheet.component'
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { HomeComponent } from './home/home.component'
     LoginComponent,
     EmployeeComponent,
     HomeComponent,
+    MonthsheetComponent,
     
   ],
   imports: [
