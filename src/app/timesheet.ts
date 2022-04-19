@@ -1,4 +1,5 @@
 import { Time } from '@angular/common';
+import { ParseFlags } from '@angular/compiler';
 // import { Time } from "@angular/common";
 
 export class Timesheet {
@@ -17,4 +18,5 @@ export class Timesheet {
     otbtstart : String;
     otbtend : String;
     daytype : String;
+    cflag:boolean;
 }

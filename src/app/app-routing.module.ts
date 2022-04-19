@@ -20,7 +20,7 @@ const routes: Routes = [
   {path:'login',component: LoginComponent},
   {path:'employee',component: EmployeeComponent},
   {path:'home/:id',component: HomeComponent},
-  {path:'monthsheet/:id',component: MonthsheetComponent}
+  {path:'monthsheet/:id/:year/:month',component: MonthsheetComponent}
 ];
 
 @NgModule({

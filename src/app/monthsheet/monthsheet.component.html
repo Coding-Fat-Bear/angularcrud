@@ -20,7 +20,7 @@
   </thead>
   <tbody>
     <ng-container *ngFor="let timesheet of timesheets">
-      <tr *ngIf="false" ><td>{{timesheet.timeid }}</td>
+      <tr *ngIf="!timesheet.cflag" ><td>{{timesheet.timeid }}</td>
         <td >{{timesheet.tsdate }}</td>
         <td>{{timesheet.checkin }}</td>
         <td>{{timesheet.checkout }}</td>
@@ -32,7 +32,7 @@
         <td>{{timesheet.otend }}</td>
       </tr>
 
-      <tr *ngIf="true">
+      <tr *ngIf="timesheet.cflag">
         <td >{{timesheet.tsdate }}</td>
         <td>{{timesheet.checkin }}</td>
         <td>{{timesheet.checkout }}</td>
