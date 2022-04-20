@@ -5,6 +5,7 @@
           <th  colspan="2">Day</th>
           <th colspan="3">Result</th>
           <th rowspan="2">Skipped Break</th>
+          <th rowspan="2">comment</th>
           <th rowspan="2">Overtime Start</th>
           <th rowspan="2">Overtime End</th>
           <th rowspan="2">Breaktime Start</th>
@@ -19,29 +20,36 @@
      </tr>
   </thead>
   <tbody>
-    <ng-container *ngFor="let timesheet of timesheets">
-      <tr *ngIf="!timesheet.cflag" ><td>{{timesheet.timeid }}</td>
+    <ng-container *ngFor="let timesheet of timesheetsDis">
+      <tr *ngIf="!timesheet.cflag" >
+        <td></td>
         <td >{{timesheet.tsdate }}</td>
         <td>{{timesheet.checkin }}</td>
         <td>{{timesheet.checkout }}</td>
         <td>{{timesheet.totalhours }}</td>
-        <td>{{timesheet.breakflag }}</td>
+        <td><mat-checkbox [checked]="true"></mat-checkbox></td>
+        <td>{{timesheet.comment }}</td>
         <td>{{timesheet.otstart }}</td>
         <td>{{timesheet.otend }}</td>
-        <td>{{timesheet.otstart }}</td>
-        <td>{{timesheet.otend }}</td>
+        <td>{{timesheet.btstart }}</td>
+        <td>{{timesheet.btend }}</td>
       </tr>
 
-      <tr *ngIf="timesheet.cflag">
+      <tr  *ngIf="timesheet.cflag">
+        <td>{{timesheet.timeid }}</td>
         <td >{{timesheet.tsdate }}</td>
-        <td>{{timesheet.checkin }}</td>
-        <td>{{timesheet.checkout }}</td>
+        <td><input type="time" [(ngModel)]="timesheet.checkin" placeholder="Checkin Time" [hidden]="false" ></td>
+        <td><input type="time" [(ngModel)]="timesheet.checkout" placeholder="CheckOut Time" [hidden]="false"  ></td>
         <td>{{timesheet.totalhours }}</td>
-        <td>{{timesheet.breakflag }}</td>
-        <td>{{timesheet.otstart }}</td>
-        <td>{{timesheet.otend }}</td>
-        <td>{{timesheet.otstart }}</td>
-        <td>HI WD</td>
+        <td><mat-checkbox></mat-checkbox></td>
+        <td>
+          <textarea matInput placeholder="Leave a coment " [(ngModel)]="timesheet.comment"
+              [ngModelOptions]="{standalone: true}"></textarea>
+      </td>
+        <td><input type="time" [(ngModel)]="timesheet.otstart" placeholder="Overtime Time" [hidden]="false"  ></td>
+        <td><input type="time" [(ngModel)]="timesheet.otend" placeholder="Overtime Time"  [hidden]="false" ></td>
+        <td><input type="time" [(ngModel)]="timesheet.btstart" placeholder="BreakTime start"   [hidden]="false"></td>
+        <td><input type="time" [(ngModel)]="timesheet.btend" placeholder="BreakTime end"  [hidden]="false" ></td>
       </tr>
   </ng-container>
   </tbody>

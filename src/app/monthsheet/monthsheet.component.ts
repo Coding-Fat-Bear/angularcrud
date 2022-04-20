@@ -83,15 +83,18 @@ this.monthday.forEach(b=>{
    if(this.timesheets2.some(a=>{
          var str = new Timesheet();
          str = a; hasDate = a;
-         return  str.tsdate == time;  }))
+                            return  str.tsdate == time;  }))
             {
-              console.log("hasdate");
+              // console.log("hasdate");
               this.timesheetsDis.push(hasDate);
             }
             else
-            {
-              this.timesheetsDis.push(time);
-              console.log('adddate');
+            {var time1 = {}; 
+            time1['tsdate'] = String(time);
+            time1['cflag'] = true;
+            // times.push(time1);
+              this.timesheetsDis.push(time1);
+              // console.log('adddate');
               
             }
   
