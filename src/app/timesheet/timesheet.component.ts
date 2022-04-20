@@ -376,8 +376,6 @@ export class TimesheetComponent implements OnInit {
         console.log("Null Process how");
 
       } else {
-        console.log(data.tsdate);
-
         console.log("Receiving Process");
         this.timesheet = data;
         // console.log(this.timesheet.tsdate);
