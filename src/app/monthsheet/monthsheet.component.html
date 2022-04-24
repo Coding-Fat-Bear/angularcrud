@@ -1,10 +1,13 @@
 <br>
-<table class="table table-bordered shadow-sm p-3 mb-5 bg-white rounded">
+
+  <button (click)="ex()">check</button>
+<table class="table table-bordered  bg-white rounded">
   <thead>
       <tr>
           <th  colspan="2">Day</th>
           <th colspan="3">Result</th>
           <th rowspan="2">Skipped Break</th>
+          <th rowspan="2" style="width: 200px;">Classification</th>
           <th rowspan="2">comment</th>
           <th rowspan="2">Overtime Start</th>
           <th rowspan="2">Overtime End</th>
@@ -27,7 +30,8 @@
         <td>{{timesheet.checkin }}</td>
         <td>{{timesheet.checkout }}</td>
         <td>{{timesheet.totalhours }}</td>
-        <td><mat-checkbox [checked]="true"></mat-checkbox></td>
+        <td><mat-checkbox [checked]="true" [disabled]="true"></mat-checkbox></td>
+        <td>{{timesheet.daytype}}</td>
         <td>{{timesheet.comment }}</td>
         <td>{{timesheet.otstart }}</td>
         <td>{{timesheet.otend }}</td>
@@ -38,19 +42,22 @@
       <tr  *ngIf="timesheet.cflag">
         <td>{{timesheet.timeid }}</td>
         <td >{{timesheet.tsdate }}</td>
-        <td><input type="time" [(ngModel)]="timesheet.checkin" placeholder="Checkin Time" [hidden]="false" ></td>
-        <td><input type="time" [(ngModel)]="timesheet.checkout" placeholder="CheckOut Time" [hidden]="false"  ></td>
+        <td><input type="time" [(ngModel)]="timesheet.checkin" placeholder="Checkin Time" ></td>
+        <td><input type="time" [(ngModel)]="timesheet.checkout" placeholder="CheckOut Time"  ></td>
         <td>{{timesheet.totalhours }}</td>
         <td><mat-checkbox></mat-checkbox></td>
-        <td>
-          <textarea matInput placeholder="Leave a coment " [(ngModel)]="timesheet.comment"
+        <td><mat-select [(ngModel)]="timesheet.daytype" >
+          <mat-option *ngFor="let classif of classifs" [value]="classif.name">{{classif.name}}</mat-option>
+      </mat-select></td>
+        <td><textarea matInput placeholder="Leave a coment " [(ngModel)]="timesheet.comment"
               [ngModelOptions]="{standalone: true}"></textarea>
-      </td>
-        <td><input type="time" [(ngModel)]="timesheet.otstart" placeholder="Overtime Time" [hidden]="false"  ></td>
-        <td><input type="time" [(ngModel)]="timesheet.otend" placeholder="Overtime Time"  [hidden]="false" ></td>
-        <td><input type="time" [(ngModel)]="timesheet.btstart" placeholder="BreakTime start"   [hidden]="false"></td>
-        <td><input type="time" [(ngModel)]="timesheet.btend" placeholder="BreakTime end"  [hidden]="false" ></td>
+        </td>
+        <td><input type="time" [(ngModel)]="timesheet.otstart" placeholder="Overtime Time"  ></td>
+        <td><input type="time" [(ngModel)]="timesheet.otend" placeholder="Overtime Time"  ></td>
+        <td><input type="time" [(ngModel)]="timesheet.btstart" placeholder="BreakTime start"  ></td>
+        <td><input type="time" [(ngModel)]="timesheet.btend" placeholder="BreakTime end"  ></td>
       </tr>
+      
   </ng-container>
   </tbody>
 </table>
