@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { TimesheetService } from '../Services/timesheet.service';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-monthsheet',
@@ -18,9 +19,9 @@ export class MonthsheetComponent implements OnInit {
    timesheetsDis = [];
    timesheetsCopy= [];
   constructor( private timesheetService: TimesheetService,
+               private snackBar: MatSnackBar,
                private route :ActivatedRoute,private titleService: Title) {}
-               public setTitle(newTitle: string) {
-              }
+               
   year:number;
   month:number;
   yearnum  : number;
@@ -84,21 +85,21 @@ export class MonthsheetComponent implements OnInit {
             }
             else
             {var time1 = {}; 
-            time1['loginid']  = null;
-            time1['tsdate'] = String(time);
+            time1['loginid']  = Number( this.id);
+            time1['tsdate']   = String(time);
             time1['checkin']  = null;
-            time1['checkout']  = null;
+            time1['checkout'] = null;
             time1['otstart']  = null;
-            time1['otend']  = null;
+            time1['otend']    = null;
             time1['otbtstart']  = null;
             time1['otbtend']  = null;
             time1['btstart']  = null;
-            time1['btend']  = null;
-            time1['timeid']  = null;
+            time1['btend']    = null;
+            time1['timeid']   = null;
             time1['comment']  = null;
-            time1['breakflag']  = null;
+            time1['breakflag']  = "";
             time1['daytype']  = 'none';
-            time1['cflag'] = true;
+            time1['cflag']    = true;
             this.timesheetsDis.push(time1)
             }
   this.timesheetsCopy =  this.timesheetsDis.map(a => Object.assign({}, a));
@@ -154,52 +155,65 @@ ex()
   
   difference.forEach(timesheet=>{
     
-if (timesheet.checkin == null) {
+if (timesheet.checkin !== null ) {
+      if(timesheet.checkin.length !== 0){
+        timesheet.checkin = (timesheet.checkin + ":00").substring(0, 8);
+        }
 }
-else {
-  timesheet.checkin = (timesheet.checkin + ":00").substring(0, 8);
-}
-if (timesheet.checkout == null) {
-}
-else {
-  timesheet.checkout = (timesheet.checkout + ":00").substring(0, 8);
-}
-
-if (timesheet.btstart == null) {
-}
-else {
-  timesheet.btstart = (timesheet.btstart + ":00").substring(0, 8);
-}
-if (timesheet.btend == null) {
-
-}
-else {
-  timesheet.btend = (timesheet.btend + ":00").substring(0, 8);
+if (timesheet.checkout !== null ) {
+      if(timesheet.checkout.length !== 0){
+          timesheet.checkout = (timesheet.checkout + ":00").substring(0, 8);
+            }
 }
 
-if (timesheet.otbtstart == null) {
+if (timesheet.btstart !== null ) {
+      if(timesheet.btstart.length !== 0){
+        timesheet.btstart = (timesheet.btstart + ":00").substring(0, 8);
+             }
 }
-else {
-  timesheet.otbtstart = (timesheet.otbtstart + ":00").substring(0, 8);
-}
-if (timesheet.otbtend == null) {
-}
-else {
-  timesheet.otbtend = (timesheet.otbtend + ":00").substring(0, 8);
+if (timesheet.btend !== null ) {
+    if(timesheet.otbtstart.length !== 0){
+      timesheet.btend = (timesheet.btend + ":00").substring(0, 8);
+    }
 }
 
-if (timesheet.otstart == null) {
+if (timesheet.otbtstart !== null ) {
+  if(timesheet.otbtstart.length !== 0){
+    timesheet.otbtstart = (timesheet.otbtstart + ":00").substring(0, 8);
+  }
 }
-else {
+if (timesheet.otbtend !== null ) {
+  if(timesheet.otbtend.length !== 0){
+    timesheet.otbtend = (timesheet.otbtend + ":00").substring(0, 8);
+  }
+  
+}
+
+if (timesheet.otstart !== null ) {
+  if(timesheet.otstart.length !== 0){
   timesheet.otstart = (timesheet.otstart + ":00").substring(0, 8);
+  }
 }
-if (timesheet.otend == null) {
-}
-else {
+if (timesheet.otend !== null ) {
+  if(timesheet.otend.length !==0 )
+  {
   timesheet.otend = (timesheet.otend + ":00").substring(0, 8);
+  }
 }
   })
-  
+  difference.forEach(timesheetsave=>{
+    console.log(timesheetsave);
+    delete timesheetsave.cflag;
+    this.timesheetService.postTimesheet(timesheetsave).subscribe(data => {
+      console.log("saved");
+      this.openSnackBar("Saved", "Hide")
+    }, error => console.log(error))
+  })
   
 }
+openSnackBar(message: string, action: string) {
+
+  let snackRef = this.snackBar.open(message, action, { duration: 1000 });
+}
+
 }

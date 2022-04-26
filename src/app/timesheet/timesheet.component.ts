@@ -141,13 +141,9 @@ export class TimesheetComponent implements OnInit {
   }
   ////////date type input hide//////
   holihidedis(){
-    
-
     this.classifs.forEach(element => {
       if(element.name == this.timesheet.daytype){
         console.log(element.type);
-        
-        
         if( element.type == "fullpaid" || element.type == "fullunpd"  ){
           this.holihide = true;
           this.timesheet.checkin = null;
@@ -347,6 +343,8 @@ export class TimesheetComponent implements OnInit {
   ////////////check/////////////
   check() {
     console.log("////");
+    console.log(this.timesheet);
+    
     console.log(this.savebtdis);
     console.log(this.ctShow);
     console.log("////");
@@ -480,10 +478,6 @@ export class TimesheetComponent implements OnInit {
       console.log("saved");
       this.openSnackBar("Saved", "Hide")
     }, error => console.log(error))
-    // }
-    // else{
-    //   this.openSnackBar("Fix Error", "Hide")
-    // }
 
   }
   ////snack bar pop up///////////
