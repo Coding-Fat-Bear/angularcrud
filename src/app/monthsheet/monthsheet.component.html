@@ -1,7 +1,7 @@
 <br>
 
   <button (click)="ex()">check</button>
-<table class="table table-bordered  bg-white rounded">
+<table class="table  table-bordered bg-white rounded">
   <thead>
       <tr>
           <th  colspan="2" >Day</th>
@@ -15,6 +15,7 @@
           <th rowspan="2">Breaktime End</th>
           <th rowspan="2">OT Breaktime Start</th>
           <th rowspan="2">OT Breaktime End</th>
+          <th rowspan="2" style="width: 200px;">Status</th>
       </tr>
       <tr>
         <th>No</th>
@@ -41,13 +42,13 @@
         <td>{{timesheet.btend }}</td>
         <td>{{timesheet.otbtstart }}</td>
         <td>{{timesheet.otbtend }}</td>
+        <td>{{timesheet.error}}</td>
       </tr>
-
       <tr  *ngIf="timesheet.cflag">
-        <td>{{timesheet.timeid }}</td>
-        <td >{{timesheet.tsdate }}</td>
-        <td><input type="time" [(ngModel)]="timesheet.checkin" placeholder="Checkin Time" ></td>
-        <td><input type="time" [(ngModel)]="timesheet.checkout" placeholder="CheckOut Time"  ></td>
+        <td>{{timesheet.timeid}}</td>
+        <td >{{timesheet.tsdate}}</td>
+        <td (change)="checkinout()"><input type="time" [(ngModel)]="timesheet.checkin" placeholder="Checkin Time" ></td>
+        <td (change)="checkinout()"><input type="time" [(ngModel)]="timesheet.checkout" placeholder="CheckOut Time"  ></td>
         <td>{{timesheet.totalhours }}</td>
         <td><mat-checkbox></mat-checkbox></td>
         <td><mat-select [(ngModel)]="timesheet.daytype" >
@@ -62,8 +63,8 @@
         <td><input type="time" [(ngModel)]="timesheet.btend" placeholder="BreakTime end"  ></td>
         <td><input type="time" [(ngModel)]="timesheet.otbtstart" placeholder="OT BreakTime start"  ></td>
         <td><input type="time" [(ngModel)]="timesheet.otbtend" placeholder="OT BreakTime end"  ></td>
+        <td >{{timesheet.error}}</td>
       </tr>
-      
   </ng-container>
   </tbody>
 </table>

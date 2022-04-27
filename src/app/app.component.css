@@ -36,4 +36,6 @@ header{
   position: absolute;
   margin-top: 3px;
   margin-left: 5px; /* optional */
+  box-shadow: 2px;
+  
 }

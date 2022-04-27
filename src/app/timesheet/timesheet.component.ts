@@ -344,7 +344,6 @@ export class TimesheetComponent implements OnInit {
   check() {
     console.log("////");
     console.log(this.timesheet);
-    
     console.log(this.savebtdis);
     console.log(this.ctShow);
     console.log("////");

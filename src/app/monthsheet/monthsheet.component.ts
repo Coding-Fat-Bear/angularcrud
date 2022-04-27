@@ -13,17 +13,25 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class MonthsheetComponent implements OnInit {
   
-  timesheet = new Timesheet();
+  // timesheet = new Timesheet();
   timesheets : Timesheet[];
-   timesheets2 = [];
-   timesheetsDis = [];
-   timesheetsCopy= [];
+  timesheets2 = [];
+  timesheetsDis = [];
+  timesheetsCopy= [];
+  d10 = new Date();
+  d1830 = new Date();
+  d2359 = new Date();
+  date1 = new Date();
+  date2 = new Date();
+    ctShow: boolean = false;
+
+
   constructor( private timesheetService: TimesheetService,
                private snackBar: MatSnackBar,
-               private route :ActivatedRoute,private titleService: Title) {}
-               
-  year:number;
-  month:number;
+               private route :ActivatedRoute,
+               private titleService: Title) {}
+  year  :   number;
+  month : number;
   yearnum  : number;
   monthnum : number;
   id  : any;
@@ -49,6 +57,18 @@ export class MonthsheetComponent implements OnInit {
     {id:16,name:'Medical Examination',type:'fullpaid'},]
   
   ngOnInit(): void {
+    this.d10.setHours(10);
+    this.d10.setMinutes(0);
+    this.d10.setSeconds(0);
+
+    this.d1830.setHours(18);
+    this.d1830.setMinutes(30);
+    this.d1830.setSeconds(0);
+
+    this.d2359.setHours(23);
+    this.d2359.setMinutes(59);
+    this.d2359.setSeconds(0);
+
     this.id = this.route.snapshot.params['id'];
     this.month = Number(this.route.snapshot.params['month']);
     this.year =  Number(this.route.snapshot.params['year']);
@@ -100,6 +120,7 @@ export class MonthsheetComponent implements OnInit {
             time1['breakflag']  = "";
             time1['daytype']  = 'none';
             time1['cflag']    = true;
+            time1['error']    = "";
             this.timesheetsDis.push(time1)
             }
   this.timesheetsCopy =  this.timesheetsDis.map(a => Object.assign({}, a));
@@ -121,6 +142,7 @@ export class MonthsheetComponent implements OnInit {
     
     return days;
   }
+
 //////////////to convert to a required date format///////////////
   dateCon(str) {
     var date = new Date(str),
@@ -132,7 +154,6 @@ export class MonthsheetComponent implements OnInit {
 ////////////fetch table from screen/////////////
 ex()
 {
-
   function getDifference(array1, array2) {
     return array1.filter(object1 => {
       return !array2.some(object2 => {
@@ -141,9 +162,6 @@ ex()
     });
 
   }
-  
-
-
   const difference = [
     ...getDifference(this.timesheetsDis, this.timesheetsCopy),
     ...getDifference(this.timesheetsCopy, this.timesheetsDis)
@@ -204,6 +222,7 @@ if (timesheet.otend !== null ) {
   difference.forEach(timesheetsave=>{
     console.log(timesheetsave);
     delete timesheetsave.cflag;
+    delete timesheetsave.error;
     this.timesheetService.postTimesheet(timesheetsave).subscribe(data => {
       console.log("saved");
       this.openSnackBar("Saved", "Hide")
@@ -215,5 +234,75 @@ openSnackBar(message: string, action: string) {
 
   let snackRef = this.snackBar.open(message, action, { duration: 1000 });
 }
+///////////errorcheck//////////////
+checkinout(){
+  function getDifference(array1, array2) {
+    return array1.filter(object1 => {
+      return !array2.some(object2 => {
+        return object1.checkin === object2.checkin ||object1.checkout === object2.checkout;
+      });
+    });
 
+  }
+  const difference = [
+    ...getDifference(this.timesheetsDis, this.timesheetsCopy),
+    ...getDifference(this.timesheetsCopy, this.timesheetsDis)
+  ];
+
+
+  difference.forEach(timesheet=>{
+
+    try {
+      var inhr: any;
+      var inmin :any;
+      inmin = timesheet.checkin.substring(3, 5);
+      inhr = timesheet.checkin.substring(0, 2);
+      
+      this.date1.setHours(inhr);
+      this.date1.setMinutes(inmin);
+      this.date1.setSeconds(0);
+      
+      var outhr: any;
+      var outmin: any;
+      outhr = timesheet.checkout.substring(0, 2);
+      outmin = timesheet.checkout.substring(3, 5);
+      this.date2.setHours(outhr);
+      this.date2.setMinutes(outmin);
+      this.date2.setSeconds(0);
+
+
+
+
+      if (timesheet.checkin !== null && timesheet.checkout !== null ) {
+        
+        console.log(this.date1);
+        console.log(this.date2);
+        console.log(this.d10);
+        console.log(this.d1830);
+
+        this.ctShow = !(this.date1 >= this.d10 && this.d1830 >= this.date2);
+        // this.savebtdis = this.ctShow;
+        
+        }
+        else {
+          this.ctShow = false;
+          // this.savebtdis = this.ctShow;
+        }
+      } catch (e) {
+
+        this.ctShow = false;
+        // this.savebtdis = this.ctShow;
+      }
+      console.log(this.ctShow);
+      
+      if(this.ctShow){
+         timesheet.error = "not within working hours"
+      }
+      else{
+        
+         timesheet.error= ""
+      }
+    })
+    }
+  
 }
