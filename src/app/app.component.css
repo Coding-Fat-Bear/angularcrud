@@ -1,5 +1,5 @@
 header{
-  width:100%;
+  width:max;
   margin: 0;
   padding:0;
   background: rgba(42,55,123,0.9);
@@ -38,4 +38,9 @@ header{
   margin-left: 5px; /* optional */
   box-shadow: 2px;
   
+}
+::ng-deep * {
+      
+  margin: 0;
+  padding: 0;
 }

@@ -23,7 +23,17 @@ export class MonthsheetComponent implements OnInit {
   d2359 = new Date();
   date1 = new Date();
   date2 = new Date();
+  datebtstart = new Date();
+  datebtend = new Date();
+  dateotstart = new Date();
+  dateotend = new Date();
+  dateotbtstart = new Date();
+  dateotbtend = new Date();
     ctShow: boolean = false;
+    otShow: boolean = false;
+    otbtShow: boolean = false;
+    btShow: boolean = false;
+    errorCheck : boolean;
 
 
   constructor( private timesheetService: TimesheetService,
@@ -154,17 +164,10 @@ export class MonthsheetComponent implements OnInit {
 ////////////fetch table from screen/////////////
 ex()
 {
-  function getDifference(array1, array2) {
-    return array1.filter(object1 => {
-      return !array2.some(object2 => {
-        return object1.checkin === object2.checkin ||object1.checkout === object2.checkout;
-      });
-    });
-
-  }
+  
   const difference = [
-    ...getDifference(this.timesheetsDis, this.timesheetsCopy),
-    ...getDifference(this.timesheetsCopy, this.timesheetsDis)
+    ...this.getDifference(this.timesheetsDis, this.timesheetsCopy),
+    ...this.getDifference(this.timesheetsCopy, this.timesheetsDis)
   ];
   
   console.log(difference);
@@ -183,7 +186,6 @@ if (timesheet.checkout !== null ) {
           timesheet.checkout = (timesheet.checkout + ":00").substring(0, 8);
             }
 }
-
 if (timesheet.btstart !== null ) {
       if(timesheet.btstart.length !== 0){
         timesheet.btstart = (timesheet.btstart + ":00").substring(0, 8);
@@ -194,7 +196,6 @@ if (timesheet.btend !== null ) {
       timesheet.btend = (timesheet.btend + ":00").substring(0, 8);
     }
 }
-
 if (timesheet.otbtstart !== null ) {
   if(timesheet.otbtstart.length !== 0){
     timesheet.otbtstart = (timesheet.otbtstart + ":00").substring(0, 8);
@@ -206,7 +207,6 @@ if (timesheet.otbtend !== null ) {
   }
   
 }
-
 if (timesheet.otstart !== null ) {
   if(timesheet.otstart.length !== 0){
   timesheet.otstart = (timesheet.otstart + ":00").substring(0, 8);
@@ -236,17 +236,10 @@ openSnackBar(message: string, action: string) {
 }
 ///////////errorcheck//////////////
 checkinout(){
-  function getDifference(array1, array2) {
-    return array1.filter(object1 => {
-      return !array2.some(object2 => {
-        return object1.checkin === object2.checkin ||object1.checkout === object2.checkout;
-      });
-    });
-
-  }
+  
   const difference = [
-    ...getDifference(this.timesheetsDis, this.timesheetsCopy),
-    ...getDifference(this.timesheetsCopy, this.timesheetsDis)
+    ...this.getDifference(this.timesheetsDis, this.timesheetsCopy),
+    ...this.getDifference(this.timesheetsCopy, this.timesheetsDis)
   ];
 
 
@@ -270,39 +263,201 @@ checkinout(){
       this.date2.setMinutes(outmin);
       this.date2.setSeconds(0);
 
-
-
-
-      if (timesheet.checkin !== null && timesheet.checkout !== null ) {
-        
-        console.log(this.date1);
-        console.log(this.date2);
-        console.log(this.d10);
-        console.log(this.d1830);
-
-        this.ctShow = !(this.date1 >= this.d10 && this.d1830 >= this.date2);
-        // this.savebtdis = this.ctShow;
-        
-        }
-        else {
-          this.ctShow = false;
-          // this.savebtdis = this.ctShow;
-        }
-      } catch (e) {
-
-        this.ctShow = false;
-        // this.savebtdis = this.ctShow;
-      }
-      console.log(this.ctShow);
       
+        ///validation
+      if (timesheet.checkin !== null && timesheet.checkout !== null ) {
+        this.ctShow = !(this.date1 >= this.d10 && this.d1830 >= this.date2);
+      }
+      else {
+        this.ctShow = false;
+      }
+    } catch (e) {
+        this.ctShow = false;
+      }
+      //write on screen
       if(this.ctShow){
          timesheet.error = "not within working hours"
       }
-      else{
-        
+      else{  
          timesheet.error= ""
       }
-    })
+
+      if(!this.ctShow){
+        this.ctShow = this.date1 > this.date2
+        if(this.ctShow){
+          timesheet.error = "checkin must be after checkout"
+         //  this.errorCheck = true
+       }
+       else{  
+          timesheet.error= ""
+       }
+      }
     }
-  
+    )
+    }
+
+    cusOtcheck()
+    {
+      if(!this.ctShow){
+        const difference = [
+          ...this.getDifference(this.timesheetsDis, this.timesheetsCopy),
+          ...this.getDifference(this.timesheetsCopy, this.timesheetsDis)
+        ];
+      
+      
+        difference.forEach(timesheet=>{
+          try{
+          if (timesheet.otstart !== null && timesheet.otend !== null ) {
+            var otinhr: any;
+            var otinmin: any;
+            otinhr = timesheet.otstart.substring(0, 2);
+            otinmin = timesheet.otstart.substring(3, 5);
+    
+            var otouthr: any;
+            var otoutmin: any;
+            otouthr = timesheet.otend.substring(0, 2);
+            otoutmin = timesheet.otend.substring(3, 5);
+    
+            this.dateotstart.setHours(otinhr);
+            this.dateotstart.setMinutes(otinmin);
+            this.dateotstart.setSeconds(0);
+    
+            this.dateotend.setHours(otouthr);
+            this.dateotend.setMinutes(otoutmin);
+            this.dateotend.setSeconds(0);
+            this.otShow = !(this.d1830 < this.dateotstart && this.d2359 > this.dateotend && this.dateotstart < this.dateotend);
+            
+          }
+          else {
+            this.otShow = false;
+          }
+        } catch (e) {
+          this.otShow =  false;
+        }
+        ///display error
+          if(this.otShow){
+            timesheet.error = "overtime time is wrong"
+         }
+         else{  
+            timesheet.error= ""
+         }
+        
+
+        })
+    }
+    }
+    cusBtcheck()
+    {
+      if(!this.ctShow){
+        const difference = [
+          ...this.getDifference(this.timesheetsDis, this.timesheetsCopy),
+          ...this.getDifference(this.timesheetsCopy, this.timesheetsDis)
+        ];
+      
+      
+        difference.forEach(timesheet=>{
+
+          try {
+            if (timesheet.btstart !== null && timesheet.btend !== null) {
+              var btinhr: any;
+              var btinmin: any;
+              btinhr = timesheet.btstart.substring(0, 2);
+              btinmin = timesheet.btstart.substring(3, 5);
+      
+              var btouthr: any;
+              var btoutmin: any;
+              btouthr = timesheet.btend.substring(0, 2);
+              btoutmin = timesheet.btend.substring(3, 5);
+      
+              this.datebtstart.setHours(btinhr);
+              this.datebtstart.setMinutes(btinmin);
+              this.datebtstart.setSeconds(0);
+      
+              this.datebtend.setHours(btouthr);
+              this.datebtend.setMinutes(btoutmin);
+              this.datebtend.setSeconds(0);
+      
+              this.btShow = !(this.datebtstart >= this.date1 && this.datebtend < this.date2 && this.datebtstart < this.datebtend);
+            }
+            else {
+              this.btShow = false;
+            }
+          } catch (e) {
+      
+            this.btShow = false;
+          }
+        ///displayerror
+        if(this.btShow){
+          timesheet.error = "breaktime is wrong"
+       }
+       else{  
+          timesheet.error= ""
+       }
+        })
+      }
+    }
+    cusOtBtcheck()
+    {
+      if(!this.otShow && !this.ctShow ){
+        const difference = [
+          ...this.getDifference(this.timesheetsDis, this.timesheetsCopy),
+          ...this.getDifference(this.timesheetsCopy, this.timesheetsDis)
+        ];
+      
+      
+        difference.forEach(timesheet=>{
+          try {
+            if (timesheet.otbtstart !== null && timesheet.otbtend !== null) {
+              var otbtinhr: any;
+              var otbtinmin: any;
+              otbtinhr = timesheet.otbtstart.substring(0, 2);
+              otbtinmin = timesheet.otbtstart.substring(3, 5);
+      
+              var otbtouthr: any;
+              var otbtoutmin: any;
+              otbtouthr = timesheet.otbtend.substring(0, 2);
+              otbtoutmin = timesheet.otbtend.substring(3, 5);
+      
+              this.dateotbtstart.setHours(otbtinhr);
+              this.dateotbtstart.setMinutes(otbtinmin);
+              this.dateotbtstart.setSeconds(0);
+      
+              this.dateotbtend.setHours(otbtouthr);
+              this.dateotbtend.setMinutes(otbtoutmin);
+              this.dateotbtend.setSeconds(0);
+      
+              this.otbtShow = !(this.dateotstart < this.dateotbtstart && this.dateotend > this.dateotbtend && this.dateotbtstart < this.dateotbtend);
+      
+      
+            }
+            else {
+              this.otbtShow = false;
+            }
+          } catch (e) {
+            console.log("string null : valid overtime's breaktime");
+      
+            this.otbtShow = false;
+          }
+          ////displayerror
+          if(this.otbtShow){
+            timesheet.error = "overtime'sbreaktime is wrong"
+         }
+         else{  
+            timesheet.error= ""
+         }
+
+
+        })
+      }
+    }
+    
+    getDifference(array1, array2) {
+      return array1.filter(object1 => {
+        return !array2.some(object2 => {
+          return object1.checkin === object2.checkin ||object1.checkout === object2.checkout;
+        });
+      });
+    }
+
+    
 }
