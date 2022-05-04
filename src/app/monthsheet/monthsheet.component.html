@@ -9,7 +9,7 @@
           <th colspan="3">Result</th>
           <th rowspan="2">Skipped Break</th>
           <th rowspan="2" style="width: 200px;">Classification</th>
-          <th rowspan="2">comment</th>
+          <th rowspan="2">Work/Task</th>
           <th rowspan="2">Overtime Start</th>
           <th rowspan="2">Overtime End</th>
           <th rowspan="2">Breaktime Start</th>
@@ -34,15 +34,15 @@
         <td>{{timesheet.checkin }}</td>
         <td>{{timesheet.checkout }}</td>
         <td>{{timesheet.totalhours }}</td>
-        <td><mat-checkbox [checked]="true" [disabled]="true"></mat-checkbox></td>
+        <td><mat-checkbox [checked]="true" [disabled]="timesheet.daytype"></mat-checkbox></td>
         <td>{{timesheet.daytype}}</td>
         <td>{{timesheet.comment }}</td>
         <td>{{timesheet.otstart }}</td>
         <td>{{timesheet.otend }}</td>
         <td>{{timesheet.btstart }}</td>
         <td>{{timesheet.btend }}</td>
-        <td>{{timesheet.otbtstart }}</td>
-        <td>{{timesheet.otbtend }}</td>
+        <td >{{timesheet.otbtstart }}</td>
+        <td >{{timesheet.otbtend }}</td>
         <td>{{timesheet.error}}</td>
       </tr>
       <tr  *ngIf="timesheet.cflag" >
@@ -58,12 +58,12 @@
         <td><textarea matInput placeholder="Leave a comment " [(ngModel)]="timesheet.comment"
               [ngModelOptions]="{standalone: true}"></textarea>
         </td>
-        <td (change)="cusOtcheck()" ><input type="time" [(ngModel)]="timesheet.otstart" placeholder="Overtime Time"  ></td>
-        <td (change)="cusOtcheck()" ><input type="time" [(ngModel)]="timesheet.otend" placeholder="Overtime Time"  ></td>
+        <td (change)="cusOtcheck(); otbtshow() " ><input type="time" [(ngModel)]="timesheet.otstart" placeholder="Overtime Time"  ></td>
+        <td (change)="cusOtcheck(); otbtshow()" ><input type="time" [(ngModel)]="timesheet.otend" placeholder="Overtime Time"  ></td>
         <td (change)="cusBtcheck()" ><input type="time" [(ngModel)]="timesheet.btstart" placeholder="BreakTime start"  ></td>
         <td (change)="cusBtcheck()" ><input type="time" [(ngModel)]="timesheet.btend" placeholder="BreakTime end"  ></td>
-        <td (change)="cusOtBtcheck()" > <input type="time" [(ngModel)]="timesheet.otbtstart" placeholder="OT BreakTime start"  ></td>
-        <td (change)="cusOtBtcheck()" ><input type="time" [(ngModel)]="timesheet.otbtend" placeholder="OT BreakTime end"  ></td>
+        <td (change)="cusOtBtcheck()" > <input type="time" [(ngModel)]="timesheet.otbtstart" placeholder="OT BreakTime start"  [disabled]="timesheet.otbkdischk"></td>
+        <td (change)="cusOtBtcheck()" ><input type="time" [(ngModel)]="timesheet.otbtend" placeholder="OT BreakTime end"  [disabled]="timesheet.otbkdischk"></td>
         <td >{{timesheet.error}}</td>
       </tr>
   </ng-container>

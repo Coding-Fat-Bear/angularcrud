@@ -35,7 +35,6 @@ export class MonthsheetComponent implements OnInit {
     btShow: boolean = false;
     errorCheck : boolean;
 
-
   constructor( private timesheetService: TimesheetService,
                private snackBar: MatSnackBar,
                private route :ActivatedRoute,
@@ -108,7 +107,8 @@ export class MonthsheetComponent implements OnInit {
  
       if(this.timesheets2.some(a=>{
           var str = new Timesheet();
-          str = a; hasDate = a;
+          str = a;
+           hasDate = a;
           return  str.tsdate == time;  }))
             {
               this.timesheetsDis.push(hasDate);
@@ -130,6 +130,7 @@ export class MonthsheetComponent implements OnInit {
             time1['breakflag']  = "";
             time1['daytype']  = 'none';
             time1['cflag']    = true;
+            time1['otbkdischk']  = true;
             time1['error']    = "";
             this.timesheetsDis.push(time1)
             }
@@ -192,7 +193,7 @@ if (timesheet.btstart !== null ) {
              }
 }
 if (timesheet.btend !== null ) {
-    if(timesheet.otbtstart.length !== 0){
+    if(timesheet.btstart.length !== 0){
       timesheet.btend = (timesheet.btend + ":00").substring(0, 8);
     }
 }
@@ -223,6 +224,7 @@ if (timesheet.otend !== null ) {
     console.log(timesheetsave);
     delete timesheetsave.cflag;
     delete timesheetsave.error;
+    delete timesheetsave.otbkdischk;
     this.timesheetService.postTimesheet(timesheetsave).subscribe(data => {
       console.log("saved");
       this.openSnackBar("Saved", "Hide")
@@ -459,5 +461,25 @@ checkinout(){
       });
     }
 
-    
+    //////// dropdown otbt show///////
+  otbtshow(){
+    const difference = [
+      ...this.getDifference(this.timesheetsDis, this.timesheetsCopy),
+      ...this.getDifference(this.timesheetsCopy, this.timesheetsDis)
+    ];
+    difference.forEach(timesheet=>{
+    try{
+    if (timesheet.otstart !== null && timesheet.otend !== null ) {
+      if(timesheet.otstart.length !== 0 &&timesheet.otend.length !== 0){
+      timesheet.otbkdischk = false;
+      console.log("check");
+      }
+    }else{
+      timesheet.otbkdischk = true;
+    }} catch(e) {
+      timesheet.otbkdischk = true;
+    }
+  })
+  }
+
 }
