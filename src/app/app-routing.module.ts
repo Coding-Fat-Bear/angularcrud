@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { HomeComponent } from './home/home.component';
 import { MonthsheetComponent } from './monthsheet/monthsheet.component';
+import { InquiryComponent } from './inquiry/inquiry.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path:'login',component: LoginComponent},
   {path:'employee',component: EmployeeComponent},
   {path:'home/:id',component: HomeComponent},
-  {path:'monthsheet/:id/:year/:month',component: MonthsheetComponent}
+  {path:'monthsheet/:id/:year/:month',component: MonthsheetComponent},
+  {path:'inquiry',component: InquiryComponent},
 ];
 
 @NgModule({

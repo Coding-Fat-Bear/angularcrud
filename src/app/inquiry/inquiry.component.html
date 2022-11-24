@@ -1,0 +1,95 @@
+
+<h1 class="header">Inquiry Master</h1>
+<!--   <button mat-button [matMenuTriggerFor]="menu">Inquiry</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Create</button>
+    <button mat-menu-item>Edit</button>
+    <button mat-menu-item>Delete</button>
+    <button mat-menu-item>Display</button>
+  </mat-menu> -->
+<mat-toolbar>
+    <button mat-button [matMenuTriggerFor]="menu">Inquiry</button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>Create</button>
+        <button mat-menu-item>Edit</button>
+        <button mat-menu-item>Delete</button>
+        <button mat-menu-item>Display</button>
+    </mat-menu>
+</mat-toolbar>
+<div>
+    <ul>
+        <button mat-icon-button color="primary">
+            <mat-icon>save</mat-icon>
+        </button>
+        <button mat-icon-button color="primary">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="primary">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button color="primary">
+            <mat-icon>list</mat-icon>
+        </button>
+        <button mat-icon-button color="primary">
+            <mat-icon>arrow_left_alt</mat-icon>
+        </button>
+    </ul>
+</div>
+<form>
+    <div>
+        <ul>
+            <label for="inqno">Inquiry</label> <input type="text" name="inqno" id="inqno">
+            <label for="ccod">Company Code</label> <input type="text" name="ccod" id="ccod">
+            <label for="empno">Employee</label> <input type="text" name="empno" id="empno">
+            <label for="prjdes">Project Description</label> <input type="text" name="prjdes" id="prjdes">
+        </ul>
+    </div>
+    <div>
+        <mat-tab-group [selectedIndex]="active" animationDuration="0ms">
+            <mat-tab label="Inquiry Terms">
+                <ul>
+                    <label for="assnper">Assignment Percentage</label> <input type="text" name="assnper" id="assnper">
+                    <br>
+                    <label for="bizid">Business Line</label> <input type="text" name="bizid" id="bizid"> <br>
+                    <label for="modul">Module</label> <input type="text" name="modul" id="modul"> <br>
+                    <label for="lngid">Language</label> <input type="text" name="lngid" id="lngid"> <br>
+                    <label for="posbper">Possible Percentage</label> <input type="text" name="posbper" id="posbper">
+                    <br>
+                </ul>
+            </mat-tab>
+            <mat-tab label="Inquiry Termss">
+                <ul>
+                    <label for="frmdt">Inquiry Start Date</label> <input type="text" name="frmdt" id="frmdt"> <br>
+                    <label for="todt">Inquiry End Date</label> <input type="text" name="todt" id="todt"> <br>
+                    <label for="status">Status</label> <input type="text" name="status" id="status"> <br>
+                    <label for="phaseid">Phase</label> <input type="text" name="phaseid" id="phaseid"> <br>
+                </ul>
+            </mat-tab>
+            <mat-tab label="Estimations">
+                <ul>
+                    <label for="estmamt">Estimation Amount</label> <input type="text" name="estmamt" id="estmamt"> <br>
+                    <label for="curr">Currency</label> <input type="text" name="curr" id="curr">
+                    <select>
+                        <option value="inr">INR</option>
+                        <option value="usd">USD</option>
+                        <option value="aud">AUD</option>
+                        <option value="jpy">JPY</option>
+                    </select>
+                    <br>
+                    <label for="taxamt">Tax Amount</label> <input type="text" name="taxamt" id="taxamt"> <br>
+                    <label for="unit">Unit</label> <input type="text" name="unit" id="unit"> <br>
+                    <label for="qty">Quantity</label> <input type="text" name="qty" id="qty"> <br>
+                    <label for="rate">Rate</label> <input type="text" name="rate" id="rate"> <br>
+                </ul>
+            </mat-tab>
+            <mat-tab label="Organization Details">
+                <ul>
+                    <label for="custno">Customer No</label> <input type="text" name="custno" id="custno"> <br>
+                    <label for="eusrno">End User</label> <input type="text" name="eusrno" id="eusrno"> <br>
+                    <label for="custinfo">Customer Info</label><input type="text" name="custinfo" id="custinfo"> <br>
+                    <label for="remarks">Remarks</label> <input type="text" name="remarks" id="remarks"> <br>
+                </ul>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</form>
